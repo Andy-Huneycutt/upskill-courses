@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>UpskillTech Courses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg:       #070C16;
+  --bg-e:     #0E1726;
+  --bg-s:     #0B1220;
+  --bg-hover: #131D30;
+
+  --rule:     #1B2638;
+  --rule-s:   #283449;
+
+  --text:       #E8EDF5;
+  --text-soft:  #A3AEC2;
+  --text-quiet: #64748B;
+  --text-faint: #475569;
+
+  --brand-sky:    #2BA9DC;
+  --brand-teal:   #0F5F8A;
+  --brand-bright: #4FC0F0;
+  --brand-ink:    #0A1628;
+  --brand-gold:   #FFC532;
+  --brand-gold-soft: rgba(255,197,50,.10);
+  --brand-sky-soft:  rgba(43,169,220,.10);
+  --brand-sky-line:  rgba(43,169,220,.20);
+
+  --green:      #2DD4BF;
+  --green-soft: rgba(45,212,191,.10);
+
+  --sans: 'General Sans', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', 'SF Mono', monospace;
+  --serif: 'Instrument Serif', Georgia, serif;
+
+  --radius:    10px;
+  --radius-sm: 6px;
+  --max:       860px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,.028) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 60px 24px 80px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+.brand-logo {
+  width: 34px;
+  height: 34px;
+  background: linear-gradient(135deg, var(--brand-teal) 0%, var(--brand-sky) 55%, var(--brand-bright) 100%);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 16px rgba(43,169,220,.25);
+}
+.brand-logo svg { width: 18px; height: 18px; fill: #fff; }
+.brand-name {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-quiet);
+  text-transform: uppercase;
+  letter-spacing: .14em;
+}
+
+h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1.15;
+  margin: 0 0 12px;
+  letter-spacing: -0.01em;
+}
+.lede {
+  font-size: 16px;
+  color: var(--text-soft);
+  max-width: 620px;
+  margin: 0 0 48px;
+}
+
+.courses {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.course-card {
+  display: block;
+  background: var(--bg-e);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 26px 28px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 150ms, transform 150ms, box-shadow 150ms;
+}
+.course-card:hover {
+  border-color: var(--brand-sky);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,0,0,.35), 0 0 0 1px var(--brand-sky-line);
+}
+
+.course-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--brand-sky);
+  margin-bottom: 10px;
+}
+
+.course-card h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 24px;
+  color: var(--text);
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+}
+
+.course-card p {
+  font-size: 14px;
+  color: var(--text-soft);
+  margin: 0 0 16px;
+}
+
+.course-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.chip {
+  background: var(--brand-sky-soft);
+  color: var(--brand-bright);
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  border: 1px solid var(--brand-sky-line);
+}
+.go {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+.course-card:hover .go { color: var(--brand-bright); }
+
+footer {
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+  font-size: 12px;
+  color: var(--text-faint);
+  font-family: var(--mono);
+}
+footer a { color: var(--brand-sky); text-decoration: none; }
+footer a:hover { color: var(--brand-bright); text-decoration: underline; }
+
+@media (max-width: 640px) {
+  h1 { font-size: 30px; }
+  .page { padding: 40px 20px 60px; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="brand">
+    <div class="brand-logo">
+      <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 2L3 6v8l7 4 7-4V6L10 2zm0 2.4l4.5 2.6v5.2L10 14.8 5.5 12.2V7L10 4.4z"/>
+      </svg>
+    </div>
+    <div class="brand-name">UpskillTech</div>
+  </div>
+
+  <h1>Copilot courses</h1>
+  <p class="lede">Three self-contained, browser-based courses on Microsoft 365 Copilot — no sign-up, no build step. Pick one and start where you like; progress is tracked locally in your browser.</p>
+
+  <div class="courses">
+    <a class="course-card" href="intro-copilot-chat.html">
+      <div class="course-tag">Course 01</div>
+      <h2>Introduction to M365 Copilot Chat</h2>
+      <p>What's included free with Microsoft 365, how the licensing tiers work, and how to prompt, ground, and extend Copilot Chat day to day.</p>
+      <div class="course-meta">
+        <span class="chip">14 lessons</span>
+        <span class="go">Start course →</span>
+      </div>
+    </a>
+
+    <a class="course-card" href="intro-copilot-chat-agents.html">
+      <div class="course-tag">Course 02</div>
+      <h2>Introduction to Copilot Chat Agents</h2>
+      <p>Build scoped, single-purpose agents with Agent Builder, and know when a task has outgrown it and needs Copilot Studio.</p>
+      <div class="course-meta">
+        <span class="chip">13 lessons</span>
+        <span class="go">Start course →</span>
+      </div>
+    </a>
+
+    <a class="course-card" href="intro-copilot-cowork.html">
+      <div class="course-tag">Course 03</div>
+      <h2>Introduction to Copilot Cowork</h2>
+      <p>Delegate multi-step work to Copilot's agentic system — licensing, Work IQ, skills, plugins, and admin governance.</p>
+      <div class="course-meta">
+        <span class="chip">15 lessons</span>
+        <span class="go">Start course →</span>
+      </div>
+    </a>
+  </div>
+
+  <footer>
+    <a href="https://github.com/Andy-Huneycutt/upskill-courses">View source on GitHub</a>
+  </footer>
+
+</div>
+</body>
+</html>

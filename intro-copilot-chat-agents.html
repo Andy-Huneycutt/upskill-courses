@@ -1,0 +1,1875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>UpskillTech Course</title>
+<!-- Real title is set from COURSE_TITLE at boot, below. Don't hand-edit this tag. -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=General+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+/* ═══════════════════════════════════════════
+   UPSKILLTECH DESIGN TOKENS
+═══════════════════════════════════════════ */
+:root {
+  /* Backgrounds */
+  --bg:       #070C16;
+  --bg-e:     #0E1726;
+  --bg-s:     #0B1220;
+  --bg-hover: #131D30;
+
+  /* Rules / borders */
+  --rule:     #1B2638;
+  --rule-s:   #283449;
+
+  /* Text */
+  --text:       #E8EDF5;
+  --text-soft:  #A3AEC2;
+  --text-quiet: #64748B;
+  --text-faint: #475569;
+
+  /* Brand palette */
+  --brand-sky:    #2BA9DC;
+  --brand-teal:   #0F5F8A;
+  --brand-bright: #4FC0F0;
+  --brand-ink:    #0A1628;
+  --brand-gold:   #FFC532;
+  --brand-gold-soft: rgba(255,197,50,.10);
+  --brand-sky-soft:  rgba(43,169,220,.10);
+  --brand-sky-line:  rgba(43,169,220,.20);
+
+  /* Semantic status */
+  --green:      #2DD4BF;
+  --green-soft: rgba(45,212,191,.10);
+  --yellow:     #FFC532;
+  --yellow-soft: rgba(255,197,50,.10);
+  --red:        #F87171;
+  --red-soft:   rgba(248,113,113,.10);
+
+  /* Typography */
+  --sans: 'General Sans', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', 'SF Mono', monospace;
+  --serif: 'Instrument Serif', Georgia, serif;
+
+  /* Shape */
+  --radius:    10px;
+  --radius-sm: 6px;
+  --max:       860px;
+}
+
+/* ═══════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Grid background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,.028) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ═══════════════════════════════════════════
+   TYPOGRAPHY
+═══════════════════════════════════════════ */
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 400;
+  color: var(--text);
+}
+h1 { font-size: 34px; line-height: 1.15; margin: 0 0 8px; letter-spacing: -0.01em; }
+h2 { font-size: 24px; line-height: 1.25; margin: 36px 0 14px; letter-spacing: -0.01em; }
+h3 { font-size: 18px; line-height: 1.3; margin: 28px 0 10px; }
+h4 { font-size: 15px; line-height: 1.35; margin: 22px 0 8px; font-family: var(--sans); font-weight: 600; }
+p { margin: 0 0 16px; color: var(--text-soft); }
+a { color: var(--brand-sky); text-decoration: none; }
+a:hover { color: var(--brand-bright); text-decoration: underline; }
+ul, ol { margin: 0 0 16px; padding-left: 22px; }
+ul li, ol li { margin-bottom: 6px; color: var(--text-soft); }
+strong { color: var(--text); font-weight: 600; }
+em { font-style: italic; }
+
+code {
+  font-family: var(--mono);
+  font-size: 0.85em;
+  background: var(--bg-e);
+  border: 1px solid var(--rule);
+  padding: 1px 7px;
+  border-radius: 4px;
+  color: var(--brand-bright);
+}
+pre {
+  background: var(--bg-e);
+  border: 1px solid var(--rule);
+  padding: 18px 20px;
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0 0 14px;
+}
+pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: var(--brand-bright);
+}
+
+/* ═══════════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════════ */
+.app {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+/* ═══════════════════════════════════════════
+   SIDEBAR
+═══════════════════════════════════════════ */
+.sidebar {
+  background: var(--bg-s);
+  border-right: 1px solid var(--rule);
+  padding: 24px 18px;
+  overflow-y: auto;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+/* Brand mark */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--rule);
+}
+.brand-logo {
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(135deg, var(--brand-teal) 0%, var(--brand-sky) 55%, var(--brand-bright) 100%);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 16px rgba(43,169,220,.25);
+}
+.brand-logo svg { width: 16px; height: 16px; fill: #fff; }
+.brand-name {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-quiet);
+  text-transform: uppercase;
+  letter-spacing: .14em;
+}
+
+/* Course title */
+.course-title {
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.3;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.course-overview {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--brand-sky);
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-bottom: 18px;
+  display: inline-block;
+}
+.course-overview:hover { color: var(--brand-bright); }
+
+/* Progress bar */
+.course-progress { margin-bottom: 20px; }
+.course-progress .pct {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-bottom: 6px;
+}
+.course-progress .bar {
+  height: 3px;
+  background: var(--rule-s);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.course-progress .bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--brand-teal), var(--brand-sky));
+  transition: width 300ms ease;
+}
+
+/* Sidebar nav */
+.section-title {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  margin: 16px 0 6px 8px;
+}
+
+.lesson-link {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 7px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: var(--text-quiet);
+  cursor: pointer;
+  transition: background 100ms, color 100ms;
+  line-height: 1.35;
+}
+.lesson-link:hover { background: var(--bg-hover); color: var(--text-soft); }
+.lesson-link.active {
+  background: var(--brand-sky-soft);
+  color: var(--brand-bright);
+  border: 1px solid var(--brand-sky-line);
+}
+.lesson-link .dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid var(--rule-s);
+  flex-shrink: 0;
+  margin-top: 1px;
+  transition: all 150ms;
+}
+.lesson-link.completed .dot {
+  background: var(--brand-teal);
+  border-color: var(--brand-teal);
+  position: relative;
+}
+.lesson-link.completed .dot::after {
+  content: "✓";
+  color: white;
+  font-size: 8px;
+  font-weight: 700;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.lesson-link.active .dot { border-color: var(--brand-sky); }
+
+/* ═══════════════════════════════════════════
+   MAIN CONTENT
+═══════════════════════════════════════════ */
+.content {
+  padding: 60px 52px 80px;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+.content-inner { max-width: var(--max); margin: 0 auto; }
+
+/* Lesson header */
+.lesson-header {
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 20px;
+  margin-bottom: 28px;
+}
+.breadcrumb {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.breadcrumb::before {
+  content: '';
+  width: 14px;
+  height: 1px;
+  background: var(--brand-teal);
+}
+.estimated-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-e);
+  border: 1px solid var(--rule);
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-quiet);
+  margin: 10px 0;
+}
+.estimated-time strong { color: var(--text-soft); font-weight: 500; }
+
+/* ═══════════════════════════════════════════
+   OBJECTIVES BLOCK
+═══════════════════════════════════════════ */
+.objectives {
+  background: var(--bg-e);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--brand-sky);
+  padding: 20px 24px;
+  border-radius: var(--radius-sm);
+  margin: 18px 0 28px;
+}
+.objectives h3 {
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-family: var(--sans);
+  font-weight: 700;
+  color: var(--brand-bright);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.objectives p { margin: 0 0 10px; font-size: 14px; }
+.objectives ul { margin: 0; padding-left: 20px; }
+.objectives ul li { color: var(--text-soft); font-size: 14px; }
+
+/* ═══════════════════════════════════════════
+   VIDEO
+═══════════════════════════════════════════ */
+.video-card {
+  display: block;
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #000;
+  margin: 18px 0 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.4), 0 0 0 1px var(--rule);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.video-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0,0,0,.5), 0 0 0 1px var(--brand-sky-line);
+}
+.video-card .thumb {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--bg-e);
+}
+.video-card .thumb::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 60%;
+  background: linear-gradient(to top, rgba(7,12,22,.9) 0%, rgba(7,12,22,0) 100%);
+}
+.video-card .play {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 72px; height: 72px;
+  background: rgba(7,12,22,.7);
+  border: 2px solid rgba(79,192,240,.4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 160ms, border-color 160ms, transform 160ms;
+  z-index: 3;
+}
+.video-card:hover .play {
+  background: rgba(43,169,220,.25);
+  border-color: var(--brand-sky);
+  transform: translate(-50%, -50%) scale(1.06);
+}
+.video-card .play::before {
+  content: "";
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 13px 0 13px 22px;
+  border-color: transparent transparent transparent var(--brand-bright);
+  margin-left: 4px;
+}
+.video-card .meta {
+  position: absolute;
+  left: 18px; right: 18px; bottom: 14px;
+  color: white;
+  z-index: 2;
+}
+.video-card .vtitle { font-size: 15px; font-weight: 600; line-height: 1.3; margin-bottom: 4px; }
+.video-card .vsub { font-size: 12px; opacity: 0.7; font-family: var(--mono); }
+.video-card .badge {
+  position: absolute; top: 12px; right: 12px;
+  background: var(--brand-teal);
+  color: white;
+  font-family: var(--mono);
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+  z-index: 4;
+}
+
+.video-frame {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #000;
+  margin: 18px 0 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.4), 0 0 0 1px var(--rule);
+}
+.video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video-meta-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 14px; margin: 0 2px 4px; font-size: 12.5px;
+}
+.video-meta-text { color: var(--text-quiet); font-family: var(--mono); font-size: 11px; }
+.video-meta-text strong { color: var(--text-soft); font-weight: 500; font-family: var(--sans); font-size: 13px; }
+.video-meta-link { color: var(--brand-sky); font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: .06em; }
+.video-caption { font-size: 13px; color: var(--text-faint); margin: 4px 0 26px; font-style: italic; }
+
+/* ═══════════════════════════════════════════
+   KEY TAKEAWAYS
+═══════════════════════════════════════════ */
+.takeaways {
+  background: var(--brand-sky-soft);
+  border: 1px solid var(--brand-sky-line);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+.takeaways h4 {
+  margin: 0 0 12px;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  color: var(--brand-sky);
+}
+.takeaways ul { margin: 0; padding-left: 20px; }
+.takeaways li { color: var(--text-soft); font-size: 14px; margin-bottom: 8px; }
+
+/* ═══════════════════════════════════════════
+   CALLOUTS
+═══════════════════════════════════════════ */
+.callout {
+  background: var(--bg-e);
+  border: 1px solid var(--rule);
+  padding: 14px 18px;
+  border-radius: var(--radius-sm);
+  margin: 18px 0;
+  font-size: 14px;
+}
+.callout.note  { border-left: 3px solid var(--brand-sky); background: var(--brand-sky-soft); }
+.callout.warn  { border-left: 3px solid var(--yellow); background: var(--yellow-soft); }
+.callout.danger { border-left: 3px solid var(--red); background: var(--red-soft); }
+.callout.tip   { border-left: 3px solid var(--green); background: var(--green-soft); }
+.callout-label {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-right: 8px;
+  color: var(--text-quiet);
+}
+
+/* ═══════════════════════════════════════════
+   COMPARE GRID
+═══════════════════════════════════════════ */
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin: 24px 0;
+}
+.compare-card {
+  background: var(--bg-e);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 150ms;
+}
+.compare-card:hover { border-color: var(--rule-s); }
+.compare-card.featured {
+  border-color: var(--brand-sky);
+  box-shadow: 0 0 0 1px var(--brand-sky-line), 0 4px 20px rgba(43,169,220,.08);
+}
+.compare-card .tag {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--brand-sky);
+  margin-bottom: 8px;
+}
+.compare-card.featured .tag { color: var(--brand-bright); }
+.compare-card h4 { margin: 0 0 6px; font-size: 16px; font-family: var(--serif); color: var(--text); }
+.compare-card .sub { font-size: 13px; color: var(--text-quiet); margin-bottom: 12px; }
+.compare-card .best-for {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--text-faint);
+  margin: 6px 0;
+}
+.compare-card ul { padding-left: 16px; font-size: 13px; margin: 0; }
+.compare-card ul li { color: var(--text-quiet); margin-bottom: 5px; }
+
+/* ═══════════════════════════════════════════
+   PROMPT CARD
+═══════════════════════════════════════════ */
+.prompt-card {
+  background: var(--bg-e);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin: 20px 0;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-soft);
+}
+.prompt-card .prompt-label {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--text-faint);
+  margin-bottom: 12px;
+}
+.prompt-card .annot {
+  background: var(--brand-sky-soft);
+  padding: 1px 5px;
+  border-bottom: 1.5px dashed var(--brand-sky);
+  cursor: help;
+  border-radius: 3px;
+  color: var(--brand-bright);
+}
+.prompt-card .legend {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--text-faint);
+  margin-top: 14px;
+  border-top: 1px dashed var(--rule);
+  padding-top: 10px;
+}
+
+/* ═══════════════════════════════════════════
+   QUIZ
+═══════════════════════════════════════════ */
+.quiz {
+  background: var(--bg-e);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  margin: 28px 0;
+}
+.quiz h4 {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--brand-sky);
+  margin: 0 0 10px;
+}
+.quiz .q-title { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 14px; }
+.quiz .options { display: flex; flex-direction: column; gap: 8px; }
+.quiz .option {
+  border: 1px solid var(--rule);
+  background: var(--bg);
+  padding: 11px 16px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 14px;
+  text-align: left;
+  color: var(--text-soft);
+  transition: all 100ms;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--sans);
+}
+.quiz .option:hover { border-color: var(--brand-sky); background: var(--brand-sky-soft); color: var(--text); }
+.quiz .option.correct {
+  border-color: var(--green);
+  background: var(--green-soft);
+  color: var(--green);
+  font-weight: 600;
+}
+.quiz .option.incorrect {
+  border-color: var(--red);
+  background: var(--red-soft);
+  color: var(--red);
+}
+.quiz .option .icon { font-size: 15px; }
+.quiz .feedback {
+  margin-top: 14px;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  display: none;
+}
+.quiz .feedback.correct {
+  background: var(--green-soft);
+  border: 1px solid rgba(45,212,191,.2);
+  color: var(--green);
+  display: block;
+}
+.quiz .feedback.incorrect {
+  background: var(--red-soft);
+  border: 1px solid rgba(248,113,113,.2);
+  color: var(--red);
+  display: block;
+}
+
+/* Final quiz */
+.final-quiz .q-counter {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-faint);
+  margin-bottom: 6px;
+}
+.final-quiz .next-btn {
+  margin-top: 16px;
+  background: var(--brand-gold);
+  color: #070C16;
+  border: 0;
+  padding: 10px 24px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 14px;
+  font-family: var(--sans);
+  cursor: pointer;
+  transition: opacity 120ms;
+}
+.final-quiz .next-btn:disabled { background: var(--rule-s); color: var(--text-faint); cursor: not-allowed; }
+.final-quiz .results { text-align: center; padding: 30px 0; }
+.final-quiz .score {
+  font-size: 56px;
+  font-weight: 700;
+  color: var(--brand-bright);
+  font-family: var(--serif);
+}
+
+/* ═══════════════════════════════════════════
+   TABS
+═══════════════════════════════════════════ */
+.tabs {
+  background: var(--bg-e);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  margin: 24px 0;
+  overflow: hidden;
+}
+.tabs .tab-header {
+  display: flex;
+  border-bottom: 1px solid var(--rule);
+  background: var(--bg-s);
+}
+.tabs .tab-btn {
+  flex: 1;
+  padding: 11px 16px;
+  background: transparent;
+  border: 0;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-faint);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  text-align: center;
+  transition: all 100ms;
+}
+.tabs .tab-btn:hover { color: var(--text-soft); }
+.tabs .tab-btn.active {
+  color: var(--brand-bright);
+  border-bottom-color: var(--brand-sky);
+  background: var(--bg-e);
+}
+.tabs .tab-content { padding: 20px; display: none; font-size: 14px; }
+.tabs .tab-content.active { display: block; }
+.tabs .file-tree {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-quiet);
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 14px;
+}
+.tabs .file-tree .file { padding: 2px 0; }
+.tabs .file-tree .file::before { content: "📄  "; }
+.tabs .file-tree .folder { font-weight: 600; color: var(--text-soft); padding: 2px 0; }
+.tabs .file-tree .folder::before { content: "📁  "; }
+
+/* ═══════════════════════════════════════════
+   FOOTER NAV
+═══════════════════════════════════════════ */
+.lesson-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 60px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.nav-btn {
+  background: var(--bg-e);
+  color: var(--text-soft);
+  border: 1px solid var(--rule);
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  font-size: 14px;
+  font-family: var(--sans);
+  cursor: pointer;
+  transition: all 120ms;
+}
+.nav-btn:hover { border-color: var(--brand-sky); color: var(--brand-bright); }
+.nav-btn.primary {
+  background: var(--brand-gold);
+  color: #070C16;
+  border-color: var(--brand-gold);
+  font-weight: 700;
+}
+.nav-btn.primary:hover { background: #FFD060; border-color: #FFD060; }
+.nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* ═══════════════════════════════════════════
+   LESSON SCREENS
+═══════════════════════════════════════════ */
+.lesson { display: none; }
+.lesson.active { display: block; }
+
+/* ═══════════════════════════════════════════
+   UTILITY / COMPONENTS
+═══════════════════════════════════════════ */
+.muted { color: var(--text-faint); }
+.sm { font-size: 13px; }
+.center { text-align: center; }
+hr { border: 0; border-top: 1px solid var(--rule); margin: 28px 0; }
+
+.kbd {
+  font-family: var(--mono);
+  font-size: 11px;
+  background: var(--bg-e);
+  border: 1px solid var(--rule);
+  border-bottom-width: 2px;
+  padding: 1px 7px;
+  border-radius: 4px;
+  color: var(--text-soft);
+}
+
+.chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+.chip {
+  background: var(--brand-sky-soft);
+  color: var(--brand-bright);
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  border: 1px solid var(--brand-sky-line);
+}
+
+.steps { counter-reset: step; margin: 18px 0; padding: 0; list-style: none; }
+.steps li {
+  counter-increment: step;
+  position: relative;
+  padding-left: 48px;
+  margin-bottom: 14px;
+  color: var(--text-soft);
+}
+.steps li::before {
+  content: counter(step);
+  position: absolute; left: 0; top: 1px;
+  width: 30px; height: 30px;
+  background: linear-gradient(135deg, var(--brand-teal), var(--brand-sky));
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  font-family: var(--mono);
+}
+
+table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 14px; }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--rule); }
+th { background: var(--bg-e); font-weight: 600; font-size: 12px; color: var(--text-soft); font-family: var(--mono); text-transform: uppercase; letter-spacing: .06em; }
+tr:hover td { background: var(--bg-hover); }
+td { color: var(--text-soft); }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 880px) {
+  .app { grid-template-columns: 1fr; }
+  .sidebar { position: relative; height: auto; }
+  .content { padding: 32px 24px 60px; }
+  .compare-grid { grid-template-columns: 1fr; }
+  h1 { font-size: 26px; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-logo">
+        <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 2L3 6v8l7 4 7-4V6L10 2zm0 2.4l4.5 2.6v5.2L10 14.8 5.5 12.2V7L10 4.4z"/>
+        </svg>
+      </div>
+      <div class="brand-name">UpskillTech</div>
+    </div>
+
+    <div class="course-title" id="courseTitleEl"></div>
+    <div class="course-overview" onclick="goLesson(0)">↳ Course Overview</div>
+
+    <div class="course-progress">
+      <div class="pct" id="progressLabel"></div>
+      <div class="bar"><div class="bar-fill" id="progressBar" style="width:0%"></div></div>
+    </div>
+
+    <div id="lessonNav"></div>
+  </aside>
+
+  <!-- ── CONTENT ── -->
+  <main class="content">
+    <div class="content-inner" id="contentInner">
+      <!-- Lesson screens injected here -->
+    </div>
+  </main>
+</div>
+
+<script>
+// ============================================================
+// LESSON DATA
+// ============================================================
+
+const COURSE_TITLE = "Introduction to Copilot Chat Agents";
+
+const INLINE_QUIZZES = [
+  {
+    q: "Which definition best matches what Microsoft means by an 'agent' in Microsoft 365 Copilot?",
+    options: [
+      { text: "The general chat interface used to ask Copilot any question", correct: false, why: "That's Copilot Chat — a general-purpose interface, not a scoped agent." },
+      { text: "A custom version of Copilot that combines instructions, knowledge, and skills for a specific task", correct: true, why: "This is Microsoft's own definition of an agent." },
+      { text: "An agentic system that plans and executes multi-step work end to end", correct: false, why: "That describes Copilot Cowork, which Microsoft documentation explicitly distinguishes from an agent." },
+      { text: "A connector that links Copilot Studio to an external system", correct: false, why: "Connectors are a Copilot Studio building block, not the definition of an agent." }
+    ]
+  },
+  {
+    q: "What is the maximum length of the Instructions field for a declarative agent in Agent Builder?",
+    options: [
+      { text: "1,000 characters", correct: false, why: "1,000 characters is the limit for Description, not Instructions." },
+      { text: "8,000 characters", correct: true, why: "Instructions can run up to 8,000 characters." },
+      { text: "20,000 characters", correct: false, why: "There's no 20,000-character field in Agent Builder's configuration." },
+      { text: "There is no limit", correct: false, why: "Instructions are capped, just like Description." }
+    ]
+  },
+  {
+    q: "Which statement correctly separates Agent Builder from Copilot Studio?",
+    options: [
+      { text: "Agent Builder is for information workers building lightweight Q&A agents; Copilot Studio is for makers/developers building multistep, connector-driven agents", correct: true, why: "This matches how Microsoft documentation distinguishes the two tools' access points and audiences." },
+      { text: "They're the same underlying tool marketed under two names", correct: false, why: "They're genuinely different tools, managed through different admin centers." },
+      { text: "Agent Builder is managed through the Power Platform admin center, and Copilot Studio through the M365 admin center", correct: false, why: "That's reversed — Agent Builder is managed via the M365 admin center, Copilot Studio via the Power Platform admin center." },
+      { text: "Copilot Studio can only use public website knowledge sources", correct: false, why: "That restriction doesn't describe Copilot Studio; knowledge-source rules discussed in this course apply to Agent Builder." }
+    ]
+  },
+  {
+    q: "In Agent Builder's recommended natural-language flow, what does the tool do after you describe your agent on the Describe tab?",
+    options: [
+      { text: "It auto-configures name, description, and instructions, and suggests refinements, knowledge sources, and capabilities", correct: true, why: "That's exactly what the Describe-tab flow automates for you." },
+      { text: "It requires you to first write all 8,000 characters of instructions by hand", correct: false, why: "That's the manual configuration path, not natural-language authoring." },
+      { text: "It automatically submits the agent to the Agent Store", correct: false, why: "Agent Store submission is a separate, manual step you take later." },
+      { text: "It hands the agent off to Copilot Studio for configuration", correct: false, why: "Natural-language creation stays inside Agent Builder." }
+    ]
+  },
+  {
+    q: "Besides describing an agent in natural language, what are the other two ways to start building an agent in Agent Builder?",
+    options: [
+      { text: "Skip to configure for manual setup, or build from a preconfigured template", correct: true, why: "These are the two alternatives to the natural-language Describe flow." },
+      { text: "Import from Copilot Studio, or copy an existing Cowork skill", correct: false, why: "Neither of these is a documented Agent Builder creation path." },
+      { text: "Request an admin to build it, or use the Agent Registry", correct: false, why: "The Registry is an admin inventory tool, not an agent-creation path." },
+      { text: "Only natural language is supported; there is no manual option", correct: false, why: "Skip to configure and templates are both documented alternatives." }
+    ]
+  },
+  {
+    q: "What must be true before the Try it tab becomes available while building an agent?",
+    options: [
+      { text: "The agent needs at least one Starter Prompt configured", correct: false, why: "Starter Prompts aren't the prerequisite — name, description, and instructions are." },
+      { text: "The agent needs a name, description, and instructions", correct: true, why: "Those three fields are what unlock Try it." },
+      { text: "The agent must already be shared with colleagues", correct: false, why: "Sharing happens after testing, not before Try it is available." },
+      { text: "The agent must be approved by an admin first", correct: false, why: "Admin approval applies to Agent Store submission, not to testing in Try it." }
+    ]
+  },
+  {
+    q: "By default, who can access an agent immediately after you finish building it?",
+    options: [
+      { text: "Everyone in your organization", correct: false, why: "Agents are private by default, not automatically visible org-wide." },
+      { text: "Only you, until you choose to share it", correct: true, why: "Agents are private by default; sharing is an explicit step." },
+      { text: "Only your direct manager", correct: false, why: "There's no automatic manager visibility for new agents." },
+      { text: "Anyone who finds it in the Agent Store", correct: false, why: "It isn't in the Agent Store until you separately submit and an admin approves it." }
+    ]
+  },
+  {
+    q: "What is the correct path to submit an Agent Builder agent to your org's Agent Store catalog?",
+    options: [
+      { text: "Open the agent, choose More (…) → Submit to your org catalog, then wait for admin approval", correct: true, why: "That's the documented submission flow." },
+      { text: "It's submitted automatically the moment you share it with colleagues", correct: false, why: "Sharing and Agent Store submission are two separate actions." },
+      { text: "Submit it directly through the Power Platform admin center", correct: false, why: "Submission and approval happen through Agent Builder and the M365 admin center, not the Power Platform admin center." },
+      { text: "Agents appear in the Agent Store automatically once published in Try it", correct: false, why: "Try it is a testing surface; it doesn't publish anything to the store." }
+    ]
+  },
+  {
+    q: "Which admin role is recommended as the least-privilege option for read-only visibility into the Agent Registry?",
+    options: [
+      { text: "Global Administrator", correct: false, why: "Global Administrator has full install/approve/manage rights — more privilege than needed for read-only visibility." },
+      { text: "AI Administrator", correct: false, why: "AI Administrator can also install, approve, and manage agents — not a read-only role." },
+      { text: "AI Reader", correct: true, why: "AI Reader is documented as the recommended least-privilege, read-only role for Registry visibility." },
+      { text: "Global Reader", correct: false, why: "Global Reader is also read-only, but AI Reader is the one Microsoft recommends specifically for this purpose." }
+    ]
+  },
+  {
+    q: "Which of these is one of the five signals that it's time to graduate an agent to Copilot Studio?",
+    options: [
+      { text: "The agent needs multistep logic with approvals and branching workflows", correct: true, why: "Multistep/branching logic is one of the five documented graduation signals." },
+      { text: "The agent only needs one SharePoint knowledge source", correct: false, why: "A single SharePoint source is well within what Agent Builder already supports." },
+      { text: "The agent will stay private to just its creator", correct: false, why: "Staying private doesn't require Copilot Studio at all." },
+      { text: "The agent needs a Starter Prompt", correct: false, why: "Starter Prompts are a basic Agent Builder building block, not a Copilot Studio signal." }
+    ]
+  },
+  {
+    q: "What unit does Copilot Studio use for consumption-based billing as of September 1, 2025?",
+    options: [
+      { text: "Dialog turns", correct: false, why: "The new unit specifically moved away from counting dialog turns." },
+      { text: "Copilot Credits, measuring compute", correct: true, why: "Copilot Credits became the unified consumption unit, measuring compute rather than turns." },
+      { text: "A flat monthly fee per agent", correct: false, why: "Copilot Studio's model is consumption-based, not a flat per-agent fee." },
+      { text: "Unlimited messages included in every license", correct: false, why: "Additional messages are purchased beyond the capacity-based license, not unlimited." }
+    ]
+  },
+  {
+    q: "A team wants an agent that answers questions from a single SharePoint site for internal staff, with no approvals or connectors involved. Which tool fits best?",
+    options: [
+      { text: "Agent Builder", correct: true, why: "This is exactly the lightweight, single-source Q&A scenario Agent Builder is designed for." },
+      { text: "Copilot Studio", correct: false, why: "Copilot Studio is overkill here — there's no connector, branching, or lifecycle need." },
+      { text: "Copilot Cowork", correct: false, why: "Cowork executes multi-step delegated work; this request is a scoped Q&A agent, not a delegated task." },
+      { text: "The Agent Registry", correct: false, why: "The Registry is an admin inventory tool, not a place to build agents." }
+    ]
+  }
+];
+
+const SECTIONS = [
+  { name: "What agents are", lessons: [0, 1, 2] },
+  { name: "Building with Agent Builder", lessons: [3, 4, 5] },
+  { name: "Sharing and governing agents", lessons: [6, 7, 8] },
+  { name: "When to graduate to Copilot Studio", lessons: [9, 10, 11] },
+  { name: "Check your understanding", lessons: [12] }
+];
+
+const LESSONS = [
+  // ── L0 ──
+  {
+    title: "Agents vs. Chat vs. Cowork — from the builder's side",
+    time: "7 minutes",
+    objectives: [
+      "Define what an agent is in Microsoft 365 Copilot terms",
+      "Place agents on the spectrum between Copilot Chat and Copilot Cowork",
+      "Recognize first-party agent examples Microsoft ships"
+    ],
+    body: `
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li><strong>An agent is a custom version of Copilot.</strong> It combines instructions, knowledge, and skills to perform a specific task or scenario.</li>
+          <li><strong>Chat, Agents, and Cowork sit on a spectrum.</strong> Chat answers questions, agents are scoped assistants, and Cowork executes multi-step work on your behalf.</li>
+          <li><strong>Cowork is explicitly not "an agent."</strong> Microsoft documentation calls Cowork an agentic system, distinct from an agent.</li>
+        </ul>
+      </div>
+
+      <h2>Where agents sit</h2>
+      <p>Microsoft 365 Copilot Chat is the everyday chat surface: you ask a question, Chat answers, grounded in either the web or, with a Copilot license, your work data. An <strong>agent</strong> is different — Microsoft's own documentation defines agents as "custom versions of Microsoft 365 Copilot that combine instructions, knowledge, and skills to perform specific tasks or scenarios." An agent is purpose-built and scoped: it knows what it's for, it has a defined set of knowledge sources, and it usually behaves as a declarative agent.</p>
+
+      <p>Copilot Cowork sits further along the spectrum again. Where Chat gives you answers and an agent gives you a scoped assistant, Cowork is an agentic system that plans and executes multi-step work end to end — sending emails, scheduling meetings, creating documents — and returns a completed deliverable rather than a draft. Teach the progression as: <strong>Chat (answers) → Agents (specialized, scoped assistants) → Cowork (delegated multi-step execution).</strong></p>
+
+      <div class="callout note">
+        <div class="callout-label">Note</div>
+        Microsoft's own admin documentation is explicit that Cowork is "an agentic system (different from an agent)." Don't blur the two when you're explaining this to colleagues — it's a common source of confusion.
+      </div>
+
+      <h3>First-party examples</h3>
+      <p>Microsoft ships its own first-party agents built on this same model, including Researcher, Analyst, Facilitator, Project Manager, and Sales Agent.</p>
+
+      <div class="compare-grid">
+        <div class="compare-card">
+          <div class="tag">Copilot Chat</div>
+          <h4>Chat</h4>
+          <p>General-purpose AI chat, grounded on the web or your work data.</p>
+          <div class="best-for">Best for: quick answers, drafting, summarizing</div>
+        </div>
+        <div class="compare-card featured">
+          <div class="tag">Agent Builder</div>
+          <h4>Agents</h4>
+          <p>Scoped assistants combining instructions, knowledge, and skills for one task or scenario.</p>
+          <div class="best-for">Best for: repeatable, well-defined jobs</div>
+        </div>
+        <div class="compare-card">
+          <div class="tag">Cowork</div>
+          <h4>Cowork</h4>
+          <p>An agentic system that plans and executes multi-step work, then hands back a finished deliverable.</p>
+          <div class="best-for">Best for: delegated, multi-step execution</div>
+        </div>
+      </div>
+
+      <div class="quiz" data-quiz-idx="0"></div>
+    `
+  },
+
+  // ── L1 ──
+  {
+    title: "The shape of a declarative agent (instructions, knowledge, starter prompts)",
+    time: "8 minutes",
+    objectives: [
+      "List the core building blocks of a declarative agent",
+      "State the character limits on Description and Instructions",
+      "Explain the license nuance around knowledge sources"
+    ],
+    body: `
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li><strong>Five building blocks define a declarative agent:</strong> Description, Instructions, Knowledge, Capabilities, and Starter Prompts.</li>
+          <li><strong>Description and Instructions are both length-capped.</strong> Description tops out at 1,000 characters; Instructions at 8,000.</li>
+          <li><strong>Not all knowledge sources are license-equal.</strong> SharePoint and public websites work for everyone; personal work data and prebuilt Copilot connectors need a Copilot add-on license.</li>
+        </ul>
+      </div>
+
+      <h2>The five building blocks</h2>
+      <p>Every agent built with Agent Builder is assembled from the same five components:</p>
+
+      <div class="chip-row">
+        <span class="chip">Description</span>
+        <span class="chip">Instructions</span>
+        <span class="chip">Knowledge</span>
+        <span class="chip">Capabilities</span>
+        <span class="chip">Starter Prompts</span>
+      </div>
+
+      <table>
+        <tr><th>Component</th><th>What it does</th><th>Limit</th></tr>
+        <tr><td>Description</td><td>Helps the orchestrator route to the agent and shows in the catalog</td><td>≤ 1,000 characters</td></tr>
+        <tr><td>Instructions</td><td>Directs the agent's behavior</td><td>≤ 8,000 characters</td></tr>
+        <tr><td>Knowledge</td><td>SharePoint sites/folders/files, public websites, or Copilot connectors</td><td>Up to 20 sources</td></tr>
+        <tr><td>Capabilities</td><td>e.g. code interpreter, image generator</td><td>—</td></tr>
+        <tr><td>Starter Prompts</td><td>Name + description shown to users</td><td>No minimum</td></tr>
+      </table>
+
+      <div class="callout note">
+        <div class="callout-label">Note</div>
+        Knowledge has a license nuance worth remembering: SharePoint items and public websites work for all users. Grounding an agent in personal work data (Teams or Outlook) or prebuilt Copilot connectors requires a Microsoft 365 Copilot add-on license.
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-label">Instructions example</div>
+        "Answer questions about our expense policy using only the attached SharePoint knowledge source. <span class="annot" title="Specific instructions like this keep the agent scoped to one job instead of behaving like general chat.">Do not answer questions outside expense policy</span>."
+        <div class="legend">Instructions are what keep an agent scoped — the whole point of building one instead of just using Chat.</div>
+      </div>
+
+      <div class="quiz" data-quiz-idx="1"></div>
+    `
+  },
+
+  // ── L2 ──
+  {
+    title: "Agent Builder vs. Copilot Studio — two different tools (the naming trap)",
+    time: "8 minutes",
+    objectives: [
+      "Distinguish Agent Builder from Copilot Studio by access point, audience, and admin surface",
+      "Avoid the naming trap between the two \"agent builder\" tools",
+      "Identify which license unlocks each tool"
+    ],
+    body: `
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li><strong>Agent Builder and Copilot Studio are two distinct tools.</strong> They share overlapping "agent builder" naming but serve different audiences.</li>
+          <li><strong>Agent Builder lives inside the Microsoft 365 Copilot app</strong> and is aimed at information workers building lightweight Q&A agents.</li>
+          <li><strong>Copilot Studio lives at copilotstudio.microsoft.com</strong> and is aimed at makers and developers building multistep, connector-driven agents.</li>
+        </ul>
+      </div>
+
+      <h2>The naming trap</h2>
+      <p>"Agent builder" is a confusing phrase in the Microsoft 365 ecosystem because two different tools use versions of that name. The in-Copilot feature is specifically called <strong>Agent Builder</strong>. An older, now-superseded feature was called "Agent Builder in Copilot Chat" (a Power Platform release-plan item from early 2025) — that page is archived, and current guidance points to the Agent Builder documentation under Copilot extensibility instead. Keep the two straight: Agent Builder is not Copilot Studio, even though both let you "build an agent."</p>
+
+      <div class="compare-grid">
+        <div class="compare-card featured">
+          <div class="tag">In the Copilot app</div>
+          <h4>Agent Builder</h4>
+          <p>Access point: Microsoft 365 Copilot app. Built for information workers, individuals, and small teams. Produces lightweight Q&A agents grounded in organizational knowledge, authored in natural language, using the Copilot orchestrator and foundation models.</p>
+          <div class="best-for">Best for: individuals/small teams, Q&A agents</div>
+          <ul><li>Managed via the M365 admin center</li></ul>
+        </div>
+        <div class="compare-card">
+          <div class="tag">copilotstudio.microsoft.com</div>
+          <h4>Copilot Studio</h4>
+          <p>Access point: a separate maker/developer site. Built for departments, whole orgs, or external customers. Supports multistep logic, approvals, branching workflows, prebuilt and custom connectors, autonomous capabilities, and full lifecycle management.</p>
+          <div class="best-for">Best for: makers/developers, complex workflows</div>
+          <ul><li>Managed via the Power Platform admin center</li></ul>
+        </div>
+      </div>
+
+      <div class="callout warn">
+        <div class="callout-label">Watch out</div>
+        Both tools are included with a Microsoft 365 Copilot add-on license; without it, agents built either way run on Copilot Credits / pay-as-you-go, except that Agent Builder is free for agents that only use web knowledge.
+      </div>
+
+      <div class="quiz" data-quiz-idx="2"></div>
+    `
+  },
+
+  // ── L3 ──
+  {
+    title: "Natural-language agent creation",
+    time: "6 minutes",
+    objectives: [
+      "Walk through the recommended Describe-tab flow for building an agent",
+      "Explain what Agent Builder auto-configures for you",
+      "Recognize the language prerequisite for natural-language authoring"
+    ],
+    body: `
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li><strong>Natural language is the recommended path.</strong> Choose New agent, then describe what you want on the Describe tab.</li>
+          <li><strong>Agent Builder does the configuration work.</strong> It auto-fills name, description, and instructions, suggests refinements, adds knowledge sources, and wires up capabilities.</li>
+          <li><strong>It requires a supported display language.</strong> Natural-language authoring only works in a supported Microsoft 365 display language.</li>
+        </ul>
+      </div>
+
+      <h2>Describe it, don't configure it</h2>
+      <p>The recommended way to start building an agent is to describe it in plain language rather than filling out fields by hand. Choose <strong>New agent</strong>, then use the <strong>Describe</strong> tab.</p>
+
+      <div class="steps">
+        <ol>
+          <li>Choose <span class="kbd">New agent</span> in Agent Builder.</li>
+          <li>On the Describe tab, write a plain-language description of what the agent should do.</li>
+          <li>Agent Builder auto-configures the name, description, and instructions from what you wrote.</li>
+          <li>Review the suggested refinements, knowledge sources, and integrated capabilities it proposes.</li>
+        </ol>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-label">Describe-tab prompt example</div>
+        "Build an agent that answers employee questions about our travel and expense policy, <span class="annot" title="Agent Builder will translate this into instructions and suggest a matching SharePoint knowledge source.">using only our Travel &amp; Expense SharePoint site as its knowledge source</span>."
+        <div class="legend">Agent Builder turns a description like this into a name, description, instructions, and a knowledge-source suggestion automatically.</div>
+      </div>
+
+      <div class="callout note">
+        <div class="callout-label">Note</div>
+        Natural-language authoring requires a supported Microsoft 365 display language. If it's unavailable, use manual configuration instead (next lesson).
+      </div>
+
+      <div class="quiz" data-quiz-idx="3"></div>
+    `
+  },
+
+  // ── L4 ──
+  {
+    title: "Manual configuration and templates",
+    time: "7 minutes",
+    objectives: [
+      "Use the Skip to configure path to build an agent manually",
+      "Start from a template instead of a blank agent",
+      "Decide when manual configuration is preferable to natural language"
+    ],
+    body: `
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li><strong>Manual configuration is a fallback path.</strong> Choose New agent → Skip to configure, then fill out the Configure tab directly.</li>
+          <li><strong>Templates preconfigure the basics.</strong> A template comes with a description, instructions, and prompts already filled in.</li>
+          <li><strong>Both paths land in the same place.</strong> A manually configured agent and a naturally-described agent produce the same underlying agent object.</li>
+        </ul>
+      </div>
+
+      <div class="tabs" data-tabs>
+        <div class="tab-header">
+          <button class="tab-btn active">Skip to configure</button>
+          <button class="tab-btn">Build from a template</button>
+        </div>
+        <div class="tab-content active">
+          <p>Choose <strong>New agent</strong>, then select <strong>Skip to configure</strong> instead of describing the agent. This opens the <strong>Configure</strong> tab, where you fill in Description, Instructions, Knowledge, Capabilities, and Starter Prompts directly, field by field.</p>
+        </div>
+        <div class="tab-content">
+          <p>Instead of starting blank, choose a preconfigured template. A template arrives with a description, instructions, and starter prompts already set — you adjust them rather than writing from scratch.</p>
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-label">Tip</div>
+        Manual configuration is useful when you already know exactly what instructions and knowledge sources you want, or when natural-language authoring isn't available in your display language.
+      </div>
+
+      <div class="quiz" data-quiz-idx="4"></div>
+    `
+  },
+
+  // ── L5 ──
+  {
+    title: "Testing and refining with the Try it tab",
+    time: "6 minutes",
+    objectives: [
+      "Explain what's required before the Try it tab activates",
+      "List the features that are unavailable in Try it",
+      "Refine an agent iteratively across turns"
+    ],
+    body: `
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li><strong>Try it needs the basics filled in.</strong> It activates once the agent has a name, description, and instructions.</li>
+          <li><strong>It behaves like the published agent</strong>, working within the knowledge you've configured so far.</li>
+          <li><strong>Some features are missing in Try it</strong> — sharing prompts, feedback, and @mentioning other agents aren't available there.</li>
+        </ul>
+      </div>
+
+      <h2>Test before you share</h2>
+      <p>Once an agent has a name, description, and instructions, the <strong>Try it</strong> tab becomes available. It behaves like the agent would once published, responding within the knowledge sources you've attached — so it's a realistic preview, not a stripped-down demo.</p>
+
+      <div class="callout warn">
+        <div class="callout-label">Watch out</div>
+        A few features aren't available in Try it: sharing prompts, submitting feedback, and @mentioning other agents. Don't judge those capabilities from the Try it tab.
+      </div>
+
+      <h3>Iterating</h3>
+      <p>You can refine the agent from within Try it — either by continuing the natural-language conversation or by switching back to the Configure tab — across as many turns as you need. When something goes wrong or right, thumbs-up/down feedback is submitted the same way Copilot Studio handles feedback.</p>
+
+      <div class="quiz" data-quiz-idx="5"></div>
+    `
+  },
+
+  // ── L6 ──
+  {
+    title: "Sharing an agent with colleagues",
+    time: "6 minutes",
+    objectives: [
+      "State the default visibility of a newly created agent",
+      "Share an agent with specific people using the Share option",
+      "Recognize when admin policy blocks sharing"
+    ],
+    body: `
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li><strong>Agents are private by default.</strong> After you choose Create, only you can see the agent until you share it.</li>
+          <li><strong>Sharing is explicit.</strong> Select Share (or More … → Share) and choose who gets access.</li>
+          <li><strong>Admin policy can restrict sharing.</strong> If it does, an admin has to approve or deploy the agent before others can use it.</li>
+        </ul>
+      </div>
+
+      <h2>From private to shared</h2>
+      <p>After building and testing an agent, choosing <strong>Create</strong> finalizes it — but it stays private to you by default. To let colleagues use it, select <strong>Share</strong> and choose who has access, or use the <strong>More (…)</strong> menu and pick Share from there.</p>
+
+      <div class="steps">
+        <ol>
+          <li>Finish building and testing the agent, then choose Create.</li>
+          <li>Open the agent and select Share, or use More (…) → Share.</li>
+          <li>Choose the people or groups who should have access.</li>
+        </ol>
+      </div>
+
+      <div class="callout warn">
+        <div class="callout-label">Watch out</div>
+        Admin policy may restrict sharing options entirely. If it does, an admin has to approve and deploy the agent before your colleagues can use it. Admins can also reassign ownership of a shared agent later.
+      </div>
+
+      <div class="quiz" data-quiz-idx="6"></div>
+    `
+  },
+
+  // ── L7 ──
+  {
+    title: "Submitting to the Agent Store (\"Built by your org\")",
+    time: "7 minutes",
+    objectives: [
+      "Follow the submission flow from Agent Builder to the org catalog",
+      "Describe what happens after an admin reviews a submission",
+      "Explain why updates require a new review cycle"
+    ],
+    body: `
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li><strong>Submission is a distinct step from sharing.</strong> Open the agent, then More (…) → Submit to your org catalog.</li>
+          <li><strong>An admin reviews and approves it</strong> in the M365 admin center before it appears under "Built by your org" in the Agent Store.</li>
+          <li><strong>Updating a submitted agent restarts the review.</strong> Any change requires a fresh submission and approval cycle.</li>
+        </ul>
+      </div>
+
+      <h2>Getting into the org catalog</h2>
+      <p>Sharing an agent with specific colleagues is different from publishing it broadly through the Agent Store. To do the latter, open the agent and choose <strong>More (…) → Submit to your org catalog</strong>, complete the required fields, then submit for admin approval.</p>
+
+      <div class="steps">
+        <ol>
+          <li>Open the built agent and choose More (…) → Submit to your org catalog.</li>
+          <li>Fill in the required fields for the submission.</li>
+          <li>Submit for admin approval.</li>
+          <li>An admin reviews the request in M365 admin center → Agents → All agents → Requests.</li>
+          <li>The admin publishes it to the "Built by your org" section of the Agent Store — optionally scoped to specific users or groups, preinstalled, or pinned.</li>
+        </ol>
+      </div>
+
+      <div class="callout note">
+        <div class="callout-label">Note</div>
+        Submission status shows as Pending, Approved, or Rejected, with a reviewer comment. This capability is available as of mid-2026. If you change the agent after it's published, you'll need to resubmit — updates go through a fresh review cycle rather than updating silently.
+      </div>
+
+      <div class="quiz" data-quiz-idx="7"></div>
+    `
+  },
+
+  // ── L8 ──
+  {
+    title: "What admins control (Agent Registry, roles, Agent 365)",
+    time: "8 minutes",
+    objectives: [
+      "Describe what the Agent Registry tracks tenant-wide",
+      "Match admin roles to their level of control",
+      "Explain what Agent 365 governs across all agent sources"
+    ],
+    body: `
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li><strong>The Agent Registry is the tenant-wide inventory</strong> of every agent, found in the M365 admin center under Agents → All Agents → Registry.</li>
+          <li><strong>Admin roles differ in what they can do.</strong> Global Administrator and AI Administrator can install and manage agents; Global Reader and AI Reader are read-only.</li>
+          <li><strong>Agent 365 is the control plane</strong> for observing and governing all agents, regardless of where they were built.</li>
+        </ul>
+      </div>
+
+      <h2>The Agent Registry</h2>
+      <p>The Agent Registry, found at M365 admin center → <strong>Agents → All Agents → Registry</strong>, is the tenant-wide inventory of agents. It tracks four agent types:</p>
+
+      <div class="chip-row">
+        <span class="chip">Microsoft agents</span>
+        <span class="chip">External partner-built</span>
+        <span class="chip">Published by your org (LOB)</span>
+        <span class="chip">Shared by creator</span>
+      </div>
+
+      <p>From the Registry, admins can install/uninstall, block/unblock, delete, start/stop (for Foundry agents), assign a new owner, publish to the store, or reject a submission. Summary tiles surface agents without owners and unmanaged agents so nothing slips through unnoticed.</p>
+
+      <h3>Roles</h3>
+      <table>
+        <tr><th>Role</th><th>Access level</th></tr>
+        <tr><td>Global Administrator</td><td>Can install, approve, and manage agents</td></tr>
+        <tr><td>AI Administrator</td><td>Can install, approve, and manage agents</td></tr>
+        <tr><td>Global Reader</td><td>Read-only</td></tr>
+        <tr><td>AI Reader</td><td>Read-only — the recommended least-privilege role for inventory visibility</td></tr>
+      </table>
+
+      <h3>Agent 365</h3>
+      <p>Agent 365 is the control plane for observing, securing, and governing every agent in the tenant, no matter where it was built. Agents from Copilot Studio, Foundry, and Agent Builder register automatically; external agents such as Bedrock or Vertex can be synced in. <strong>Entra Agent ID</strong> gives each agent an identity, and governance actions log to Microsoft Purview. Applying security controls like Conditional Access to agents requires Microsoft Entra Agent ID licensing.</p>
+
+      <div class="quiz" data-quiz-idx="8"></div>
+    `
+  },
+
+  // ── L9 ──
+  {
+    title: "What Copilot Studio adds (connectors, multistep logic, autonomous, multi-channel, lifecycle)",
+    time: "7 minutes",
+    objectives: [
+      "List the five capability areas that signal it's time to graduate to Copilot Studio",
+      "Explain what each capability area unlocks",
+      "Recognize the limits of Agent Builder that Copilot Studio removes"
+    ],
+    body: `
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li><strong>Five capability areas mark the graduation point:</strong> connectors, multistep logic, autonomous behavior, multi-channel publishing, and lifecycle management.</li>
+          <li><strong>Agent Builder doesn't offer these.</strong> It's built for lightweight, knowledge-grounded Q&A, not workflow orchestration.</li>
+          <li><strong>Copilot Studio adds the maker/developer tooling</strong> needed to build and run agents as production systems.</li>
+        </ul>
+      </div>
+
+      <h2>Five reasons to graduate</h2>
+      <p>Graduate an agent from Agent Builder to Copilot Studio when you need any of the following:</p>
+
+      <div class="chip-row">
+        <span class="chip">Connectors</span>
+        <span class="chip">Multistep logic</span>
+        <span class="chip">Autonomous behavior</span>
+        <span class="chip">Multi-channel publishing</span>
+        <span class="chip">Lifecycle management</span>
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-card">
+          <h4>Connectors</h4>
+          <p>Prebuilt and custom Power Platform connectors, plus Copilot connectors, for pulling in outside systems.</p>
+        </div>
+        <div class="compare-card">
+          <h4>Multistep logic</h4>
+          <p>Approvals and branching workflows instead of a single instructions block.</p>
+        </div>
+        <div class="compare-card">
+          <h4>Autonomous behavior</h4>
+          <p>Agents that can act without a human prompting each step.</p>
+        </div>
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-card">
+          <h4>Multi-channel publishing</h4>
+          <p>Deploy the same agent to Teams, the web, and custom endpoints.</p>
+        </div>
+        <div class="compare-card">
+          <h4>Lifecycle management</h4>
+          <p>Dev/test/prod environments, versioning, role-based access control, and telemetry.</p>
+        </div>
+      </div>
+
+      <div class="callout note">
+        <div class="callout-label">Note</div>
+        None of these five are available in Agent Builder — it's intentionally scoped to lightweight Q&A agents grounded in organizational knowledge.
+      </div>
+
+      <div class="quiz" data-quiz-idx="9"></div>
+    `
+  },
+
+  // ── L10 ──
+  {
+    title: "Copy to Copilot Studio + pricing model differences",
+    time: "8 minutes",
+    objectives: [
+      "Use Copy to Copilot Studio to carry over an existing agent's configuration",
+      "Explain how Copilot Studio's consumption-based pricing works",
+      "State what Copilot Credits measure, and since when"
+    ],
+    body: `
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li><strong>Copy to Copilot Studio preserves your work.</strong> It carries over the core configuration and instructions instead of making you rebuild from scratch.</li>
+          <li><strong>Copilot Studio bills by consumption, not by seat.</strong> Licenses are capacity-based, and additional messages can be purchased.</li>
+          <li><strong>Copilot Credits became the unified consumption unit on September 1, 2025</strong>, measuring compute rather than dialog turns.</li>
+        </ul>
+      </div>
+
+      <h2>Carrying your work over</h2>
+      <p>When an agent outgrows Agent Builder, use <strong>Copy to Copilot Studio</strong> rather than rebuilding it there by hand. It preserves the core configuration and instructions you already wrote, so you're extending the agent — adding connectors, branching logic, and so on — instead of starting over.</p>
+
+      <h2>How Copilot Studio is priced</h2>
+      <p>Copilot Studio uses a consumption-based, message-driven pricing model. Licenses are capacity-based, and additional messages can be purchased beyond that capacity; a billable message is a request or message sent to the agent that triggers an action or a response.</p>
+
+      <div class="callout note">
+        <div class="callout-label">Note</div>
+        Since September 1, 2025, Microsoft has used <strong>Copilot Credits</strong> as the unified consumption unit across this billing — measuring compute rather than counting dialog turns, available as pay-as-you-go, prepaid packs, or pre-purchase commitments.
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-label">Tip</div>
+        Copilot-licensed end users can run Copilot Studio agents deployed to Microsoft 365 channels without necessarily consuming billable credits in every context. But agents that reach into shared tenant data — SharePoint or Graph connector content — are metered, and that metering is off by default in Copilot Chat until an admin sets up billing.
+      </div>
+
+      <div class="quiz" data-quiz-idx="10"></div>
+    `
+  },
+
+  // ── L11 ──
+  {
+    title: "A worked \"which tool for this job\" decision",
+    time: "8 minutes",
+    objectives: [
+      "Apply the Agent Builder vs. Copilot Studio distinctions to real scenarios",
+      "Decide which tool fits a given agent request",
+      "Justify the decision using audience, complexity, and lifecycle needs"
+    ],
+    body: `
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li><strong>Start from the job, not the tool.</strong> Audience, complexity, and lifecycle needs point you to the right builder.</li>
+          <li><strong>Agent Builder fits scoped, knowledge-grounded jobs</strong> for individuals or small teams.</li>
+          <li><strong>Copilot Studio fits jobs that need connectors, branching logic, autonomy, multiple channels, or formal lifecycle management.</strong></li>
+        </ul>
+      </div>
+
+      <h2>Two scenarios, worked through</h2>
+
+      <div class="tabs" data-tabs>
+        <div class="tab-header">
+          <button class="tab-btn active">Scenario A</button>
+          <button class="tab-btn">Scenario B</button>
+        </div>
+        <div class="tab-content active">
+          <p><strong>Request:</strong> "Our HR team wants an agent that answers staff questions about the benefits policy, using our Benefits SharePoint site as its only source. No approvals, no other systems involved."</p>
+          <p><strong>Decision:</strong> Agent Builder. This is a lightweight Q&A agent for an internal audience, grounded in a single SharePoint knowledge source — exactly what Agent Builder is built for. Describe it in natural language, test it in Try it, then share it with the HR team.</p>
+        </div>
+        <div class="tab-content">
+          <p><strong>Request:</strong> "We want an agent that pulls open tickets from a connector, routes them through a manager approval step, and posts status updates to a Teams channel and a public web page."</p>
+          <p><strong>Decision:</strong> Copilot Studio. This needs a connector, branching approval logic, and multi-channel publishing to Teams and the web — three of the five graduation signals from the last lesson. If this started life as a simple Agent Builder agent, use Copy to Copilot Studio to carry the instructions forward instead of rebuilding.</p>
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-label">Tip</div>
+        When you're unsure, ask: does this need a connector, branching logic, autonomy, more than one channel, or formal environments and versioning? One "yes" is usually enough to justify Copilot Studio.
+      </div>
+
+      <div class="quiz" data-quiz-idx="11"></div>
+    `
+  },
+
+  // ── L12 — final quiz lesson ──
+  {
+    title: `Quiz on ${COURSE_TITLE}`,
+    body: `<p>Test what you've learned across this course. You need 70% to pass — you can retake it as many times as you like.</p>`,
+    isFinalQuiz: true
+  }
+];
+
+const FINAL_QUIZ = [
+  { q: "What is an 'agent' in Microsoft 365 Copilot terms?", options: [
+    { text: "A custom version of Copilot combining instructions, knowledge, and skills for a specific task", correct: true },
+    { text: "The general-purpose chat interface for asking any question", correct: false },
+    { text: "An agentic system that executes multi-step work end to end", correct: false },
+    { text: "A connector linking Copilot Studio to an external system", correct: false }
+  ]},
+  { q: "What is the character limit on a declarative agent's Instructions field?", options: [
+    { text: "1,000 characters", correct: false },
+    { text: "8,000 characters", correct: true },
+    { text: "20,000 characters", correct: false },
+    { text: "There is no limit", correct: false }
+  ]},
+  { q: "How do Agent Builder and Copilot Studio differ?", options: [
+    { text: "Agent Builder targets information workers with lightweight Q&A agents; Copilot Studio targets makers/developers with multistep, connector-driven agents", correct: true },
+    { text: "They are the same tool marketed under two names", correct: false },
+    { text: "Agent Builder is managed via the Power Platform admin center, Copilot Studio via the M365 admin center", correct: false },
+    { text: "Copilot Studio only supports public website knowledge sources", correct: false }
+  ]},
+  { q: "What happens when you describe an agent on the Describe tab in Agent Builder?", options: [
+    { text: "Agent Builder auto-configures name, description, and instructions, and suggests refinements", correct: true },
+    { text: "You must first write all 8,000 characters of instructions by hand", correct: false },
+    { text: "The agent is automatically submitted to the Agent Store", correct: false },
+    { text: "Configuration is handed off to Copilot Studio", correct: false }
+  ]},
+  { q: "Besides natural-language description, what are the other two ways to start building an agent?", options: [
+    { text: "Skip to configure manually, or build from a preconfigured template", correct: true },
+    { text: "Import from Copilot Studio, or copy a Cowork skill", correct: false },
+    { text: "Ask an admin to build it, or use the Agent Registry", correct: false },
+    { text: "There is no other way — natural language is required", correct: false }
+  ]},
+  { q: "What's required before the Try it tab becomes available?", options: [
+    { text: "At least one Starter Prompt", correct: false },
+    { text: "A name, description, and instructions", correct: true },
+    { text: "The agent must already be shared", correct: false },
+    { text: "Admin approval", correct: false }
+  ]},
+  { q: "What is the default visibility of a newly created agent?", options: [
+    { text: "Visible to the entire organization", correct: false },
+    { text: "Private to the creator until shared", correct: true },
+    { text: "Visible only to the creator's manager", correct: false },
+    { text: "Automatically listed in the Agent Store", correct: false }
+  ]},
+  { q: "What is the correct flow to submit an agent to your org's Agent Store catalog?", options: [
+    { text: "Open the agent, choose More (…) → Submit to your org catalog, then await admin approval", correct: true },
+    { text: "It happens automatically once shared with colleagues", correct: false },
+    { text: "Submit directly through the Power Platform admin center", correct: false },
+    { text: "It publishes automatically from the Try it tab", correct: false }
+  ]},
+  { q: "Which admin role is the recommended least-privilege, read-only role for Agent Registry visibility?", options: [
+    { text: "Global Administrator", correct: false },
+    { text: "AI Administrator", correct: false },
+    { text: "AI Reader", correct: true },
+    { text: "Global Reader", correct: false }
+  ]},
+  { q: "Which of these is one of the five signals for graduating to Copilot Studio?", options: [
+    { text: "Needing multistep logic with approvals and branching", correct: true },
+    { text: "Needing a single SharePoint knowledge source", correct: false },
+    { text: "Keeping the agent private to its creator", correct: false },
+    { text: "Adding a Starter Prompt", correct: false }
+  ]},
+  { q: "What consumption unit has Copilot Studio used for billing since September 1, 2025?", options: [
+    { text: "Dialog turns", correct: false },
+    { text: "Copilot Credits, measuring compute", correct: true },
+    { text: "A flat monthly fee per agent", correct: false },
+    { text: "Unlimited included messages", correct: false }
+  ]},
+  { q: "Which tool fits an agent that answers questions from one SharePoint site for internal staff, with no connectors or approvals?", options: [
+    { text: "Agent Builder", correct: true },
+    { text: "Copilot Studio", correct: false },
+    { text: "Copilot Cowork", correct: false },
+    { text: "The Agent Registry", correct: false }
+  ]}
+];
+
+// ============================================================
+// RENDERING + STATE
+// ============================================================
+const CAN_EMBED = location.protocol === 'http:' || location.protocol === 'https:';
+let currentLesson = 0;
+let completed = new Set();
+
+function buildSidebar() {
+  const nav = document.getElementById('lessonNav');
+  let html = '';
+  SECTIONS.forEach(section => {
+    html += `<div class="section-title">${section.name}</div>`;
+    section.lessons.forEach(li => {
+      html += `<div class="lesson-link" data-i="${li}" onclick="goLesson(${li})">
+        <div class="dot"></div>
+        <div>${LESSONS[li].title}</div>
+      </div>`;
+    });
+  });
+  nav.innerHTML = html;
+}
+
+function buildLessons() {
+  const root = document.getElementById('contentInner');
+  let html = '';
+  LESSONS.forEach((L, i) => {
+    html += `<div class="lesson" data-lesson="${i}">`;
+    html += `<div class="lesson-header">`;
+    html += `<div class="breadcrumb">M365 Learning / ${COURSE_TITLE}</div>`;
+    html += `<h1>${L.title}</h1>`;
+    if (L.time) html += `<div class="estimated-time"><strong>Estimated time:</strong>&nbsp; ${L.time}</div>`;
+    html += `</div>`;
+
+    if (L.objectives && L.objectives.length) {
+      html += `<div class="objectives"><h3>Learning objectives</h3><p>By the end of this lesson you'll be able to:</p><ul>`;
+      L.objectives.forEach(o => html += `<li>${o}</li>`);
+      html += `</ul></div>`;
+    }
+
+    if (L.video) {
+      const v = L.video;
+      const thumbUrl = `https://img.youtube.com/vi/${v.id}/hqdefault.jpg`;
+      const watchUrl = `https://www.youtube.com/watch?v=${v.id}`;
+      const title = (v.title || L.title).replace(/"/g, '&quot;');
+      const sub = `${v.channel || 'Microsoft 365'}${v.duration ? '  ·  ' + v.duration : ''}`;
+      if (CAN_EMBED) {
+        html += `<div class="video-frame">
+          <iframe src="https://www.youtube.com/embed/${v.id}" title="${title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <div class="video-meta-row">
+          <div class="video-meta-text"><strong>${v.title || L.title}</strong> · ${sub}</div>
+          <a class="video-meta-link" href="${watchUrl}" target="_blank" rel="noopener">Open on YouTube ↗</a>
+        </div>`;
+      } else {
+        html += `<a class="video-card" href="${watchUrl}" target="_blank" rel="noopener">
+          <div class="thumb" style="background-image:url('${thumbUrl}')"></div>
+          <div class="badge">Watch on YouTube</div>
+          <div class="play" aria-hidden="true"></div>
+          <div class="meta">
+            <div class="vtitle">${v.title || L.title}</div>
+            <div class="vsub">${sub}</div>
+          </div>
+        </a>`;
+      }
+      if (v.caption) html += `<div class="video-caption">${v.caption}</div>`;
+    }
+
+    html += L.body;
+
+    if (L.isFinalQuiz) {
+      html += `<div class="quiz final-quiz" id="finalQuiz"></div>`;
+    }
+
+    html += `<div class="lesson-footer">`;
+    html += `<button class="nav-btn" onclick="goLesson(${i-1})" ${i===0?'disabled':''}>← Previous</button>`;
+    const isLast = i === LESSONS.length - 1;
+    html += `<button class="nav-btn primary" onclick="${isLast?'finishCourse()':'completeAndAdvance('+i+')'}">${isLast?'Finish course':'Mark complete &amp; next →'}</button>`;
+    html += `</div></div>`;
+  });
+  root.innerHTML = html;
+  attachQuizHandlers();
+  attachTabHandlers();
+  renderFinalQuiz();
+}
+
+function attachQuizHandlers() {
+  document.querySelectorAll('.quiz[data-quiz-idx]').forEach(box => {
+    const data = INLINE_QUIZZES[parseInt(box.getAttribute('data-quiz-idx'))];
+    let html = `<h4>Knowledge check</h4><div class="q-title">${data.q}</div><div class="options">`;
+    data.options.forEach(opt => {
+      html += `<button class="option" data-correct="${opt.correct}" data-why="${opt.why?opt.why.replace(/"/g,'&quot;'):''}"><span class="icon">○</span><span>${opt.text}</span></button>`;
+    });
+    html += `</div><div class="feedback"></div>`;
+    box.innerHTML = html;
+    box.querySelectorAll('.option').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const correct = btn.getAttribute('data-correct') === 'true';
+        const why = btn.getAttribute('data-why');
+        box.querySelectorAll('.option').forEach(b => {
+          b.disabled = true;
+          if (b.getAttribute('data-correct') === 'true') b.classList.add('correct');
+        });
+        if (!correct) btn.classList.add('incorrect');
+        const fb = box.querySelector('.feedback');
+        fb.className = 'feedback ' + (correct ? 'correct' : 'incorrect');
+        fb.innerHTML = (correct ? '<strong>Correct.</strong> ' : '<strong>Not quite.</strong> ') + why;
+      });
+    });
+  });
+}
+
+function attachTabHandlers() {
+  document.querySelectorAll('.tabs[data-tabs]').forEach(tabBox => {
+    const btns = tabBox.querySelectorAll('.tab-btn');
+    const contents = tabBox.querySelectorAll('.tab-content');
+    btns.forEach((btn, idx) => {
+      btn.addEventListener('click', () => {
+        btns.forEach(b => b.classList.remove('active'));
+        contents.forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        contents[idx].classList.add('active');
+      });
+    });
+  });
+}
+
+let finalQuizState = { idx: 0, answers: [], answered: false };
+
+function renderFinalQuiz() {
+  const box = document.getElementById('finalQuiz');
+  if (!box) return;
+  const i = finalQuizState.idx;
+  if (i >= FINAL_QUIZ.length) {
+    const correctCount = finalQuizState.answers.filter(a => a).length;
+    const pct = Math.round(100 * correctCount / FINAL_QUIZ.length);
+    const passed = pct >= 70;
+    box.innerHTML = `<div class="results">
+      <div class="score">${correctCount} / ${FINAL_QUIZ.length}</div>
+      <div style="font-size:17px;margin:10px 0 18px;color:var(--text-soft)">${pct}% — ${passed?'Passed ✓':'Keep going'}</div>
+      <p>${passed?('Solid grasp of ' + COURSE_TITLE.replace(/^Introduction to /,'') + '. Ready to put into practice.'):'Review the lessons where you missed questions — the material is dense, this is normal.'}</p>
+      <button class="nav-btn primary" onclick="finalQuizState={idx:0,answers:[],answered:false};renderFinalQuiz()">Retake quiz</button>
+    </div>`;
+    return;
+  }
+  const Q = FINAL_QUIZ[i];
+  let html = `<h4>Question ${i+1} of ${FINAL_QUIZ.length}</h4>`;
+  html += `<div class="q-counter">${finalQuizState.answers.length} answered</div>`;
+  html += `<div class="q-title">${Q.q}</div>`;
+  html += `<div class="options">`;
+  Q.options.forEach(opt => {
+    html += `<button class="option" data-correct="${opt.correct}"><span class="icon">○</span><span>${opt.text}</span></button>`;
+  });
+  html += `</div><div class="feedback"></div>`;
+  html += `<button class="next-btn" id="fqNext" disabled onclick="finalQuizNext()">${i === FINAL_QUIZ.length - 1 ? 'See results' : 'Next question →'}</button>`;
+  box.innerHTML = html;
+  box.querySelectorAll('.option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (finalQuizState.answered) return;
+      const correct = btn.getAttribute('data-correct') === 'true';
+      box.querySelectorAll('.option').forEach(b => {
+        b.disabled = true;
+        if (b.getAttribute('data-correct') === 'true') b.classList.add('correct');
+      });
+      if (!correct) btn.classList.add('incorrect');
+      const fb = box.querySelector('.feedback');
+      fb.className = 'feedback ' + (correct ? 'correct' : 'incorrect');
+      fb.innerHTML = correct ? '<strong>Correct.</strong>' : '<strong>Not quite — the highlighted option is correct.</strong>';
+      finalQuizState.answered = true;
+      finalQuizState.answers.push(correct);
+      document.getElementById('fqNext').disabled = false;
+    });
+  });
+}
+
+function finalQuizNext() {
+  finalQuizState.idx++;
+  finalQuizState.answered = false;
+  renderFinalQuiz();
+}
+
+function goLesson(i) {
+  if (i < 0 || i >= LESSONS.length) return;
+  currentLesson = i;
+  document.querySelectorAll('.lesson').forEach(el => el.classList.remove('active'));
+  const el = document.querySelector(`.lesson[data-lesson="${i}"]`);
+  if (el) el.classList.add('active');
+  document.querySelectorAll('.lesson-link').forEach(el => el.classList.remove('active'));
+  const link = document.querySelector(`.lesson-link[data-i="${i}"]`);
+  if (link) link.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function completeAndAdvance(i) {
+  completed.add(i);
+  document.querySelector(`.lesson-link[data-i="${i}"]`).classList.add('completed');
+  updateProgress();
+  if (i + 1 < LESSONS.length) goLesson(i + 1);
+}
+
+function finishCourse() {
+  completed.add(LESSONS.length - 1);
+  document.querySelector(`.lesson-link[data-i="${LESSONS.length-1}"]`).classList.add('completed');
+  updateProgress();
+  alert('🎓 Course complete. Now go put it to work.');
+}
+
+function updateProgress() {
+  const total = LESSONS.length;
+  const done = completed.size;
+  const pct = Math.round(100 * done / total);
+  document.getElementById('progressLabel').textContent = `${done} of ${total} lessons completed (${pct}%)`;
+  document.getElementById('progressBar').style.width = pct + '%';
+}
+
+// Boot
+document.title = COURSE_TITLE + ' — UpskillTech';
+document.getElementById('courseTitleEl').textContent = COURSE_TITLE;
+buildSidebar();
+buildLessons();
+updateProgress();
+goLesson(0);
+</script>
+</body>
+</html>

@@ -1,0 +1,1951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>UpskillTech Course</title>
+<!-- Real title is set from COURSE_TITLE at boot, below. Don't hand-edit this tag. -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=General+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+/* ═══════════════════════════════════════════
+   UPSKILLTECH DESIGN TOKENS
+═══════════════════════════════════════════ */
+:root {
+  /* Backgrounds */
+  --bg:       #070C16;
+  --bg-e:     #0E1726;
+  --bg-s:     #0B1220;
+  --bg-hover: #131D30;
+
+  /* Rules / borders */
+  --rule:     #1B2638;
+  --rule-s:   #283449;
+
+  /* Text */
+  --text:       #E8EDF5;
+  --text-soft:  #A3AEC2;
+  --text-quiet: #64748B;
+  --text-faint: #475569;
+
+  /* Brand palette */
+  --brand-sky:    #2BA9DC;
+  --brand-teal:   #0F5F8A;
+  --brand-bright: #4FC0F0;
+  --brand-ink:    #0A1628;
+  --brand-gold:   #FFC532;
+  --brand-gold-soft: rgba(255,197,50,.10);
+  --brand-sky-soft:  rgba(43,169,220,.10);
+  --brand-sky-line:  rgba(43,169,220,.20);
+
+  /* Semantic status */
+  --green:      #2DD4BF;
+  --green-soft: rgba(45,212,191,.10);
+  --yellow:     #FFC532;
+  --yellow-soft: rgba(255,197,50,.10);
+  --red:        #F87171;
+  --red-soft:   rgba(248,113,113,.10);
+
+  /* Typography */
+  --sans: 'General Sans', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', 'SF Mono', monospace;
+  --serif: 'Instrument Serif', Georgia, serif;
+
+  /* Shape */
+  --radius:    10px;
+  --radius-sm: 6px;
+  --max:       860px;
+}
+
+/* ═══════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Grid background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,.028) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ═══════════════════════════════════════════
+   TYPOGRAPHY
+═══════════════════════════════════════════ */
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 400;
+  color: var(--text);
+}
+h1 { font-size: 34px; line-height: 1.15; margin: 0 0 8px; letter-spacing: -0.01em; }
+h2 { font-size: 24px; line-height: 1.25; margin: 36px 0 14px; letter-spacing: -0.01em; }
+h3 { font-size: 18px; line-height: 1.3; margin: 28px 0 10px; }
+h4 { font-size: 15px; line-height: 1.35; margin: 22px 0 8px; font-family: var(--sans); font-weight: 600; }
+p { margin: 0 0 16px; color: var(--text-soft); }
+a { color: var(--brand-sky); text-decoration: none; }
+a:hover { color: var(--brand-bright); text-decoration: underline; }
+ul, ol { margin: 0 0 16px; padding-left: 22px; }
+ul li, ol li { margin-bottom: 6px; color: var(--text-soft); }
+strong { color: var(--text); font-weight: 600; }
+em { font-style: italic; }
+
+code {
+  font-family: var(--mono);
+  font-size: 0.85em;
+  background: var(--bg-e);
+  border: 1px solid var(--rule);
+  padding: 1px 7px;
+  border-radius: 4px;
+  color: var(--brand-bright);
+}
+pre {
+  background: var(--bg-e);
+  border: 1px solid var(--rule);
+  padding: 18px 20px;
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0 0 14px;
+}
+pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: var(--brand-bright);
+}
+
+/* ═══════════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════════ */
+.app {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+/* ═══════════════════════════════════════════
+   SIDEBAR
+═══════════════════════════════════════════ */
+.sidebar {
+  background: var(--bg-s);
+  border-right: 1px solid var(--rule);
+  padding: 24px 18px;
+  overflow-y: auto;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+/* Brand mark */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--rule);
+}
+.brand-logo {
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(135deg, var(--brand-teal) 0%, var(--brand-sky) 55%, var(--brand-bright) 100%);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 16px rgba(43,169,220,.25);
+}
+.brand-logo svg { width: 16px; height: 16px; fill: #fff; }
+.brand-name {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-quiet);
+  text-transform: uppercase;
+  letter-spacing: .14em;
+}
+
+/* Course title */
+.course-title {
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.3;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.course-overview {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--brand-sky);
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-bottom: 18px;
+  display: inline-block;
+}
+.course-overview:hover { color: var(--brand-bright); }
+
+/* Progress bar */
+.course-progress { margin-bottom: 20px; }
+.course-progress .pct {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-bottom: 6px;
+}
+.course-progress .bar {
+  height: 3px;
+  background: var(--rule-s);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.course-progress .bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--brand-teal), var(--brand-sky));
+  transition: width 300ms ease;
+}
+
+/* Sidebar nav */
+.section-title {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  margin: 16px 0 6px 8px;
+}
+
+.lesson-link {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 7px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: var(--text-quiet);
+  cursor: pointer;
+  transition: background 100ms, color 100ms;
+  line-height: 1.35;
+}
+.lesson-link:hover { background: var(--bg-hover); color: var(--text-soft); }
+.lesson-link.active {
+  background: var(--brand-sky-soft);
+  color: var(--brand-bright);
+  border: 1px solid var(--brand-sky-line);
+}
+.lesson-link .dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid var(--rule-s);
+  flex-shrink: 0;
+  margin-top: 1px;
+  transition: all 150ms;
+}
+.lesson-link.completed .dot {
+  background: var(--brand-teal);
+  border-color: var(--brand-teal);
+  position: relative;
+}
+.lesson-link.completed .dot::after {
+  content: "✓";
+  color: white;
+  font-size: 8px;
+  font-weight: 700;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.lesson-link.active .dot { border-color: var(--brand-sky); }
+
+/* ═══════════════════════════════════════════
+   MAIN CONTENT
+═══════════════════════════════════════════ */
+.content {
+  padding: 60px 52px 80px;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+.content-inner { max-width: var(--max); margin: 0 auto; }
+
+/* Lesson header */
+.lesson-header {
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 20px;
+  margin-bottom: 28px;
+}
+.breadcrumb {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.breadcrumb::before {
+  content: '';
+  width: 14px;
+  height: 1px;
+  background: var(--brand-teal);
+}
+.estimated-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-e);
+  border: 1px solid var(--rule);
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-quiet);
+  margin: 10px 0;
+}
+.estimated-time strong { color: var(--text-soft); font-weight: 500; }
+
+/* ═══════════════════════════════════════════
+   OBJECTIVES BLOCK
+═══════════════════════════════════════════ */
+.objectives {
+  background: var(--bg-e);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--brand-sky);
+  padding: 20px 24px;
+  border-radius: var(--radius-sm);
+  margin: 18px 0 28px;
+}
+.objectives h3 {
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-family: var(--sans);
+  font-weight: 700;
+  color: var(--brand-bright);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.objectives p { margin: 0 0 10px; font-size: 14px; }
+.objectives ul { margin: 0; padding-left: 20px; }
+.objectives ul li { color: var(--text-soft); font-size: 14px; }
+
+/* ═══════════════════════════════════════════
+   VIDEO
+═══════════════════════════════════════════ */
+.video-card {
+  display: block;
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #000;
+  margin: 18px 0 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.4), 0 0 0 1px var(--rule);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.video-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0,0,0,.5), 0 0 0 1px var(--brand-sky-line);
+}
+.video-card .thumb {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--bg-e);
+}
+.video-card .thumb::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 60%;
+  background: linear-gradient(to top, rgba(7,12,22,.9) 0%, rgba(7,12,22,0) 100%);
+}
+.video-card .play {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 72px; height: 72px;
+  background: rgba(7,12,22,.7);
+  border: 2px solid rgba(79,192,240,.4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 160ms, border-color 160ms, transform 160ms;
+  z-index: 3;
+}
+.video-card:hover .play {
+  background: rgba(43,169,220,.25);
+  border-color: var(--brand-sky);
+  transform: translate(-50%, -50%) scale(1.06);
+}
+.video-card .play::before {
+  content: "";
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 13px 0 13px 22px;
+  border-color: transparent transparent transparent var(--brand-bright);
+  margin-left: 4px;
+}
+.video-card .meta {
+  position: absolute;
+  left: 18px; right: 18px; bottom: 14px;
+  color: white;
+  z-index: 2;
+}
+.video-card .vtitle { font-size: 15px; font-weight: 600; line-height: 1.3; margin-bottom: 4px; }
+.video-card .vsub { font-size: 12px; opacity: 0.7; font-family: var(--mono); }
+.video-card .badge {
+  position: absolute; top: 12px; right: 12px;
+  background: var(--brand-teal);
+  color: white;
+  font-family: var(--mono);
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+  z-index: 4;
+}
+
+.video-frame {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #000;
+  margin: 18px 0 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.4), 0 0 0 1px var(--rule);
+}
+.video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video-meta-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 14px; margin: 0 2px 4px; font-size: 12.5px;
+}
+.video-meta-text { color: var(--text-quiet); font-family: var(--mono); font-size: 11px; }
+.video-meta-text strong { color: var(--text-soft); font-weight: 500; font-family: var(--sans); font-size: 13px; }
+.video-meta-link { color: var(--brand-sky); font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: .06em; }
+.video-caption { font-size: 13px; color: var(--text-faint); margin: 4px 0 26px; font-style: italic; }
+
+/* ═══════════════════════════════════════════
+   KEY TAKEAWAYS
+═══════════════════════════════════════════ */
+.takeaways {
+  background: var(--brand-sky-soft);
+  border: 1px solid var(--brand-sky-line);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+.takeaways h4 {
+  margin: 0 0 12px;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  color: var(--brand-sky);
+}
+.takeaways ul { margin: 0; padding-left: 20px; }
+.takeaways li { color: var(--text-soft); font-size: 14px; margin-bottom: 8px; }
+
+/* ═══════════════════════════════════════════
+   CALLOUTS
+═══════════════════════════════════════════ */
+.callout {
+  background: var(--bg-e);
+  border: 1px solid var(--rule);
+  padding: 14px 18px;
+  border-radius: var(--radius-sm);
+  margin: 18px 0;
+  font-size: 14px;
+}
+.callout.note  { border-left: 3px solid var(--brand-sky); background: var(--brand-sky-soft); }
+.callout.warn  { border-left: 3px solid var(--yellow); background: var(--yellow-soft); }
+.callout.danger { border-left: 3px solid var(--red); background: var(--red-soft); }
+.callout.tip   { border-left: 3px solid var(--green); background: var(--green-soft); }
+.callout-label {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-right: 8px;
+  color: var(--text-quiet);
+}
+
+/* ═══════════════════════════════════════════
+   COMPARE GRID
+═══════════════════════════════════════════ */
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin: 24px 0;
+}
+.compare-card {
+  background: var(--bg-e);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 150ms;
+}
+.compare-card:hover { border-color: var(--rule-s); }
+.compare-card.featured {
+  border-color: var(--brand-sky);
+  box-shadow: 0 0 0 1px var(--brand-sky-line), 0 4px 20px rgba(43,169,220,.08);
+}
+.compare-card .tag {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--brand-sky);
+  margin-bottom: 8px;
+}
+.compare-card.featured .tag { color: var(--brand-bright); }
+.compare-card h4 { margin: 0 0 6px; font-size: 16px; font-family: var(--serif); color: var(--text); }
+.compare-card .sub { font-size: 13px; color: var(--text-quiet); margin-bottom: 12px; }
+.compare-card .best-for {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--text-faint);
+  margin: 6px 0;
+}
+.compare-card ul { padding-left: 16px; font-size: 13px; margin: 0; }
+.compare-card ul li { color: var(--text-quiet); margin-bottom: 5px; }
+
+/* ═══════════════════════════════════════════
+   PROMPT CARD
+═══════════════════════════════════════════ */
+.prompt-card {
+  background: var(--bg-e);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin: 20px 0;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-soft);
+}
+.prompt-card .prompt-label {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--text-faint);
+  margin-bottom: 12px;
+}
+.prompt-card .annot {
+  background: var(--brand-sky-soft);
+  padding: 1px 5px;
+  border-bottom: 1.5px dashed var(--brand-sky);
+  cursor: help;
+  border-radius: 3px;
+  color: var(--brand-bright);
+}
+.prompt-card .legend {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--text-faint);
+  margin-top: 14px;
+  border-top: 1px dashed var(--rule);
+  padding-top: 10px;
+}
+
+/* ═══════════════════════════════════════════
+   QUIZ
+═══════════════════════════════════════════ */
+.quiz {
+  background: var(--bg-e);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  margin: 28px 0;
+}
+.quiz h4 {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--brand-sky);
+  margin: 0 0 10px;
+}
+.quiz .q-title { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 14px; }
+.quiz .options { display: flex; flex-direction: column; gap: 8px; }
+.quiz .option {
+  border: 1px solid var(--rule);
+  background: var(--bg);
+  padding: 11px 16px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 14px;
+  text-align: left;
+  color: var(--text-soft);
+  transition: all 100ms;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--sans);
+}
+.quiz .option:hover { border-color: var(--brand-sky); background: var(--brand-sky-soft); color: var(--text); }
+.quiz .option.correct {
+  border-color: var(--green);
+  background: var(--green-soft);
+  color: var(--green);
+  font-weight: 600;
+}
+.quiz .option.incorrect {
+  border-color: var(--red);
+  background: var(--red-soft);
+  color: var(--red);
+}
+.quiz .option .icon { font-size: 15px; }
+.quiz .feedback {
+  margin-top: 14px;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  display: none;
+}
+.quiz .feedback.correct {
+  background: var(--green-soft);
+  border: 1px solid rgba(45,212,191,.2);
+  color: var(--green);
+  display: block;
+}
+.quiz .feedback.incorrect {
+  background: var(--red-soft);
+  border: 1px solid rgba(248,113,113,.2);
+  color: var(--red);
+  display: block;
+}
+
+/* Final quiz */
+.final-quiz .q-counter {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-faint);
+  margin-bottom: 6px;
+}
+.final-quiz .next-btn {
+  margin-top: 16px;
+  background: var(--brand-gold);
+  color: #070C16;
+  border: 0;
+  padding: 10px 24px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 14px;
+  font-family: var(--sans);
+  cursor: pointer;
+  transition: opacity 120ms;
+}
+.final-quiz .next-btn:disabled { background: var(--rule-s); color: var(--text-faint); cursor: not-allowed; }
+.final-quiz .results { text-align: center; padding: 30px 0; }
+.final-quiz .score {
+  font-size: 56px;
+  font-weight: 700;
+  color: var(--brand-bright);
+  font-family: var(--serif);
+}
+
+/* ═══════════════════════════════════════════
+   TABS
+═══════════════════════════════════════════ */
+.tabs {
+  background: var(--bg-e);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  margin: 24px 0;
+  overflow: hidden;
+}
+.tabs .tab-header {
+  display: flex;
+  border-bottom: 1px solid var(--rule);
+  background: var(--bg-s);
+}
+.tabs .tab-btn {
+  flex: 1;
+  padding: 11px 16px;
+  background: transparent;
+  border: 0;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-faint);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  text-align: center;
+  transition: all 100ms;
+}
+.tabs .tab-btn:hover { color: var(--text-soft); }
+.tabs .tab-btn.active {
+  color: var(--brand-bright);
+  border-bottom-color: var(--brand-sky);
+  background: var(--bg-e);
+}
+.tabs .tab-content { padding: 20px; display: none; font-size: 14px; }
+.tabs .tab-content.active { display: block; }
+.tabs .file-tree {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-quiet);
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 14px;
+}
+.tabs .file-tree .file { padding: 2px 0; }
+.tabs .file-tree .file::before { content: "📄  "; }
+.tabs .file-tree .folder { font-weight: 600; color: var(--text-soft); padding: 2px 0; }
+.tabs .file-tree .folder::before { content: "📁  "; }
+
+/* ═══════════════════════════════════════════
+   FOOTER NAV
+═══════════════════════════════════════════ */
+.lesson-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 60px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.nav-btn {
+  background: var(--bg-e);
+  color: var(--text-soft);
+  border: 1px solid var(--rule);
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  font-size: 14px;
+  font-family: var(--sans);
+  cursor: pointer;
+  transition: all 120ms;
+}
+.nav-btn:hover { border-color: var(--brand-sky); color: var(--brand-bright); }
+.nav-btn.primary {
+  background: var(--brand-gold);
+  color: #070C16;
+  border-color: var(--brand-gold);
+  font-weight: 700;
+}
+.nav-btn.primary:hover { background: #FFD060; border-color: #FFD060; }
+.nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* ═══════════════════════════════════════════
+   LESSON SCREENS
+═══════════════════════════════════════════ */
+.lesson { display: none; }
+.lesson.active { display: block; }
+
+/* ═══════════════════════════════════════════
+   UTILITY / COMPONENTS
+═══════════════════════════════════════════ */
+.muted { color: var(--text-faint); }
+.sm { font-size: 13px; }
+.center { text-align: center; }
+hr { border: 0; border-top: 1px solid var(--rule); margin: 28px 0; }
+
+.kbd {
+  font-family: var(--mono);
+  font-size: 11px;
+  background: var(--bg-e);
+  border: 1px solid var(--rule);
+  border-bottom-width: 2px;
+  padding: 1px 7px;
+  border-radius: 4px;
+  color: var(--text-soft);
+}
+
+.chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+.chip {
+  background: var(--brand-sky-soft);
+  color: var(--brand-bright);
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  border: 1px solid var(--brand-sky-line);
+}
+
+.steps { counter-reset: step; margin: 18px 0; padding: 0; list-style: none; }
+.steps li {
+  counter-increment: step;
+  position: relative;
+  padding-left: 48px;
+  margin-bottom: 14px;
+  color: var(--text-soft);
+}
+.steps li::before {
+  content: counter(step);
+  position: absolute; left: 0; top: 1px;
+  width: 30px; height: 30px;
+  background: linear-gradient(135deg, var(--brand-teal), var(--brand-sky));
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  font-family: var(--mono);
+}
+
+table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 14px; }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--rule); }
+th { background: var(--bg-e); font-weight: 600; font-size: 12px; color: var(--text-soft); font-family: var(--mono); text-transform: uppercase; letter-spacing: .06em; }
+tr:hover td { background: var(--bg-hover); }
+td { color: var(--text-soft); }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 880px) {
+  .app { grid-template-columns: 1fr; }
+  .sidebar { position: relative; height: auto; }
+  .content { padding: 32px 24px 60px; }
+  .compare-grid { grid-template-columns: 1fr; }
+  h1 { font-size: 26px; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-logo">
+        <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 2L3 6v8l7 4 7-4V6L10 2zm0 2.4l4.5 2.6v5.2L10 14.8 5.5 12.2V7L10 4.4z"/>
+        </svg>
+      </div>
+      <div class="brand-name">UpskillTech</div>
+    </div>
+
+    <div class="course-title" id="courseTitleEl"></div>
+    <div class="course-overview" onclick="goLesson(0)">↳ Course Overview</div>
+
+    <div class="course-progress">
+      <div class="pct" id="progressLabel"></div>
+      <div class="bar"><div class="bar-fill" id="progressBar" style="width:0%"></div></div>
+    </div>
+
+    <div id="lessonNav"></div>
+  </aside>
+
+  <!-- ── CONTENT ── -->
+  <main class="content">
+    <div class="content-inner" id="contentInner">
+      <!-- Lesson screens injected here -->
+    </div>
+  </main>
+</div>
+
+<script>
+// ============================================================
+// LESSON DATA — Introduction to M365 Copilot Chat
+// ============================================================
+
+const COURSE_TITLE = "Introduction to M365 Copilot Chat";
+
+const INLINE_QUIZZES = [
+  {
+    q: "Which statement correctly describes what's included with every eligible Microsoft 365 license, with no add-on required?",
+    options: [
+      { text: "AI chat grounded on the web, with standard file upload, image generation, and access to the latest models", correct: true, why: "This is exactly what Copilot Chat includes at no extra cost — web grounding plus standard file upload and image generation." },
+      { text: "AI chat grounded on your work data — files, emails, and chats", correct: false, why: "Work-data grounding is part of the paid Microsoft 365 Copilot add-on, not the included tier." },
+      { text: "Reasoning agents like Researcher and Analyst", correct: false, why: "Reasoning agents come with the $30/user/month add-on." },
+      { text: "Priority access to file upload and image generation", correct: false, why: "Priority access is an add-on benefit — the base capability is included, but the priority lane isn't." }
+    ]
+  },
+  {
+    q: "A colleague's account shows the in-product label \"M365 Copilot (Basic)\". What does that tell you?",
+    options: [
+      { text: "They have the $30/month add-on with priority access", correct: false, why: "That description matches M365 Copilot (Premium), not Basic." },
+      { text: "They don't have the paid add-on, but they do have standard in-app Copilot access in apps like Word, Excel, and PowerPoint", correct: true, why: "M365 Copilot (Basic) means no add-on, but standard in-app Copilot access is included." },
+      { text: "They have no in-app Copilot access at all", correct: false, why: "That describes Copilot Chat (Basic), which lacks in-app access entirely." },
+      { text: "They can't use Copilot Chat", correct: false, why: "All three labels include Copilot Chat — the difference is in-app access and grounding, not chat access itself." }
+    ]
+  },
+  {
+    q: "Which best matches the progression Microsoft describes, from a simple conversation to fully delegated execution?",
+    options: [
+      { text: "Cowork → Agents → Chat", correct: false, why: "This reverses the order — Cowork is the most autonomous, not the starting point." },
+      { text: "Chat → Agents → Cowork", correct: true, why: "Chat answers and drafts; agents are scoped specialists; Cowork carries out multi-step work end to end." },
+      { text: "Agents → Chat → Cowork", correct: false, why: "Chat is the starting point in Microsoft's framing, not the middle step." },
+      { text: "Chat → Cowork → Agents", correct: false, why: "Agents sit between Chat and Cowork in Microsoft's own framing, not after Cowork." }
+    ]
+  },
+  {
+    q: "According to Microsoft's official prompting guidance, what does a prompt actually require at minimum?",
+    options: [
+      { text: "All four parts — goal, context, expectations, and source — every time", correct: false, why: "The guidance treats context, expectations, and source as optional refinements, not requirements." },
+      { text: "A clear goal", correct: true, why: "Microsoft's guidance states plainly that all that's required is a clear goal — everything else sharpens the response." },
+      { text: "A source file attached", correct: false, why: "A source is optional and, when used, should come last in the prompt — it isn't a minimum requirement." },
+      { text: "A persona instruction, like 'act as a project manager'", correct: false, why: "Persona framing isn't part of Microsoft's documented minimum requirement." }
+    ]
+  },
+  {
+    q: "What happens when a user turns the Work IQ button OFF in Copilot Chat?",
+    options: [
+      { text: "Copilot Chat stops responding entirely", correct: false, why: "Copilot Chat keeps working — it simply switches its grounding, not its availability." },
+      { text: "Copilot Chat becomes a general-knowledge chat that also shows results from the internet", correct: true, why: "With Work IQ off, Copilot Chat answers using general knowledge plus web results, not your organization's data." },
+      { text: "Copilot Chat automatically switches into Cowork mode", correct: false, why: "Work IQ toggles grounding within Chat — it doesn't switch products." },
+      { text: "It requires activating the Microsoft 365 Copilot add-on license", correct: false, why: "Web grounding (Work IQ off) is available to every Copilot Chat user, add-on or not." }
+    ]
+  },
+  {
+    q: "What's the real difference in file upload and image generation between an included Copilot Chat license and the paid add-on?",
+    options: [
+      { text: "Only add-on users can upload files or generate images at all", correct: false, why: "Standard file upload and image generation are included for every Copilot Chat user, not gated behind the add-on." },
+      { text: "Both get the same standard capability, but add-on-licensed users get priority access", correct: true, why: "The add-on doesn't unlock the capability — it gives licensed users priority access when demand is high." },
+      { text: "Only Copilot Chat (Basic) users can generate images", correct: false, why: "Image generation is available across the tiers, not restricted to Basic." },
+      { text: "File upload only works on mobile devices", correct: false, why: "File upload and image generation both work across the surfaces where Copilot Chat appears, not just mobile." }
+    ]
+  },
+  {
+    q: "When did Claude become selectable as a model option in Copilot Chat, according to official release notes cited in this course?",
+    options: [
+      { text: "May 2026, at the same time as Copilot Cowork", correct: false, why: "May 2026 is when an Anthropic model appeared on adjacent surfaces like Cowork — Copilot Chat itself got Claude in the June window." },
+      { text: "June 2026", correct: true, why: "Official release notes place Claude's availability in Copilot Chat in the June 2–16, 2026 window." },
+      { text: "September 2026", correct: false, why: "September 2026 doesn't appear in the release notes as Claude's Copilot Chat availability date." },
+      { text: "It has never been available in Copilot Chat", correct: false, why: "Claude is documented as selectable in Copilot Chat as of June 2026." }
+    ]
+  },
+  {
+    q: "Which is true about Copilot Pages licensing, per Microsoft's support documentation?",
+    options: [
+      { text: "Pages requires the Microsoft 365 Copilot add-on", correct: false, why: "Support documentation explicitly says Pages is available even without a Microsoft 365 Copilot license." },
+      { text: "Pages is available to anyone with a work or school account who has SharePoint or OneDrive storage, including those without a Copilot license", correct: true, why: "This matches Microsoft's own wording in the Pages support article." },
+      { text: "Pages is only available on mobile devices", correct: false, why: "Nothing in the documentation restricts Pages to mobile — it's created from Copilot Chat generally." },
+      { text: "Pages requires at least the Copilot Chat (Basic) label specifically", correct: false, why: "Licensing for Pages is tied to SharePoint/OneDrive storage, not a specific Copilot Chat label." }
+    ]
+  },
+  {
+    q: "How many sources can a single Copilot Notebook bring together, according to Microsoft's documentation?",
+    options: [
+      { text: "20", correct: false, why: "20 is the source limit for Agent Builder knowledge, a different feature entirely." },
+      { text: "300", correct: true, why: "Notebooks can aggregate up to 300 sources and reason across them." },
+      { text: "50", correct: false, why: "50 is not the documented Notebooks source limit." },
+      { text: "Unlimited", correct: false, why: "Notebooks have a documented cap of 300 sources, not an unlimited number." }
+    ]
+  },
+  {
+    q: "On which platform was Copilot Notebooks-to-OneNote sync available first?",
+    options: [
+      { text: "Windows, since September 2025", correct: true, why: "OneNote for Windows got Copilot Notebooks sync starting September 2025, ahead of other platforms." },
+      { text: "iPhone/iPad, since September 2025", correct: false, why: "iPhone/iPad got this capability July 1, 2026, not September 2025." },
+      { text: "OneNote on the Web, since September 2025", correct: false, why: "OneNote on the Web got this capability July 1, 2026, not September 2025." },
+      { text: "All platforms simultaneously, in July 2026", correct: false, why: "The rollout was staged — Windows came first, nearly a year before Web and iPhone/iPad." }
+    ]
+  },
+  {
+    q: "What happens when a user highlights text within an email while Copilot Chat's implicit grounding is active in Outlook?",
+    options: [
+      { text: "Nothing changes — the whole email stays the grounding source", correct: false, why: "Highlighting text specifically narrows the grounding source, per Microsoft's documentation." },
+      { text: "The grounding source automatically updates to use only the highlighted text", correct: true, why: "This is exactly how implicit grounding is documented to behave when text is selected." },
+      { text: "Copilot Chat closes automatically", correct: false, why: "Highlighting text doesn't close Copilot Chat — it refines what it's grounded on." },
+      { text: "The email is removed from Copilot's context entirely", correct: false, why: "The email stays in context; only the scope narrows to the highlighted portion." }
+    ]
+  },
+  {
+    q: "A user asks Copilot in Teams to \"Summarize thread.\" What's required for that to work?",
+    options: [
+      { text: "The thread must have at least 1,000 characters", correct: true, why: "Summarize thread requires a minimum of 1,000 characters of content to work with." },
+      { text: "The thread must include an image", correct: false, why: "Copilot can't summarize images in a thread at all — this isn't a requirement, it's a limitation." },
+      { text: "The thread must be older than 30 days", correct: false, why: "30 days is the default look-back window for summarizing a whole chat, not a requirement for Summarize thread." },
+      { text: "The thread must include a Loop component", correct: false, why: "Copilot can't summarize Loop components — this isn't a requirement for the feature to work." }
+    ]
+  },
+  {
+    q: "What does the enterprise \"Vision in Microsoft 365 Copilot\" feature require that distinguishes it from consumer Copilot Vision?",
+    options: [
+      { text: "Nothing — they are the same feature with the same requirements", correct: false, why: "They are described as distinct products with different licensing and availability." },
+      { text: "A Microsoft 365 Copilot license, microphone access, and an active voice conversation", correct: true, why: "This is exactly how Microsoft documents the enterprise Vision feature's requirements." },
+      { text: "A scheduled Teams meeting in progress", correct: false, why: "Vision works during a voice conversation with Copilot, not specifically inside a scheduled Teams meeting." },
+      { text: "A OneDrive account only, with no license needed", correct: false, why: "A Microsoft 365 Copilot license is required — OneDrive alone isn't sufficient." }
+    ]
+  }
+];
+
+const SECTIONS = [
+  { name: "Meet Copilot Chat", lessons: [0, 1, 2] },
+  { name: "Working with Copilot Chat day to day", lessons: [3, 4, 5, 6] },
+  { name: "Copilot Pages and Notebooks", lessons: [7, 8, 9] },
+  { name: "Chat in context", lessons: [10, 11, 12] },
+  { name: "Check your understanding", lessons: [13] }
+];
+
+const LESSONS = [
+  // ── L0 — What Copilot Chat is ──
+  {
+    title: "What Copilot Chat is",
+    time: "7 minutes",
+    objectives: [
+      "Describe what Copilot Chat is and who already has access to it",
+      "Explain the difference between web grounding and work grounding at a high level",
+      "Identify what's included at no extra cost versus what requires the paid add-on"
+    ],
+    body: `
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li><strong>Copilot Chat comes with your Microsoft 365 license.</strong> Every eligible Microsoft 365 business subscription includes Copilot Chat at no extra cost.</li>
+          <li><strong>It's grounded on the web by default.</strong> Copilot Chat answers using the latest models and public web data — not your organization's files, unless you add the paid add-on.</li>
+          <li><strong>Standard capabilities are included.</strong> File upload, image generation, and access to large language models come with every Copilot Chat license.</li>
+        </ul>
+      </div>
+
+      <h2>What Copilot Chat actually is</h2>
+      <p>Copilot Chat is Microsoft's AI chat experience for Microsoft 365 — a conversational assistant you can ask questions, draft text, brainstorm, or summarize with. Microsoft's support documentation describes it plainly: Copilot Chat is automatically included and available to organizations with an eligible Microsoft 365 license. That means most people taking this course already have it, whether or not their organization has purchased anything extra.</p>
+      <p>By default, Copilot Chat is <strong>grounded on the web</strong> — it answers using public information and the latest underlying models, similar to a general-purpose AI assistant. What it does <em>not</em> do out of the box is read your organization's emails, files, or Teams messages. That capability — called work grounding — requires a separate paid add-on, which the next lesson covers in detail.</p>
+
+      <div class="prompt-card">
+        <div class="prompt-label">Example prompt</div>
+        "Summarize the <span class="annot" title="Copilot Chat can work with text you paste in, or a file you upload — either way, this is the content it reasons over.">attached meeting notes</span> into five bullet points a busy executive could read in under a minute."
+        <div class="legend">Copilot Chat can reason over content you paste or upload, even without work grounding turned on.</div>
+      </div>
+
+      <h3>What's included, no add-on required</h3>
+      <div class="callout note">
+        <div class="callout-label">Included</div>
+        AI chat grounded on the web, powered by the latest models, plus standard access to file upload, image generation, and the underlying LLMs.
+      </div>
+      <div class="callout tip">
+        <div class="callout-label">Tip</div>
+        Not sure which tier you have? Check under your name in microsoft365.com — the exact labels are covered in the next lesson.
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-card featured">
+          <div class="tag">Included</div>
+          <h4>Copilot Chat</h4>
+          <p>Web-grounded chat with standard file upload, image generation, and model access — comes with any eligible Microsoft 365 license.</p>
+          <div class="best-for">Best for: quick drafting, brainstorming, and general questions</div>
+        </div>
+        <div class="compare-card">
+          <div class="tag">Paid add-on</div>
+          <h4>Microsoft 365 Copilot</h4>
+          <p>Adds chat grounded on your work data, in-app Copilot inside Word/Excel/PowerPoint, reasoning agents, and priority access.</p>
+          <div class="best-for">Best for: work that depends on your own files, emails, and meetings</div>
+        </div>
+      </div>
+
+      <div class="quiz" data-quiz-idx="0"></div>
+    `
+  },
+
+  // ── L1 — How it's licensed and where it shows up ──
+  {
+    title: "How it's licensed and where it shows up",
+    time: "7 minutes",
+    objectives: [
+      "Identify the three in-product license labels and what each unlocks",
+      "State the cost of the Microsoft 365 Copilot add-on",
+      "List the surfaces where Copilot Chat appears"
+    ],
+    body: `
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li><strong>Three in-product labels tell you what you have.</strong> Copilot Chat (Basic), M365 Copilot (Basic), and M365 Copilot (Premium) each unlock different capability.</li>
+          <li><strong>The add-on is $30 per user per month.</strong> It adds work grounding, in-app Copilot, reasoning agents, and priority access.</li>
+          <li><strong>Copilot Chat follows you across surfaces.</strong> The Microsoft 365 Copilot app, Teams, Outlook, the Edge sidebar, and mobile all carry the same chat experience.</li>
+        </ul>
+      </div>
+
+      <h2>Reading your own license label</h2>
+      <p>Microsoft documents three in-product labels, worth knowing by name since they show up under your name in microsoft365.com:</p>
+
+      <div class="compare-grid">
+        <div class="compare-card">
+          <div class="tag">No add-on</div>
+          <h4>Copilot Chat (Basic)</h4>
+          <p>Web-grounded chat only. No in-app Copilot inside Word, Excel, PowerPoint, or OneNote.</p>
+        </div>
+        <div class="compare-card">
+          <div class="tag">No add-on</div>
+          <h4>M365 Copilot (Basic)</h4>
+          <p>Web-grounded chat, but with standard in-app Copilot access inside the Office apps.</p>
+        </div>
+        <div class="compare-card featured">
+          <div class="tag">$30/user/month add-on</div>
+          <h4>M365 Copilot (Premium)</h4>
+          <p>Full add-on: work-data grounding, in-app Copilot, reasoning agents like Researcher and Analyst, and priority access.</p>
+        </div>
+      </div>
+
+      <div class="callout note">
+        <div class="callout-label">Note</div>
+        A Microsoft pricing and packaging update took effect July 1, 2026. If a number in this course looks off by the time you're reading it, check the current Microsoft pricing page — pricing and model details move fast.
+      </div>
+
+      <h3>Where you'll find it</h3>
+      <p>Copilot Chat isn't locked to one app. It shows up in:</p>
+      <span class="chip-row">
+        <span class="chip">Microsoft 365 Copilot app</span>
+        <span class="chip">Teams</span>
+        <span class="chip">Outlook</span>
+        <span class="chip">Edge sidebar</span>
+        <span class="chip">Mobile (iOS/Android)</span>
+      </span>
+      <p>If your organization has pinned you to Copilot Chat directly, you may land on <code>m365.cloud.microsoft/chat</code> instead of the full Microsoft 365 Copilot app — same chat, different entry point.</p>
+
+      <div class="quiz" data-quiz-idx="1"></div>
+    `
+  },
+
+  // ── L2 — Copilot Chat vs. Cowork vs. custom agents ──
+  {
+    title: "Copilot Chat vs. Cowork vs. custom agents",
+    time: "8 minutes",
+    objectives: [
+      "Distinguish Copilot Chat, custom agents, and Copilot Cowork by what each is built to do",
+      "Decide which one fits a given task",
+      "Avoid the common mix-up between 'agent' and 'Cowork'"
+    ],
+    body: `
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li><strong>Chat answers, agents specialize, Cowork executes.</strong> Microsoft describes a progression from simple Q&A to autonomous multi-step work.</li>
+          <li><strong>Agents are scoped assistants</strong> built from instructions, knowledge, and skills for a specific task or scenario.</li>
+          <li><strong>Cowork is a different category</strong> — an agentic system that plans and carries out multi-step work on your behalf, not a chat conversation.</li>
+        </ul>
+      </div>
+
+      <h2>Three tools, one family</h2>
+      <p>Copilot Chat, custom agents, and Copilot Cowork all sit under the Microsoft 365 Copilot umbrella, but they solve different problems. Microsoft's documentation frames the progression this way: Chat answers questions, drafts, and summarizes; agents are specialized, scoped assistants built for a specific task; Cowork is an agentic system that carries out multi-step work end to end.</p>
+
+      <div class="compare-grid">
+        <div class="compare-card featured">
+          <div class="tag">Ask and answer</div>
+          <h4>Copilot Chat</h4>
+          <p>A conversation. You ask, it answers, drafts, or summarizes — grounded on the web or, with the add-on, your work data.</p>
+          <div class="best-for">Best for: quick answers, drafting, one-off questions</div>
+        </div>
+        <div class="compare-card">
+          <div class="tag">Specialized</div>
+          <h4>Custom agents</h4>
+          <p>Custom versions of Microsoft 365 Copilot that combine instructions, knowledge, and skills to handle one specific task or scenario well.</p>
+          <div class="best-for">Best for: a repeatable, scoped job — e.g. answering questions from one knowledge base</div>
+        </div>
+        <div class="compare-card">
+          <div class="tag">Delegated execution</div>
+          <h4>Copilot Cowork</h4>
+          <p>An agentic system: you describe a task, it plans and carries out the multi-step work — sending emails, creating documents, updating a calendar — with your approval along the way.</p>
+          <div class="best-for">Best for: multi-step work you'd otherwise have to do yourself, end to end</div>
+        </div>
+      </div>
+
+      <div class="callout note">
+        <div class="callout-label">Note</div>
+        Building your own agent is a deeper topic with its own course. For now, hold onto the simple version: Chat is a conversation, an agent is a scoped specialist, and Cowork is delegated execution.
+      </div>
+
+      <div class="callout warn">
+        <div class="callout-label">Watch out</div>
+        Don't confuse "agent" with "Cowork." Microsoft is explicit that Cowork is an agentic <em>system</em>, deliberately different from a single agent — it's built to coordinate multiple steps and tools, not just respond within one scoped domain.
+      </div>
+
+      <div class="quiz" data-quiz-idx="2"></div>
+    `
+  },
+
+  // ── L3 — Prompting basics ──
+  {
+    title: "Prompting basics",
+    time: "8 minutes",
+    objectives: [
+      "Apply the goal / context / expectations / source structure to a prompt",
+      "Place source references correctly within a prompt",
+      "Explain why reviewing and verifying Copilot's output still matters"
+    ],
+    body: `
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li><strong>A prompt only truly requires one thing: a clear goal.</strong> Context, expectations, and source are optional refinements.</li>
+          <li><strong>Order matters.</strong> If you want Copilot to use specific files or sources, mention that last in the prompt.</li>
+          <li><strong>Treat it like a conversation.</strong> Plain, clear language works better than rigid formulas.</li>
+        </ul>
+      </div>
+
+      <h2>The four parts of a prompt — and the one that matters most</h2>
+      <p>Microsoft's own prompting guidance breaks a prompt into four possible parts: the <strong>goal</strong>, <strong>context</strong>, <strong>expectations</strong>, and <strong>source</strong>. The guidance is equally clear, though, that all that's strictly required is a clear goal — the rest sharpens the response, it doesn't unlock it.</p>
+
+      <div class="steps">
+        <ol>
+          <li><strong>Goal</strong> — what do you actually want? "Draft a summary," "compare these two options," "write an email."</li>
+          <li><strong>Context</strong> — what background does Copilot need to get this right?</li>
+          <li><strong>Expectations</strong> — length, tone, format, audience.</li>
+          <li><strong>Source</strong> — the specific file, email, or document to ground the answer in. Put this part last.</li>
+        </ol>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-label">Prompt example</div>
+        "Write a two-paragraph project update for my manager, <span class="annot" title="This is the 'expectations' part of the prompt — tone and length.">in a direct, no-fluff tone</span>, based on <span class="annot" title="Source information belongs at the end of the prompt, per Microsoft's guidance.">the status notes I just pasted above</span>."
+        <div class="legend">Goal and expectations come first; the source reference comes last.</div>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-label">Tip</div>
+        Think of prompting like having a conversation, using plain but clear language — you don't need special syntax or a rigid template.
+      </div>
+
+      <div class="callout warn">
+        <div class="callout-label">Watch out</div>
+        Copilot's output is a draft, not a verified fact sheet. Review and verify before you send or publish anything it produces.
+      </div>
+
+      <div class="quiz" data-quiz-idx="3"></div>
+    `
+  },
+
+  // ── L4 — Work grounding vs. web grounding ──
+  {
+    title: "Work grounding vs. web grounding",
+    time: "6 minutes",
+    objectives: [
+      "Explain what the Work IQ button controls",
+      "State the license requirement for work grounding versus web grounding",
+      "Choose the right grounding mode for a given question"
+    ],
+    body: `
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li><strong>The Work IQ button is the switch.</strong> Turn it on for work-grounded answers, off for web-grounded answers.</li>
+          <li><strong>Work grounding needs the add-on license.</strong> Web grounding is available to every Copilot Chat user.</li>
+          <li><strong>Both modes live in the same chat window</strong> — you're not switching apps, just switching what Copilot is allowed to look at.</li>
+        </ul>
+      </div>
+
+      <h2>One button, two very different chat experiences</h2>
+      <p>Copilot Chat can answer in two fundamentally different ways, and the difference comes down to a single toggle: the <strong>Work IQ button</strong>. When it's on, Copilot Chat becomes a work-based chat experience grounded in Microsoft Graph — your files, emails, chats, and meetings, where you already have permission to see them. When it's off, Copilot Chat answers using general knowledge and also shows results from the internet.</p>
+
+      <div class="compare-grid">
+        <div class="compare-card featured">
+          <div class="tag">Work IQ: on</div>
+          <h4>Work-grounded</h4>
+          <p>Answers draw on your Microsoft Graph data — files, emails, chats, and calendar you already have permission to see.</p>
+          <div class="best-for">Best for: "What did Sarah say about the Q3 numbers?"</div>
+        </div>
+        <div class="compare-card">
+          <div class="tag">Work IQ: off</div>
+          <h4>Web-grounded</h4>
+          <p>Answers draw on general knowledge and current web results — no access to your organization's content.</p>
+          <div class="best-for">Best for: "What's a good structure for a project retrospective?"</div>
+        </div>
+      </div>
+
+      <div class="callout note">
+        <div class="callout-label">Note</div>
+        Work grounding requires the Microsoft 365 Copilot add-on license. Web grounding is available to every Copilot Chat user, add-on or not.
+      </div>
+
+      <div class="quiz" data-quiz-idx="4"></div>
+    `
+  },
+
+  // ── L5 — File upload and image generation ──
+  {
+    title: "File upload and image generation",
+    time: "6 minutes",
+    objectives: [
+      "Use Add content to bring a file into Copilot Chat",
+      "Explain the difference between standard access and priority access",
+      "Generate an image from within Copilot Chat"
+    ],
+    body: `
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li><strong>File upload and image generation are standard,</strong> included for every Copilot Chat user, not just add-on subscribers.</li>
+          <li><strong>Add-on licenses get priority access</strong> to both — same capability, faster lane when demand is high.</li>
+          <li><strong>Use "Add content" in the compose box</strong> to bring a file into the conversation, and Tools for AI capabilities like image generation.</li>
+        </ul>
+      </div>
+
+      <h2>Bringing your own files and images into the conversation</h2>
+      <p>Copilot Chat includes standard access to file upload, image generation, and the underlying models for everyone with an eligible license — this isn't gated behind the paid add-on. What the add-on changes is queue position: licensed users get <strong>priority access</strong> to these same capabilities when systems are busy.</p>
+
+      <div class="steps">
+        <ol>
+          <li>Open Copilot Chat and select <strong>Add content</strong> in the compose box.</li>
+          <li>Choose a file to upload, or paste in text directly.</li>
+          <li>Ask your question or give your instruction referencing that content.</li>
+          <li>For image generation, use <strong>Tools</strong> to switch into an image-generation mode and describe what you want.</li>
+        </ol>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-label">Tip</div>
+        Image generation has also been available in the mobile Copilot Chat app since 2025 — the same capability travels with you off the desktop.
+      </div>
+
+      <div class="quiz" data-quiz-idx="5"></div>
+    `
+  },
+
+  // ── L6 — The Regenerate / Switch Model action ──
+  {
+    title: "The Regenerate / Switch Model action",
+    time: "8 minutes",
+    objectives: [
+      "Use Regenerate's Try Again and Switch Model options",
+      "Identify when Claude became selectable as a model in Copilot Chat",
+      "Explain why model names in this course carry a 'current as of' caveat"
+    ],
+    video: {
+      id: "4vkPv9lX64k",
+      title: "Multi-model intelligence in Copilot",
+      channel: "Microsoft Mechanics",
+      duration: "~9:00",
+      caption: "Watch for how Work IQ auto-retrieval and model choice interact — the same model-switching logic underlies the Switch Model action in Copilot Chat."
+    },
+    body: `
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li><strong>Regenerate gives you a second attempt.</strong> Try Again re-runs the same model; Switch Model tries a different one — this rolled out in June 2026.</li>
+          <li><strong>Claude is now a selectable model family</strong> in Copilot Chat, alongside GPT, as of the June 2026 release window.</li>
+          <li><strong>Model names change often.</strong> Treat any specific model name as "current as of July 2026," not permanent.</li>
+        </ul>
+      </div>
+
+      <h2>Not happy with a response? Regenerate it</h2>
+      <p>The Regenerate action lets you use simple options — <strong>Try Again</strong> or <strong>Switch Model</strong> — to quickly get an alternative response, instead of rewriting your whole prompt. This feature rolled out in June 2026.</p>
+      <p>Around the same time, Anthropic's Claude became available as a model option in Copilot Chat, useful for complex analysis, document understanding, and structured content generation. In the model switcher next to the Work IQ toggle (labeled "Auto" by default), you can choose response styles like Quick Response or Think Deeper, and pick between model families — currently <strong>Opus</strong> (Anthropic's Claude) and <strong>GPT</strong> (OpenAI).</p>
+
+      <span class="chip-row">
+        <span class="chip">Auto (default)</span>
+        <span class="chip">Quick Response</span>
+        <span class="chip">Think Deeper</span>
+        <span class="chip">Opus (Claude)</span>
+        <span class="chip">GPT</span>
+      </span>
+
+      <div class="callout warn">
+        <div class="callout-label">Watch out</div>
+        Model names and lineups change on close to a monthly cadence. An earlier Anthropic model was available on adjacent surfaces like Cowork before Copilot Chat itself got Claude in June 2026 — if you encounter a model name that isn't listed here, that's expected drift, not an error in this course.
+      </div>
+
+      <div class="quiz" data-quiz-idx="6"></div>
+    `
+  },
+
+  // ── L7 — What Pages are and when to use one ──
+  {
+    title: "What Pages are and when to use one",
+    time: "7 minutes",
+    objectives: [
+      "Define what a Copilot Page is",
+      "Create a Page from a Copilot response",
+      "State the licensing requirement for using Pages"
+    ],
+    body: `
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li><strong>A Page turns a Copilot response into an editable canvas.</strong> It's interactive, shareable, and separate from the chat thread it came from.</li>
+          <li><strong>You don't need a Copilot license to use Pages</strong> — just SharePoint or OneDrive storage on a work or school account.</li>
+          <li><strong>Two formats exist:</strong> the current <code>.page</code> format and the legacy <code>.loop</code> format, and both can convert to Word or PowerPoint.</li>
+        </ul>
+      </div>
+
+      <h2>Turning an answer into something you can keep working on</h2>
+      <p>Copilot Pages is described as an interactive canvas that transforms Copilot responses into editable, shareable content. Instead of a response living and dying inside one chat thread, a Page becomes its own document you can keep editing, share with others, or build on later.</p>
+
+      <div class="steps">
+        <ol>
+          <li>Write a prompt in Copilot Chat as usual.</li>
+          <li>Select the <strong>pencil button</strong> below Copilot's response.</li>
+          <li>The response opens as a Page, side-by-side with Copilot Chat, ready to edit.</li>
+          <li>Alternatively, ask directly: "Create a page from this."</li>
+        </ol>
+      </div>
+
+      <div class="callout note">
+        <div class="callout-label">Note</div>
+        Pages is available to anyone with a work or school (Entra ID) account who has SharePoint or OneDrive storage — including people without a Microsoft 365 Copilot license.
+      </div>
+
+      <div class="quiz" data-quiz-idx="7"></div>
+    `
+  },
+
+  // ── L8 — Notebooks as a project workspace ──
+  {
+    title: "Notebooks as a project workspace",
+    time: "8 minutes",
+    objectives: [
+      "Explain what a Copilot Notebook is and how it differs from a Page",
+      "Create a Notebook and add references to it",
+      "State the source limit and license requirement for Notebooks"
+    ],
+    body: `
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li><strong>A Notebook is a persistent workspace,</strong> not a single response — it aggregates files, pages, meeting notes, links, and chats in one place.</li>
+          <li><strong>It can hold up to 300 sources</strong> and reason across all of them at once.</li>
+          <li><strong>Notebooks generate more than text:</strong> Word documents, PowerPoint decks, mind maps, and Study Guides, all built from its curated context.</li>
+        </ul>
+      </div>
+
+      <h2>A workspace, not just an answer</h2>
+      <p>Where a Page captures one response, a Notebook is built to hold an entire project's worth of material. Microsoft describes it as your own AI-powered workspace that brings together Copilot Chat, files, pages, meeting notes, links, and more in one place — and lets Copilot reason across all of it together.</p>
+
+      <div class="compare-grid">
+        <div class="compare-card">
+          <h4>Copilot Pages</h4>
+          <p>A single collaborative canvas, built from one Copilot response.</p>
+          <div class="best-for">Best for: one document you want to keep refining</div>
+        </div>
+        <div class="compare-card featured">
+          <h4>Copilot Notebooks</h4>
+          <p>A persistent workspace that aggregates up to 300 sources and reasons across them.</p>
+          <div class="best-for">Best for: a whole project's worth of material in one place</div>
+        </div>
+      </div>
+
+      <div class="steps">
+        <ol>
+          <li>Go to microsoft365.com and open the app launcher.</li>
+          <li>Select <strong>Notebooks</strong>, then <strong>New notebook</strong>.</li>
+          <li>Add references — files, pages, links, meeting notes.</li>
+          <li>Ask Copilot to generate a Word document, PowerPoint deck, mind map, or Study Guide from that curated context.</li>
+        </ol>
+      </div>
+
+      <div class="callout note">
+        <div class="callout-label">Note</div>
+        Notebooks require a SharePoint or OneDrive service plan and are available to both Microsoft 365 Copilot and Copilot Chat licensed users — Notebooks opened up to Chat users in the June/July 2026 window.
+      </div>
+
+      <div class="quiz" data-quiz-idx="8"></div>
+    `
+  },
+
+  // ── L9 — Keeping Notebooks and OneNote in sync ──
+  {
+    title: "Keeping Notebooks and OneNote in sync",
+    time: "5 minutes",
+    objectives: [
+      "State which OneNote platforms support Copilot Notebooks sync, and since when",
+      "Recognize a platform gap as a rollout timing issue rather than a licensing problem"
+    ],
+    body: `
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li><strong>OneNote and Notebooks can sync,</strong> so pages you keep in OneNote can feed into Copilot's reasoning.</li>
+          <li><strong>Windows got it first</strong> — Copilot Notebooks in OneNote has been available there since September 2025.</li>
+          <li><strong>Web and mobile caught up July 1, 2026</strong> — OneNote on the Web and the iPhone/iPad apps added the same capability.</li>
+        </ul>
+      </div>
+
+      <h2>Rolling out platform by platform</h2>
+      <p>Copilot Notebooks integration with OneNote didn't arrive everywhere at once. Microsoft's feature — creating and using Copilot Notebooks in OneNote — has rolled out in stages:</p>
+
+      <table>
+        <tr><th>Platform</th><th>Available since</th></tr>
+        <tr><td>OneNote for Windows</td><td>September 2025</td></tr>
+        <tr><td>OneNote on the Web</td><td>July 1, 2026</td></tr>
+        <tr><td>OneNote for iPhone/iPad</td><td>July 1, 2026</td></tr>
+      </table>
+
+      <div class="callout tip">
+        <div class="callout-label">Tip</div>
+        If a colleague on Windows can add a OneNote page to a Notebook but you can't on your iPad, check the date before assuming it's a licensing gap — it may simply be a platform rollout timing difference.
+      </div>
+
+      <div class="quiz" data-quiz-idx="9"></div>
+    `
+  },
+
+  // ── L10 — Copilot Chat inside Outlook ──
+  {
+    title: "Copilot Chat inside Outlook",
+    time: "7 minutes",
+    objectives: [
+      "Explain how implicit grounding works when Copilot Chat is open alongside an email",
+      "Use highlighted text to narrow the grounding source",
+      "Identify what changed for Outlook grounding as of July 1, 2026"
+    ],
+    body: `
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li><strong>Implicit grounding means you don't have to attach the email yourself.</strong> Open Copilot Chat next to an email and it's automatically added as a grounding source.</li>
+          <li><strong>Highlighting text narrows the grounding.</strong> Select part of the email and Copilot updates to reason over just that selection.</li>
+          <li><strong>Outlook keeps expanding what Copilot Chat can reason over</strong> — inbox, calendar, and enterprise data as of July 1, 2026.</li>
+        </ul>
+      </div>
+
+      <h2>Copilot Chat that already knows what you're looking at</h2>
+      <p>Implicit grounding rolled out to Copilot Chat in Outlook in December 2025. When you open Copilot Chat alongside an email, that email is automatically added as a grounding source in the prompt box — no copy-paste, no manual upload. Highlight part of the email, and the grounding source updates automatically to use only the highlighted text.</p>
+
+      <div class="prompt-card">
+        <div class="prompt-label">Example prompt</div>
+        "Draft a reply confirming <span class="annot" title="Because the email is implicitly grounded, Copilot already has its content without you attaching anything.">the meeting time in this email</span>, in two sentences."
+        <div class="legend">No file attached — the open email is already the grounding source.</div>
+      </div>
+
+      <div class="callout note">
+        <div class="callout-label">Note</div>
+        Copilot Chat in Outlook can also take triage actions through natural language — mark read/unread, pin, flag, or archive — and as of July 1, 2026, expanded to reason over inbox, calendar, and enterprise data together.
+      </div>
+
+      <div class="quiz" data-quiz-idx="10"></div>
+    `
+  },
+
+  // ── L11 — Copilot Chat inside Teams ──
+  {
+    title: "Copilot Chat inside Teams",
+    time: "7 minutes",
+    objectives: [
+      "Summarize a Teams chat using its default 30-day history",
+      "Use Summarize thread and know its minimum content requirement",
+      "Add Copilot to a group chat and understand how it grounds its response"
+    ],
+    body: `
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li><strong>Summarizing a chat defaults to a 30-day history.</strong> That's the built-in time frame unless you ask otherwise.</li>
+          <li><strong>Summarize thread needs at least 1,000 characters</strong> of content to work with.</li>
+          <li><strong>Copilot can join a group chat directly,</strong> added via "Add agents and bots" or an @mention, and it grounds its answer in the asker's own data.</li>
+        </ul>
+      </div>
+
+      <h2>Copilot inside a Teams conversation</h2>
+      <p>Select <strong>Open Copilot</strong> in the upper-right of any Teams chat to summarize what you've missed. By default, it looks back across a <strong>30-day history</strong>. It has limits worth knowing: Copilot can't summarize images, Loop components, or files shared in the thread — only the message text.</p>
+
+      <div class="steps">
+        <ol>
+          <li>Open a chat or channel in Teams.</li>
+          <li>Select <strong>Open Copilot</strong> in the upper-right corner.</li>
+          <li>Ask it to summarize, or type <strong>Summarize thread</strong> for a specific conversation (needs at least 1,000 characters to work with).</li>
+          <li>Use citations in the summary to scroll straight to the source message.</li>
+        </ol>
+      </div>
+
+      <div class="callout warn">
+        <div class="callout-label">Watch out</div>
+        Copilot can be added as a member of a group chat and grounds its response in the asker's own data. If sources aren't shared with every member of the chat, the person who asked sees a preview flagging that — worth knowing before you rely on it in a mixed-permissions group.
+      </div>
+
+      <div class="quiz" data-quiz-idx="11"></div>
+    `
+  },
+
+  // ── L12 — Copilot Vision ──
+  {
+    title: "Copilot Vision",
+    time: "6 minutes",
+    objectives: [
+      "Explain what enterprise Vision in Microsoft 365 Copilot lets a user do",
+      "State the license, device, and conversation requirements it depends on",
+      "Distinguish enterprise Vision from consumer Copilot Vision"
+    ],
+    body: `
+      <div class="takeaways">
+        <h4>Key takeaways</h4>
+        <ul>
+          <li><strong>Vision in Microsoft 365 Copilot lets you share a screen or camera</strong> and talk through what Copilot is seeing.</li>
+          <li><strong>It only works during an active voice conversation,</strong> and requires a Microsoft 365 Copilot license plus microphone access.</li>
+          <li><strong>It is not the same feature as consumer Copilot Vision</strong> in the free Microsoft Copilot app — different product, different licensing, different limits.</li>
+        </ul>
+      </div>
+
+      <h2>Seeing what you see — with conditions</h2>
+      <p>Vision in Microsoft 365 Copilot lets you share your desktop screen or your mobile device's camera and ask Copilot about what you're sharing. It's gated in a specific way: it requires a Microsoft 365 Copilot license, microphone access, and it only works during a voice conversation. Start it from the Copilot Chat input box, the Copilot key, or <span class="kbd">Win</span>+<span class="kbd">C</span> on Windows.</p>
+
+      <div class="compare-grid">
+        <div class="compare-card featured">
+          <div class="tag">Enterprise</div>
+          <h4>Vision in Microsoft 365 Copilot</h4>
+          <p>Requires a Microsoft 365 Copilot license and an active voice conversation. Admin-controlled at the tenant level.</p>
+          <div class="best-for">Best for: work scenarios, screen or camera sharing during a Copilot voice session</div>
+        </div>
+        <div class="compare-card">
+          <div class="tag">Consumer</div>
+          <h4>Copilot Vision (free app)</h4>
+          <p>A separate feature in the free, consumer Microsoft Copilot app, with its own availability and limits by device and plan.</p>
+          <div class="best-for">Best for: personal use in the consumer Copilot app — not the enterprise product this course covers</div>
+        </div>
+      </div>
+
+      <div class="callout danger">
+        <div class="callout-label">Don't confuse these</div>
+        Enterprise Vision and consumer Copilot Vision share a name and a concept but are different products with different licensing. If a colleague describes a Copilot Vision feature from their personal phone, don't assume it behaves the same way inside your organization's Microsoft 365 Copilot.
+      </div>
+
+      <div class="callout note">
+        <div class="callout-label">Note</div>
+        Admins control this at Settings → Copilot → Screen and camera sharing in the Microsoft 365 admin center, and can disable screen sharing, camera sharing, or both.
+      </div>
+
+      <div class="quiz" data-quiz-idx="12"></div>
+    `
+  },
+
+  // ── L13 — final quiz lesson ──
+  {
+    title: `Quiz on ${COURSE_TITLE}`,
+    body: `<p>Test what you've learned across this course. You need 70% to pass — you can retake it as many times as you like.</p>`,
+    isFinalQuiz: true
+  }
+];
+
+const FINAL_QUIZ = [
+  { q: "Which of these is included with every eligible Microsoft 365 license, no add-on required?", options: [
+      { text: "Web-grounded AI chat with standard file upload and image generation", correct: true },
+      { text: "Reasoning agents such as Researcher and Analyst", correct: false },
+      { text: "AI chat grounded on your work data — files, emails, chats", correct: false },
+      { text: "Priority access during peak usage", correct: false }
+  ]},
+  { q: "What does the Microsoft 365 Copilot add-on cost, per the pricing cited in this course?", options: [
+      { text: "$10/user/month", correct: false },
+      { text: "$20/user/month", correct: false },
+      { text: "$30/user/month", correct: true },
+      { text: "$50/user/month", correct: false }
+  ]},
+  { q: "Which of these is designed to carry out multi-step delegated work on your behalf, rather than just answering in a chat window?", options: [
+      { text: "Copilot Chat", correct: false },
+      { text: "A custom, scoped agent", correct: false },
+      { text: "Copilot Cowork", correct: true },
+      { text: "Copilot Pages", correct: false }
+  ]},
+  { q: "Per Microsoft's prompting guidance, where should source or file information go if you want Copilot to use it?", options: [
+      { text: "At the very beginning of the prompt", correct: false },
+      { text: "Last, after the goal and expectations", correct: true },
+      { text: "It doesn't matter where it goes", correct: false },
+      { text: "In a completely separate message only", correct: false }
+  ]},
+  { q: "Turning the Work IQ button ON makes Copilot Chat a chat experience grounded in what?", options: [
+      { text: "Public web results only", correct: false },
+      { text: "Microsoft Graph — your work data", correct: true },
+      { text: "A locally stored file cache on your device", correct: false },
+      { text: "Third-party plugins only", correct: false }
+  ]},
+  { q: "How does file upload and image generation access differ between an included Copilot Chat license and the paid add-on?", options: [
+      { text: "Only add-on users can use these features at all", correct: false },
+      { text: "Standard access is included for all eligible users; add-on users get priority access on top", correct: true },
+      { text: "Neither included nor add-on users can generate images", correct: false },
+      { text: "File upload is add-on only, but image generation is free for everyone", correct: false }
+  ]},
+  { q: "What does the Regenerate action let a Copilot Chat user do?", options: [
+      { text: "Delete their chat history", correct: false },
+      { text: "Use 'Try Again' or 'Switch Model' to get an alternative response", correct: true },
+      { text: "Switch from Chat into Cowork", correct: false },
+      { text: "Turn Work IQ on automatically", correct: false }
+  ]},
+  { q: "How does a user typically turn a Copilot response into a Copilot Page?", options: [
+      { text: "Select the pencil button below Copilot's response", correct: true },
+      { text: "Right-click the response and choose Export", correct: false },
+      { text: "It happens automatically for every response", correct: false },
+      { text: "Only an admin can do this, from the M365 admin center", correct: false }
+  ]},
+  { q: "What best distinguishes a Copilot Notebook from a Copilot Page?", options: [
+      { text: "A Page is a persistent multi-source workspace; a Notebook is a single canvas", correct: false },
+      { text: "A Notebook aggregates many references and reasons across them; a Page is a single collaborative canvas built from one response", correct: true },
+      { text: "They are the same feature under two different names", correct: false },
+      { text: "Notebooks are mobile-only; Pages are desktop-only", correct: false }
+  ]},
+  { q: "When did OneNote on the Web and iPhone/iPad gain Copilot Notebooks sync, per the release notes cited in this course?", options: [
+      { text: "September 2025, same as Windows", correct: false },
+      { text: "July 1, 2026", correct: true },
+      { text: "January 2026", correct: false },
+      { text: "It still isn't available on those platforms", correct: false }
+  ]},
+  { q: "When did implicit grounding on emails in Copilot Chat in Outlook roll out?", options: [
+      { text: "December 2025", correct: true },
+      { text: "June 2026", correct: false },
+      { text: "March 2026", correct: false },
+      { text: "It rolled out with Copilot Chat's original launch", correct: false }
+  ]},
+  { q: "What is the default time frame Copilot uses when summarizing a Teams chat?", options: [
+      { text: "7 days", correct: false },
+      { text: "30 days", correct: true },
+      { text: "90 days", correct: false },
+      { text: "All history, unlimited", correct: false }
+  ]},
+  { q: "Enterprise 'Vision in Microsoft 365 Copilot' works only during what?", options: [
+      { text: "A scheduled Teams meeting", correct: false },
+      { text: "An active voice conversation", correct: true },
+      { text: "A shared SharePoint session", correct: false },
+      { text: "Offline mode", correct: false }
+  ]}
+];
+
+// ============================================================
+// RENDERING + STATE
+// ============================================================
+const CAN_EMBED = location.protocol === 'http:' || location.protocol === 'https:';
+let currentLesson = 0;
+let completed = new Set();
+
+function buildSidebar() {
+  const nav = document.getElementById('lessonNav');
+  let html = '';
+  SECTIONS.forEach(section => {
+    html += `<div class="section-title">${section.name}</div>`;
+    section.lessons.forEach(li => {
+      html += `<div class="lesson-link" data-i="${li}" onclick="goLesson(${li})">
+        <div class="dot"></div>
+        <div>${LESSONS[li].title}</div>
+      </div>`;
+    });
+  });
+  nav.innerHTML = html;
+}
+
+function buildLessons() {
+  const root = document.getElementById('contentInner');
+  let html = '';
+  LESSONS.forEach((L, i) => {
+    html += `<div class="lesson" data-lesson="${i}">`;
+    html += `<div class="lesson-header">`;
+    html += `<div class="breadcrumb">M365 Learning / ${COURSE_TITLE}</div>`;
+    html += `<h1>${L.title}</h1>`;
+    if (L.time) html += `<div class="estimated-time"><strong>Estimated time:</strong>&nbsp; ${L.time}</div>`;
+    html += `</div>`;
+
+    if (L.objectives && L.objectives.length) {
+      html += `<div class="objectives"><h3>Learning objectives</h3><p>By the end of this lesson you'll be able to:</p><ul>`;
+      L.objectives.forEach(o => html += `<li>${o}</li>`);
+      html += `</ul></div>`;
+    }
+
+    if (L.video) {
+      const v = L.video;
+      const thumbUrl = `https://img.youtube.com/vi/${v.id}/hqdefault.jpg`;
+      const watchUrl = `https://www.youtube.com/watch?v=${v.id}`;
+      const title = (v.title || L.title).replace(/"/g, '&quot;');
+      const sub = `${v.channel || 'Microsoft 365'}${v.duration ? '  ·  ' + v.duration : ''}`;
+      if (CAN_EMBED) {
+        html += `<div class="video-frame">
+          <iframe src="https://www.youtube.com/embed/${v.id}" title="${title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <div class="video-meta-row">
+          <div class="video-meta-text"><strong>${v.title || L.title}</strong> · ${sub}</div>
+          <a class="video-meta-link" href="${watchUrl}" target="_blank" rel="noopener">Open on YouTube ↗</a>
+        </div>`;
+      } else {
+        html += `<a class="video-card" href="${watchUrl}" target="_blank" rel="noopener">
+          <div class="thumb" style="background-image:url('${thumbUrl}')"></div>
+          <div class="badge">Watch on YouTube</div>
+          <div class="play" aria-hidden="true"></div>
+          <div class="meta">
+            <div class="vtitle">${v.title || L.title}</div>
+            <div class="vsub">${sub}</div>
+          </div>
+        </a>`;
+      }
+      if (v.caption) html += `<div class="video-caption">${v.caption}</div>`;
+    }
+
+    html += L.body;
+
+    if (L.isFinalQuiz) {
+      html += `<div class="quiz final-quiz" id="finalQuiz"></div>`;
+    }
+
+    html += `<div class="lesson-footer">`;
+    html += `<button class="nav-btn" onclick="goLesson(${i-1})" ${i===0?'disabled':''}>← Previous</button>`;
+    const isLast = i === LESSONS.length - 1;
+    html += `<button class="nav-btn primary" onclick="${isLast?'finishCourse()':'completeAndAdvance('+i+')'}">${isLast?'Finish course':'Mark complete &amp; next →'}</button>`;
+    html += `</div></div>`;
+  });
+  root.innerHTML = html;
+  attachQuizHandlers();
+  attachTabHandlers();
+  renderFinalQuiz();
+}
+
+function attachQuizHandlers() {
+  document.querySelectorAll('.quiz[data-quiz-idx]').forEach(box => {
+    const data = INLINE_QUIZZES[parseInt(box.getAttribute('data-quiz-idx'))];
+    let html = `<h4>Knowledge check</h4><div class="q-title">${data.q}</div><div class="options">`;
+    data.options.forEach(opt => {
+      html += `<button class="option" data-correct="${opt.correct}" data-why="${opt.why?opt.why.replace(/"/g,'&quot;'):''}"><span class="icon">○</span><span>${opt.text}</span></button>`;
+    });
+    html += `</div><div class="feedback"></div>`;
+    box.innerHTML = html;
+    box.querySelectorAll('.option').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const correct = btn.getAttribute('data-correct') === 'true';
+        const why = btn.getAttribute('data-why');
+        box.querySelectorAll('.option').forEach(b => {
+          b.disabled = true;
+          if (b.getAttribute('data-correct') === 'true') b.classList.add('correct');
+        });
+        if (!correct) btn.classList.add('incorrect');
+        const fb = box.querySelector('.feedback');
+        fb.className = 'feedback ' + (correct ? 'correct' : 'incorrect');
+        fb.innerHTML = (correct ? '<strong>Correct.</strong> ' : '<strong>Not quite.</strong> ') + why;
+      });
+    });
+  });
+}
+
+function attachTabHandlers() {
+  document.querySelectorAll('.tabs[data-tabs]').forEach(tabBox => {
+    const btns = tabBox.querySelectorAll('.tab-btn');
+    const contents = tabBox.querySelectorAll('.tab-content');
+    btns.forEach((btn, idx) => {
+      btn.addEventListener('click', () => {
+        btns.forEach(b => b.classList.remove('active'));
+        contents.forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        contents[idx].classList.add('active');
+      });
+    });
+  });
+}
+
+let finalQuizState = { idx: 0, answers: [], answered: false };
+
+function renderFinalQuiz() {
+  const box = document.getElementById('finalQuiz');
+  if (!box) return;
+  const i = finalQuizState.idx;
+  if (i >= FINAL_QUIZ.length) {
+    const correctCount = finalQuizState.answers.filter(a => a).length;
+    const pct = Math.round(100 * correctCount / FINAL_QUIZ.length);
+    const passed = pct >= 70;
+    box.innerHTML = `<div class="results">
+      <div class="score">${correctCount} / ${FINAL_QUIZ.length}</div>
+      <div style="font-size:17px;margin:10px 0 18px;color:var(--text-soft)">${pct}% — ${passed?'Passed ✓':'Keep going'}</div>
+      <p>${passed?('Solid grasp of ' + COURSE_TITLE.replace(/^Introduction to /,'') + '. Ready to put into practice.'):'Review the lessons where you missed questions — the material is dense, this is normal.'}</p>
+      <button class="nav-btn primary" onclick="finalQuizState={idx:0,answers:[],answered:false};renderFinalQuiz()">Retake quiz</button>
+    </div>`;
+    return;
+  }
+  const Q = FINAL_QUIZ[i];
+  let html = `<h4>Question ${i+1} of ${FINAL_QUIZ.length}</h4>`;
+  html += `<div class="q-counter">${finalQuizState.answers.length} answered</div>`;
+  html += `<div class="q-title">${Q.q}</div>`;
+  html += `<div class="options">`;
+  Q.options.forEach(opt => {
+    html += `<button class="option" data-correct="${opt.correct}"><span class="icon">○</span><span>${opt.text}</span></button>`;
+  });
+  html += `</div><div class="feedback"></div>`;
+  html += `<button class="next-btn" id="fqNext" disabled onclick="finalQuizNext()">${i === FINAL_QUIZ.length - 1 ? 'See results' : 'Next question →'}</button>`;
+  box.innerHTML = html;
+  box.querySelectorAll('.option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (finalQuizState.answered) return;
+      const correct = btn.getAttribute('data-correct') === 'true';
+      box.querySelectorAll('.option').forEach(b => {
+        b.disabled = true;
+        if (b.getAttribute('data-correct') === 'true') b.classList.add('correct');
+      });
+      if (!correct) btn.classList.add('incorrect');
+      const fb = box.querySelector('.feedback');
+      fb.className = 'feedback ' + (correct ? 'correct' : 'incorrect');
+      fb.innerHTML = correct ? '<strong>Correct.</strong>' : '<strong>Not quite — the highlighted option is correct.</strong>';
+      finalQuizState.answered = true;
+      finalQuizState.answers.push(correct);
+      document.getElementById('fqNext').disabled = false;
+    });
+  });
+}
+
+function finalQuizNext() {
+  finalQuizState.idx++;
+  finalQuizState.answered = false;
+  renderFinalQuiz();
+}
+
+function goLesson(i) {
+  if (i < 0 || i >= LESSONS.length) return;
+  currentLesson = i;
+  document.querySelectorAll('.lesson').forEach(el => el.classList.remove('active'));
+  const el = document.querySelector(`.lesson[data-lesson="${i}"]`);
+  if (el) el.classList.add('active');
+  document.querySelectorAll('.lesson-link').forEach(el => el.classList.remove('active'));
+  const link = document.querySelector(`.lesson-link[data-i="${i}"]`);
+  if (link) link.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function completeAndAdvance(i) {
+  completed.add(i);
+  document.querySelector(`.lesson-link[data-i="${i}"]`).classList.add('completed');
+  updateProgress();
+  if (i + 1 < LESSONS.length) goLesson(i + 1);
+}
+
+function finishCourse() {
+  completed.add(LESSONS.length - 1);
+  document.querySelector(`.lesson-link[data-i="${LESSONS.length-1}"]`).classList.add('completed');
+  updateProgress();
+  alert('🎓 Course complete. Now go put it to work.');
+}
+
+function updateProgress() {
+  const total = LESSONS.length;
+  const done = completed.size;
+  const pct = Math.round(100 * done / total);
+  document.getElementById('progressLabel').textContent = `${done} of ${total} lessons completed (${pct}%)`;
+  document.getElementById('progressBar').style.width = pct + '%';
+}
+
+// Boot
+document.title = COURSE_TITLE + ' — UpskillTech';
+document.getElementById('courseTitleEl').textContent = COURSE_TITLE;
+buildSidebar();
+buildLessons();
+updateProgress();
+goLesson(0);
+</script>
+</body>
+</html>
