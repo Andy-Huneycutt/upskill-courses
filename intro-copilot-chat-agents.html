@@ -890,6 +890,7 @@ td { color: var(--text-soft); }
 // ============================================================
 
 const COURSE_TITLE = "Introduction to Copilot Chat Agents";
+const LAST_REVIEWED = "July 30, 2026";
 
 const INLINE_QUIZZES = [
   {
@@ -902,28 +903,28 @@ const INLINE_QUIZZES = [
     ]
   },
   {
-    q: "What is the maximum length of the Instructions field for a declarative agent in Agent Builder?",
+    q: "You want an agent to answer consistently from approved policy content. Which configuration deserves the most careful review before sharing?",
     options: [
-      { text: "1,000 characters", correct: false, why: "1,000 characters is the limit for Description, not Instructions." },
-      { text: "8,000 characters", correct: true, why: "Instructions can run up to 8,000 characters." },
-      { text: "20,000 characters", correct: false, why: "There's no 20,000-character field in Agent Builder's configuration." },
-      { text: "There is no limit", correct: false, why: "Instructions are capped, just like Description." }
+      { text: "The instructions, approved knowledge sources, and expected citations", correct: true, why: "These determine the agent's scope, behavior, and grounding." },
+      { text: "Only the agent icon", correct: false, why: "Visual identity does not establish grounded behavior." },
+      { text: "Only the agent name", correct: false, why: "A name helps discovery but does not control answers." },
+      { text: "The catalog position", correct: false, why: "Catalog placement does not improve answer quality." }
     ]
   },
   {
-    q: "Which statement correctly separates Agent Builder from Copilot Studio?",
+    q: "A department needs branching approvals, actions in external systems, and managed releases. Which tool is the better starting point?",
     options: [
-      { text: "Agent Builder is for information workers building lightweight Q&A agents; Copilot Studio is for makers/developers building multistep, connector-driven agents", correct: true, why: "This matches how Microsoft documentation distinguishes the two tools' access points and audiences." },
-      { text: "They're the same underlying tool marketed under two names", correct: false, why: "They're genuinely different tools, managed through different admin centers." },
-      { text: "Agent Builder is managed through the Power Platform admin center, and Copilot Studio through the M365 admin center", correct: false, why: "That's reversed — Agent Builder is managed via the M365 admin center, Copilot Studio via the Power Platform admin center." },
-      { text: "Copilot Studio can only use public website knowledge sources", correct: false, why: "That restriction doesn't describe Copilot Studio; knowledge-source rules discussed in this course apply to Agent Builder." }
+      { text: "Copilot Studio", correct: true, why: "Advanced orchestration, actions, and lifecycle management are strong signals for Copilot Studio." },
+      { text: "Agent Builder with only starter prompts", correct: false, why: "Starter prompts do not provide the required orchestration." },
+      { text: "Copilot Chat with one long prompt", correct: false, why: "A one-time chat prompt does not create a governed workflow." },
+      { text: "The Agent Store", correct: false, why: "The store distributes agents; it is not the tool for building this workflow." }
     ]
   },
   {
     q: "In Agent Builder's recommended natural-language flow, what does the tool do after you describe your agent on the Describe tab?",
     options: [
       { text: "It auto-configures name, description, and instructions, and suggests refinements, knowledge sources, and capabilities", correct: true, why: "That's exactly what the Describe-tab flow automates for you." },
-      { text: "It requires you to first write all 8,000 characters of instructions by hand", correct: false, why: "That's the manual configuration path, not natural-language authoring." },
+      { text: "It requires you to write every configuration field by hand first", correct: false, why: "That's the manual configuration path, not natural-language authoring." },
       { text: "It automatically submits the agent to the Agent Store", correct: false, why: "Agent Store submission is a separate, manual step you take later." },
       { text: "It hands the agent off to Copilot Studio for configuration", correct: false, why: "Natural-language creation stays inside Agent Builder." }
     ]
@@ -938,12 +939,12 @@ const INLINE_QUIZZES = [
     ]
   },
   {
-    q: "What must be true before the Try it tab becomes available while building an agent?",
+    q: "An agent gives a plausible answer but cites the wrong policy. What should you do before sharing it?",
     options: [
-      { text: "The agent needs at least one Starter Prompt configured", correct: false, why: "Starter Prompts aren't the prerequisite — name, description, and instructions are." },
-      { text: "The agent needs a name, description, and instructions", correct: true, why: "Those three fields are what unlock Try it." },
-      { text: "The agent must already be shared with colleagues", correct: false, why: "Sharing happens after testing, not before Try it is available." },
-      { text: "The agent must be approved by an admin first", correct: false, why: "Admin approval applies to Agent Store submission, not to testing in Try it." }
+      { text: "Refine its instructions or knowledge scope, then retest representative questions in Try it", correct: true, why: "Iterative testing should verify grounding, citations, scope, and refusal behavior before sharing." },
+      { text: "Share it and ask users to ignore the citation", correct: false, why: "Known grounding problems should be corrected before release." },
+      { text: "Add more starter prompts without retesting", correct: false, why: "Starter prompts do not repair the knowledge scope." },
+      { text: "Rename the agent", correct: false, why: "Renaming does not correct grounding." }
     ]
   },
   {
@@ -956,39 +957,39 @@ const INLINE_QUIZZES = [
     ]
   },
   {
-    q: "What is the correct path to submit an Agent Builder agent to your org's Agent Store catalog?",
+    q: "You shared an agent with three coworkers, but it is not visible in the organization catalog. Why?",
     options: [
-      { text: "Open the agent, choose More (…) → Submit to your org catalog, then wait for admin approval", correct: true, why: "That's the documented submission flow." },
-      { text: "It's submitted automatically the moment you share it with colleagues", correct: false, why: "Sharing and Agent Store submission are two separate actions." },
-      { text: "Submit it directly through the Power Platform admin center", correct: false, why: "Submission and approval happen through Agent Builder and the M365 admin center, not the Power Platform admin center." },
-      { text: "Agents appear in the Agent Store automatically once published in Try it", correct: false, why: "Try it is a testing surface; it doesn't publish anything to the store." }
+      { text: "Sharing and organizational catalog publication are separate processes", correct: true, why: "Sharing grants selected people access; catalog publication requires a separate submission and review." },
+      { text: "Shared agents are always hidden for 30 days", correct: false, why: "There is no universal waiting period." },
+      { text: "The Try it pane must stay open", correct: false, why: "Testing does not control catalog visibility." },
+      { text: "Every coworker must edit the agent first", correct: false, why: "Editing is not a publication prerequisite." }
     ]
   },
   {
-    q: "Which admin role is recommended as the least-privilege option for read-only visibility into the Agent Registry?",
+    q: "A business user wants to know why an external agent is not visible in the organization's inventory. What is the best explanation?",
     options: [
-      { text: "Global Administrator", correct: false, why: "Global Administrator has full install/approve/manage rights — more privilege than needed for read-only visibility." },
-      { text: "AI Administrator", correct: false, why: "AI Administrator can also install, approve, and manage agents — not a read-only role." },
-      { text: "AI Reader", correct: true, why: "AI Reader is documented as the recommended least-privilege, read-only role for Registry visibility." },
-      { text: "Global Reader", correct: false, why: "Global Reader is also read-only, but AI Reader is the one Microsoft recommends specifically for this purpose." }
+      { text: "External registry synchronization is a Public Preview capability that requires administrator configuration", correct: true, why: "External agents do not appear automatically merely because they exist on another platform." },
+      { text: "All external agents appear automatically", correct: false, why: "An administrator must configure supported synchronization." },
+      { text: "The user must rebuild it in Agent Builder", correct: false, why: "Rebuilding is not the synchronization workflow." },
+      { text: "Only the agent's display name controls visibility", correct: false, why: "Configuration, permissions, preview access, and support matter." }
     ]
   },
   {
-    q: "Which of these is one of the five signals that it's time to graduate an agent to Copilot Studio?",
+    q: "A team needs an agent to route requests through approvals and branching steps. Which approach best fits?",
     options: [
-      { text: "The agent needs multistep logic with approvals and branching workflows", correct: true, why: "Multistep/branching logic is one of the five documented graduation signals." },
+      { text: "Evaluate Copilot Studio for the multistep orchestration", correct: true, why: "Approvals and branching are strong signals for Copilot Studio's advanced orchestration." },
       { text: "The agent only needs one SharePoint knowledge source", correct: false, why: "A single SharePoint source is well within what Agent Builder already supports." },
       { text: "The agent will stay private to just its creator", correct: false, why: "Staying private doesn't require Copilot Studio at all." },
       { text: "The agent needs a Starter Prompt", correct: false, why: "Starter Prompts are a basic Agent Builder building block, not a Copilot Studio signal." }
     ]
   },
   {
-    q: "What unit does Copilot Studio use for consumption-based billing as of September 1, 2025?",
+    q: "An agent now needs approvals, branching, actions in other systems, and managed deployment. What should the team do?",
     options: [
-      { text: "Dialog turns", correct: false, why: "The new unit specifically moved away from counting dialog turns." },
-      { text: "Copilot Credits, measuring compute", correct: true, why: "Copilot Credits became the unified consumption unit, measuring compute rather than turns." },
-      { text: "A flat monthly fee per agent", correct: false, why: "Copilot Studio's model is consumption-based, not a flat per-agent fee." },
-      { text: "Unlimited messages included in every license", correct: false, why: "Additional messages are purchased beyond the capacity-based license, not unlimited." }
+      { text: "Evaluate moving or extending it in Copilot Studio", correct: true, why: "Those requirements are strong signals for advanced orchestration and lifecycle tooling." },
+      { text: "Add more starter prompts only", correct: false, why: "Starter prompts do not provide workflow orchestration." },
+      { text: "Publish it immediately without testing", correct: false, why: "The expanded behavior requires testing and governance." },
+      { text: "Replace its knowledge with a public website", correct: false, why: "Changing knowledge does not meet the workflow requirements." }
     ]
   },
   {
@@ -1021,6 +1022,11 @@ const LESSONS = [
       "Recognize first-party agent examples Microsoft ships"
     ],
     body: `
+      <div class="callout note">
+        <div class="callout-label">Course scope · Last reviewed ${LAST_REVIEWED}</div>
+        This course assumes an eligible enterprise Microsoft 365 subscription and Microsoft 365 Copilot licensing where required. Licensing does not guarantee availability: tenant policy, content permissions, geography, Public Preview enrollment, administrator configuration, and phased rollout can affect what you see. Public Preview features are clearly labeled.
+      </div>
+
       <div class="takeaways">
         <h4>Key takeaways</h4>
         <ul>
@@ -1033,15 +1039,15 @@ const LESSONS = [
       <h2>Where agents sit</h2>
       <p>Microsoft 365 Copilot Chat is the everyday chat surface: you ask a question, Chat answers, grounded in either the web or, with a Copilot license, your work data. An <strong>agent</strong> is different — Microsoft's own documentation defines agents as "custom versions of Microsoft 365 Copilot that combine instructions, knowledge, and skills to perform specific tasks or scenarios." An agent is purpose-built and scoped: it knows what it's for, it has a defined set of knowledge sources, and it usually behaves as a declarative agent.</p>
 
-      <p>Copilot Cowork sits further along the spectrum again. Where Chat gives you answers and an agent gives you a scoped assistant, Cowork is an agentic system that plans and executes multi-step work end to end — sending emails, scheduling meetings, creating documents — and returns a completed deliverable rather than a draft. Teach the progression as: <strong>Chat (answers) → Agents (specialized, scoped assistants) → Cowork (delegated multi-step execution).</strong></p>
+      <p>Copilot Cowork sits further along the spectrum. Chat provides conversational assistance; agents package reusable instructions, knowledge, and supported skills or actions for a defined job; Cowork coordinates broad, multi-step work across tools and approval gates. These capabilities can overlap, so treat the progression as a useful guide rather than a permanent product boundary.</p>
 
       <div class="callout note">
         <div class="callout-label">Note</div>
         Microsoft's own admin documentation is explicit that Cowork is "an agentic system (different from an agent)." Don't blur the two when you're explaining this to colleagues — it's a common source of confusion.
       </div>
 
-      <h3>First-party examples</h3>
-      <p>Microsoft ships its own first-party agents built on this same model, including Researcher, Analyst, Facilitator, Project Manager, and Sales Agent.</p>
+      <h3>First-party agents</h3>
+      <p>Microsoft also provides first-party agents for supported roles and scenarios. The available catalog changes over time, so use the Agent Store in your tenant as the current source of truth.</p>
 
       <div class="compare-grid">
         <div class="compare-card">
@@ -1074,16 +1080,16 @@ const LESSONS = [
     time: "8 minutes",
     objectives: [
       "List the core building blocks of a declarative agent",
-      "State the character limits on Description and Instructions",
-      "Explain the license nuance around knowledge sources"
+      "Choose instructions and knowledge sources for a defined job",
+      "Explain how enterprise licensing, permissions, and tenant controls affect knowledge access"
     ],
     body: `
       <div class="takeaways">
         <h4>Key takeaways</h4>
         <ul>
-          <li><strong>Five building blocks define a declarative agent:</strong> Description, Instructions, Knowledge, Capabilities, and Starter Prompts.</li>
-          <li><strong>Description and Instructions are both length-capped.</strong> Description tops out at 1,000 characters; Instructions at 8,000.</li>
-          <li><strong>Not all knowledge sources are license-equal.</strong> SharePoint and public websites work for everyone; personal work data and prebuilt Copilot connectors need a Copilot add-on license.</li>
+          <li><strong>Five primary design areas shape a declarative agent:</strong> Description, Instructions, Knowledge, Capabilities, and Starter Prompts.</li>
+          <li><strong>The builder also includes identity, model, sharing, and publication settings.</strong> The exact configuration surface can change.</li>
+          <li><strong>Organizational grounding follows both licensing and permissions.</strong> This course assumes the enterprise entitlement required for supported SharePoint, OneDrive, Teams, Outlook, people, and connector-based sources.</li>
         </ul>
       </div>
 
@@ -1099,17 +1105,17 @@ const LESSONS = [
       </div>
 
       <table>
-        <tr><th>Component</th><th>What it does</th><th>Limit</th></tr>
-        <tr><td>Description</td><td>Helps the orchestrator route to the agent and shows in the catalog</td><td>≤ 1,000 characters</td></tr>
-        <tr><td>Instructions</td><td>Directs the agent's behavior</td><td>≤ 8,000 characters</td></tr>
-        <tr><td>Knowledge</td><td>SharePoint sites/folders/files, public websites, or Copilot connectors</td><td>Up to 20 sources</td></tr>
-        <tr><td>Capabilities</td><td>e.g. code interpreter, image generator</td><td>—</td></tr>
-        <tr><td>Starter Prompts</td><td>Name + description shown to users</td><td>No minimum</td></tr>
+        <tr><th>Design area</th><th>What it does</th><th>Good practice</th></tr>
+        <tr><td>Description</td><td>Explains the agent's purpose and helps people discover it</td><td>Use a specific job and audience</td></tr>
+        <tr><td>Instructions</td><td>Directs behavior, scope, tone, and response rules</td><td>State boundaries and expected output</td></tr>
+        <tr><td>Knowledge</td><td>Grounds answers in supported websites and organizational sources</td><td>Use the smallest authoritative source set</td></tr>
+        <tr><td>Capabilities</td><td>Adds supported tools such as code or image generation</td><td>Enable only what the job needs</td></tr>
+        <tr><td>Starter Prompts</td><td>Shows users useful ways to begin</td><td>Model realistic, in-scope tasks</td></tr>
       </table>
 
       <div class="callout note">
         <div class="callout-label">Note</div>
-        Knowledge has a license nuance worth remembering: SharePoint items and public websites work for all users. Grounding an agent in personal work data (Teams or Outlook) or prebuilt Copilot connectors requires a Microsoft 365 Copilot add-on license.
+        Knowledge-source limits vary by source type and can change. Public websites, SharePoint, OneDrive, Teams chats, uploaded files, and Copilot connectors each have their own current requirements. This course does not use one universal source count. Verify the builder's current guidance, and remember that an agent can retrieve only content the signed-in user is permitted to access.
       </div>
 
       <div class="prompt-card">
@@ -1127,9 +1133,9 @@ const LESSONS = [
     title: "Agent Builder vs. Copilot Studio — two different tools (the naming trap)",
     time: "8 minutes",
     objectives: [
-      "Distinguish Agent Builder from Copilot Studio by access point, audience, and admin surface",
+      "Distinguish Agent Builder from Copilot Studio by audience and job complexity",
       "Avoid the naming trap between the two \"agent builder\" tools",
-      "Identify which license unlocks each tool"
+      "Choose the appropriate tool for an end-user scenario"
     ],
     body: `
       <div class="takeaways">
@@ -1150,20 +1156,20 @@ const LESSONS = [
           <h4>Agent Builder</h4>
           <p>Access point: Microsoft 365 Copilot app. Built for information workers, individuals, and small teams. Produces lightweight Q&A agents grounded in organizational knowledge, authored in natural language, using the Copilot orchestrator and foundation models.</p>
           <div class="best-for">Best for: individuals/small teams, Q&A agents</div>
-          <ul><li>Managed via the M365 admin center</li></ul>
+          <ul><li>Optimized for quick, scoped creation</li></ul>
         </div>
         <div class="compare-card">
           <div class="tag">copilotstudio.microsoft.com</div>
           <h4>Copilot Studio</h4>
           <p>Access point: a separate maker/developer site. Built for departments, whole orgs, or external customers. Supports multistep logic, approvals, branching workflows, prebuilt and custom connectors, autonomous capabilities, and full lifecycle management.</p>
           <div class="best-for">Best for: makers/developers, complex workflows</div>
-          <ul><li>Managed via the Power Platform admin center</li></ul>
+          <ul><li>Optimized for advanced orchestration and lifecycle needs</li></ul>
         </div>
       </div>
 
       <div class="callout warn">
-        <div class="callout-label">Watch out</div>
-        Both tools are included with a Microsoft 365 Copilot add-on license; without it, agents built either way run on Copilot Credits / pay-as-you-go, except that Agent Builder is free for agents that only use web knowledge.
+        <div class="callout-label">Availability</div>
+        This course assumes the required enterprise licensing. Access can still depend on tenant policy, permissions, geography, administrator configuration, and rollout. Choose between the tools by the job's complexity and governance needs—not by a fixed licensing shortcut.
       </div>
 
       <div class="quiz" data-quiz-idx="2"></div>
@@ -1272,7 +1278,7 @@ const LESSONS = [
         <ul>
           <li><strong>Try it needs the basics filled in.</strong> It activates once the agent has a name, description, and instructions.</li>
           <li><strong>It behaves like the published agent</strong>, working within the knowledge you've configured so far.</li>
-          <li><strong>Some features are missing in Try it</strong> — sharing prompts, feedback, and @mentioning other agents aren't available there.</li>
+          <li><strong>Test behavior, not just fluency.</strong> Check citations, instruction-following, permissions, expected refusals, and out-of-scope questions.</li>
         </ul>
       </div>
 
@@ -1280,12 +1286,12 @@ const LESSONS = [
       <p>Once an agent has a name, description, and instructions, the <strong>Try it</strong> tab becomes available. It behaves like the agent would once published, responding within the knowledge sources you've attached — so it's a realistic preview, not a stripped-down demo.</p>
 
       <div class="callout warn">
-        <div class="callout-label">Watch out</div>
-        A few features aren't available in Try it: sharing prompts, submitting feedback, and @mentioning other agents. Don't judge those capabilities from the Try it tab.
+        <div class="callout-label">Tenant variation</div>
+        Controls in the test pane can vary as Agent Builder changes. Use the controls shown in your tenant, but do not treat a thumbs-up or thumbs-down as a substitute for checking citations, source scope, and instruction adherence.
       </div>
 
       <h3>Iterating</h3>
-      <p>You can refine the agent from within Try it — either by continuing the natural-language conversation or by switching back to the Configure tab — across as many turns as you need. When something goes wrong or right, thumbs-up/down feedback is submitted the same way Copilot Studio handles feedback.</p>
+      <p>Refine the agent by continuing the authoring conversation or returning to configuration, then start a fresh set of representative tests. Include expected questions, ambiguous requests, out-of-scope requests, and questions for which the agent should say it lacks evidence.</p>
 
       <div class="quiz" data-quiz-idx="5"></div>
     `
@@ -1335,36 +1341,36 @@ const LESSONS = [
     title: "Submitting to the Agent Store (\"Built by your org\")",
     time: "7 minutes",
     objectives: [
-      "Follow the submission flow from Agent Builder to the org catalog",
-      "Describe what happens after an admin reviews a submission",
+      "Distinguish sharing from organizational catalog publication",
+      "Describe why catalog publication requires review",
       "Explain why updates require a new review cycle"
     ],
     body: `
       <div class="takeaways">
         <h4>Key takeaways</h4>
         <ul>
-          <li><strong>Submission is a distinct step from sharing.</strong> Open the agent, then More (…) → Submit to your org catalog.</li>
-          <li><strong>An admin reviews and approves it</strong> in the M365 admin center before it appears under "Built by your org" in the Agent Store.</li>
+          <li><strong>Submission is a distinct step from sharing.</strong> Sharing grants selected people access; it does not publish the agent to the organizational catalog.</li>
+          <li><strong>An administrator reviews the submission</strong> before the agent can appear in the organization's Agent Store.</li>
           <li><strong>Updating a submitted agent restarts the review.</strong> Any change requires a fresh submission and approval cycle.</li>
         </ul>
       </div>
 
       <h2>Getting into the org catalog</h2>
-      <p>Sharing an agent with specific colleagues is different from publishing it broadly through the Agent Store. To do the latter, open the agent and choose <strong>More (…) → Submit to your org catalog</strong>, complete the required fields, then submit for admin approval.</p>
+      <p>Sharing an agent with specific colleagues is different from publishing it broadly through the Agent Store. Catalog publication requires a separate submission, required business information, and administrator review. Labels and navigation can change, so follow the submission action shown in your current Agent Builder experience.</p>
 
       <div class="steps">
         <ol>
-          <li>Open the built agent and choose More (…) → Submit to your org catalog.</li>
+          <li>Open the built agent and choose the current organizational-catalog submission action.</li>
           <li>Fill in the required fields for the submission.</li>
           <li>Submit for admin approval.</li>
-          <li>An admin reviews the request in M365 admin center → Agents → All agents → Requests.</li>
-          <li>The admin publishes it to the "Built by your org" section of the Agent Store — optionally scoped to specific users or groups, preinstalled, or pinned.</li>
+          <li>An administrator reviews the request under the organization's current governance process.</li>
+          <li>If approved, the agent appears for the audience the administrator assigns.</li>
         </ol>
       </div>
 
       <div class="callout note">
         <div class="callout-label">Note</div>
-        Submission status shows as Pending, Approved, or Rejected, with a reviewer comment. This capability is available as of mid-2026. If you change the agent after it's published, you'll need to resubmit — updates go through a fresh review cycle rather than updating silently.
+        Status labels and administrative paths are volatile and are intentionally not assessed in this course. If you change a published agent, expect the organization to require review of the update before broad distribution.
       </div>
 
       <div class="quiz" data-quiz-idx="7"></div>
@@ -1377,21 +1383,21 @@ const LESSONS = [
     time: "8 minutes",
     objectives: [
       "Describe what the Agent Registry tracks tenant-wide",
-      "Match admin roles to their level of control",
-      "Explain what Agent 365 governs across all agent sources"
+      "Explain why external agents require configured synchronization",
+      "Recognize that governance is an administrator responsibility"
     ],
     body: `
       <div class="takeaways">
         <h4>Key takeaways</h4>
         <ul>
-          <li><strong>The Agent Registry is the tenant-wide inventory</strong> of every agent, found in the M365 admin center under Agents → All Agents → Registry.</li>
-          <li><strong>Admin roles differ in what they can do.</strong> Global Administrator and AI Administrator can install and manage agents; Global Reader and AI Reader are read-only.</li>
+          <li><strong>The Agent Registry supports tenant-wide inventory.</strong> Administrators use it to discover and govern registered agents.</li>
+          <li><strong>Administrative roles differ in what they can do.</strong> End users do not manage tenant-wide agent controls.</li>
           <li><strong>Agent 365 is the control plane</strong> for observing and governing all agents, regardless of where they were built.</li>
         </ul>
       </div>
 
       <h2>The Agent Registry</h2>
-      <p>The Agent Registry, found at M365 admin center → <strong>Agents → All Agents → Registry</strong>, is the tenant-wide inventory of agents. It tracks four agent types:</p>
+      <p>The Agent Registry is the tenant-wide inventory of registered agents. Microsoft-built, partner, organizational, and creator-shared agents can enter the inventory through their supported platform processes.</p>
 
       <div class="chip-row">
         <span class="chip">Microsoft agents</span>
@@ -1400,19 +1406,15 @@ const LESSONS = [
         <span class="chip">Shared by creator</span>
       </div>
 
-      <p>From the Registry, admins can install/uninstall, block/unblock, delete, start/stop (for Foundry agents), assign a new owner, publish to the store, or reject a submission. Summary tiles surface agents without owners and unmanaged agents so nothing slips through unnoticed.</p>
-
-      <h3>Roles</h3>
-      <table>
-        <tr><th>Role</th><th>Access level</th></tr>
-        <tr><td>Global Administrator</td><td>Can install, approve, and manage agents</td></tr>
-        <tr><td>AI Administrator</td><td>Can install, approve, and manage agents</td></tr>
-        <tr><td>Global Reader</td><td>Read-only</td></tr>
-        <tr><td>AI Reader</td><td>Read-only — the recommended least-privilege role for inventory visibility</td></tr>
-      </table>
+      <p>Administrators can apply organizational policy, manage availability, review submissions, assign ownership, and investigate unmanaged agents. Exact roles, actions, and navigation are intentionally left to current administrator documentation rather than memorized in this end-user course.</p>
 
       <h3>Agent 365</h3>
-      <p>Agent 365 is the control plane for observing, securing, and governing every agent in the tenant, no matter where it was built. Agents from Copilot Studio, Foundry, and Agent Builder register automatically; external agents such as Bedrock or Vertex can be synced in. <strong>Entra Agent ID</strong> gives each agent an identity, and governance actions log to Microsoft Purview. Applying security controls like Conditional Access to agents requires Microsoft Entra Agent ID licensing.</p>
+      <p>Agent 365 provides a control plane for observing, securing, and governing agents across supported sources. Native Microsoft agents follow their platform's registration process.</p>
+
+      <div class="callout warn">
+        <div class="callout-label">Public Preview</div>
+        External agent-registry synchronization is a Public Preview capability. External agents do not appear automatically merely because they exist in another platform; an administrator must configure a supported connection, authentication, mapping, and synchronization. Availability and behavior may vary by tenant and rollout.
+      </div>
 
       <div class="quiz" data-quiz-idx="8"></div>
     `
@@ -1423,16 +1425,16 @@ const LESSONS = [
     title: "What Copilot Studio adds (connectors, multistep logic, autonomous, multi-channel, lifecycle)",
     time: "7 minutes",
     objectives: [
-      "List the five capability areas that signal it's time to graduate to Copilot Studio",
+      "Recognize capability areas that can signal it's time to use Copilot Studio",
       "Explain what each capability area unlocks",
-      "Recognize the limits of Agent Builder that Copilot Studio removes"
+      "Treat current differences as decision signals rather than permanent boundaries"
     ],
     body: `
       <div class="takeaways">
         <h4>Key takeaways</h4>
         <ul>
-          <li><strong>Five capability areas mark the graduation point:</strong> connectors, multistep logic, autonomous behavior, multi-channel publishing, and lifecycle management.</li>
-          <li><strong>Agent Builder doesn't offer these.</strong> It's built for lightweight, knowledge-grounded Q&A, not workflow orchestration.</li>
+          <li><strong>Advanced requirements can mark the graduation point:</strong> actions and connectors, multistep logic, autonomous behavior, multi-channel publishing, and lifecycle management.</li>
+          <li><strong>Agent Builder is optimized for quickly assembled, scoped agents.</strong> Its supported capabilities evolve, so avoid treating today's comparison as a permanent boundary.</li>
           <li><strong>Copilot Studio adds the maker/developer tooling</strong> needed to build and run agents as production systems.</li>
         </ul>
       </div>
@@ -1476,7 +1478,7 @@ const LESSONS = [
 
       <div class="callout note">
         <div class="callout-label">Note</div>
-        None of these five are available in Agent Builder — it's intentionally scoped to lightweight Q&A agents grounded in organizational knowledge.
+        These are current decision signals, not permanent architectural boundaries. Check the capabilities available in your tenant. If the job needs advanced orchestration, governance, channels, or lifecycle management, evaluate Copilot Studio.
       </div>
 
       <div class="quiz" data-quiz-idx="9"></div>
@@ -1485,37 +1487,29 @@ const LESSONS = [
 
   // ── L10 ──
   {
-    title: "Copy to Copilot Studio + pricing model differences",
+    title: "Extending an agent in Copilot Studio",
     time: "8 minutes",
     objectives: [
       "Use Copy to Copilot Studio to carry over an existing agent's configuration",
-      "Explain how Copilot Studio's consumption-based pricing works",
-      "State what Copilot Credits measure, and since when"
+      "Identify what to validate after copying",
+      "Apply enterprise governance to the expanded agent"
     ],
     body: `
       <div class="takeaways">
         <h4>Key takeaways</h4>
         <ul>
           <li><strong>Copy to Copilot Studio preserves your work.</strong> It carries over the core configuration and instructions instead of making you rebuild from scratch.</li>
-          <li><strong>Copilot Studio bills by consumption, not by seat.</strong> Licenses are capacity-based, and additional messages can be purchased.</li>
-          <li><strong>Copilot Credits became the unified consumption unit on September 1, 2025</strong>, measuring compute rather than dialog turns.</li>
+          <li><strong>Copying is the beginning of the extension work.</strong> Recheck knowledge, actions, authentication, channels, and permissions after the move.</li>
+          <li><strong>Govern the expanded behavior.</strong> Test approvals and consequential actions before production use.</li>
         </ul>
       </div>
 
       <h2>Carrying your work over</h2>
       <p>When an agent outgrows Agent Builder, use <strong>Copy to Copilot Studio</strong> rather than rebuilding it there by hand. It preserves the core configuration and instructions you already wrote, so you're extending the agent — adding connectors, branching logic, and so on — instead of starting over.</p>
 
-      <h2>How Copilot Studio is priced</h2>
-      <p>Copilot Studio uses a consumption-based, message-driven pricing model. Licenses are capacity-based, and additional messages can be purchased beyond that capacity; a billable message is a request or message sent to the agent that triggers an action or a response.</p>
-
-      <div class="callout note">
-        <div class="callout-label">Note</div>
-        Since September 1, 2025, Microsoft has used <strong>Copilot Credits</strong> as the unified consumption unit across this billing — measuring compute rather than counting dialog turns, available as pay-as-you-go, prepaid packs, or pre-purchase commitments.
-      </div>
-
       <div class="callout tip">
-        <div class="callout-label">Tip</div>
-        Copilot-licensed end users can run Copilot Studio agents deployed to Microsoft 365 channels without necessarily consuming billable credits in every context. But agents that reach into shared tenant data — SharePoint or Graph connector content — are metered, and that metering is off by default in Copilot Chat until an admin sets up billing.
+        <div class="callout-label">Validation checklist</div>
+        After copying, confirm that the instructions still produce the intended behavior, each action uses the correct connection and identity, approvals protect consequential steps, knowledge sources respect user permissions, and the deployment audience matches the business purpose.
       </div>
 
       <div class="quiz" data-quiz-idx="10"></div>
@@ -1582,21 +1576,21 @@ const FINAL_QUIZ = [
     { text: "An agentic system that executes multi-step work end to end", correct: false },
     { text: "A connector linking Copilot Studio to an external system", correct: false }
   ]},
-  { q: "What is the character limit on a declarative agent's Instructions field?", options: [
-    { text: "1,000 characters", correct: false },
-    { text: "8,000 characters", correct: true },
-    { text: "20,000 characters", correct: false },
-    { text: "There is no limit", correct: false }
+  { q: "You are building a policy agent. What is the best way to keep its answers reliable and in scope?", options: [
+    { text: "Use clear instructions, authoritative knowledge sources, and representative tests", correct: true },
+    { text: "Give it a broad name and no boundaries", correct: false },
+    { text: "Rely only on starter prompts", correct: false },
+    { text: "Publish it before checking citations", correct: false }
   ]},
-  { q: "How do Agent Builder and Copilot Studio differ?", options: [
-    { text: "Agent Builder targets information workers with lightweight Q&A agents; Copilot Studio targets makers/developers with multistep, connector-driven agents", correct: true },
-    { text: "They are the same tool marketed under two names", correct: false },
-    { text: "Agent Builder is managed via the Power Platform admin center, Copilot Studio via the M365 admin center", correct: false },
-    { text: "Copilot Studio only supports public website knowledge sources", correct: false }
+  { q: "A department needs branching approvals, actions in external systems, and managed releases. Which tool is the better starting point?", options: [
+    { text: "Copilot Studio", correct: true },
+    { text: "Agent Builder with only starter prompts", correct: false },
+    { text: "Copilot Chat with one long prompt", correct: false },
+    { text: "The Agent Store", correct: false }
   ]},
   { q: "What happens when you describe an agent on the Describe tab in Agent Builder?", options: [
     { text: "Agent Builder auto-configures name, description, and instructions, and suggests refinements", correct: true },
-    { text: "You must first write all 8,000 characters of instructions by hand", correct: false },
+    { text: "You must first write every configuration field by hand", correct: false },
     { text: "The agent is automatically submitted to the Agent Store", correct: false },
     { text: "Configuration is handed off to Copilot Studio", correct: false }
   ]},
@@ -1606,11 +1600,11 @@ const FINAL_QUIZ = [
     { text: "Ask an admin to build it, or use the Agent Registry", correct: false },
     { text: "There is no other way — natural language is required", correct: false }
   ]},
-  { q: "What's required before the Try it tab becomes available?", options: [
-    { text: "At least one Starter Prompt", correct: false },
-    { text: "A name, description, and instructions", correct: true },
-    { text: "The agent must already be shared", correct: false },
-    { text: "Admin approval", correct: false }
+  { q: "During testing, an agent answers an out-of-scope question confidently. What should you do?", options: [
+    { text: "Refine its boundaries and expected refusal behavior, then retest", correct: true },
+    { text: "Publish it and warn users verbally", correct: false },
+    { text: "Change only its icon", correct: false },
+    { text: "Add an unrelated knowledge source", correct: false }
   ]},
   { q: "What is the default visibility of a newly created agent?", options: [
     { text: "Visible to the entire organization", correct: false },
@@ -1618,29 +1612,29 @@ const FINAL_QUIZ = [
     { text: "Visible only to the creator's manager", correct: false },
     { text: "Automatically listed in the Agent Store", correct: false }
   ]},
-  { q: "What is the correct flow to submit an agent to your org's Agent Store catalog?", options: [
-    { text: "Open the agent, choose More (…) → Submit to your org catalog, then await admin approval", correct: true },
-    { text: "It happens automatically once shared with colleagues", correct: false },
-    { text: "Submit directly through the Power Platform admin center", correct: false },
-    { text: "It publishes automatically from the Try it tab", correct: false }
+  { q: "You shared an agent with a project team. What else is required before it can appear in the organizational catalog?", options: [
+    { text: "A separate catalog submission and organizational review", correct: true },
+    { text: "Nothing; sharing always publishes it", correct: false },
+    { text: "Every user must edit it", correct: false },
+    { text: "The Try it pane must remain open", correct: false }
   ]},
-  { q: "Which admin role is the recommended least-privilege, read-only role for Agent Registry visibility?", options: [
-    { text: "Global Administrator", correct: false },
-    { text: "AI Administrator", correct: false },
-    { text: "AI Reader", correct: true },
-    { text: "Global Reader", correct: false }
+  { q: "Why might a supported external agent not appear in the organization's agent inventory?", options: [
+    { text: "External registry synchronization is Public Preview and requires administrator configuration", correct: true },
+    { text: "All external agents are automatically hidden forever", correct: false },
+    { text: "It must first be converted into a starter prompt", correct: false },
+    { text: "Users must remove its knowledge sources", correct: false }
   ]},
-  { q: "Which of these is one of the five signals for graduating to Copilot Studio?", options: [
-    { text: "Needing multistep logic with approvals and branching", correct: true },
+  { q: "A team needs an agent to route requests through approvals and branching steps. What should it do?", options: [
+    { text: "Evaluate Copilot Studio for the multistep orchestration", correct: true },
     { text: "Needing a single SharePoint knowledge source", correct: false },
     { text: "Keeping the agent private to its creator", correct: false },
     { text: "Adding a Starter Prompt", correct: false }
   ]},
-  { q: "What consumption unit has Copilot Studio used for billing since September 1, 2025?", options: [
-    { text: "Dialog turns", correct: false },
-    { text: "Copilot Credits, measuring compute", correct: true },
-    { text: "A flat monthly fee per agent", correct: false },
-    { text: "Unlimited included messages", correct: false }
+  { q: "After copying an agent to Copilot Studio and adding actions, what should you validate before deployment?", options: [
+    { text: "Connections, identities, permissions, approvals, and end-to-end behavior", correct: true },
+    { text: "Only the agent's display name", correct: false },
+    { text: "Only whether the first response sounds fluent", correct: false },
+    { text: "Nothing; copied agents are automatically production-ready", correct: false }
   ]},
   { q: "Which tool fits an agent that answers questions from one SharePoint site for internal staff, with no connectors or approvals?", options: [
     { text: "Agent Builder", correct: true },

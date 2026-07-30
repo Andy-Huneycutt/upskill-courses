@@ -976,146 +976,76 @@ td { color: var(--text-soft); }
 const COURSE_TITLE = "Introduction to Copilot Cowork";
 
 const INLINE_QUIZZES = [
-  // L0 — What Cowork is
-  {
-    q: "What best distinguishes Copilot Cowork from Copilot Chat?",
-    options: [
-      { text: "Cowork only answers questions grounded in web data", correct: false, why: "That describes Copilot Chat without the Microsoft 365 Copilot add-on, not Cowork." },
-      { text: "Cowork is an agentic system that plans, executes, and delivers completed work, while Chat answers questions", correct: true, why: "Microsoft's own framing: Cowork sends emails, schedules meetings, creates documents, and more — you approve each action — while Chat is built to answer." },
-      { text: "Cowork requires no license while Chat does", correct: false, why: "It's the reverse in practice: Cowork requires a Microsoft 365 Copilot license plus usage-based Copilot Credits." },
-      { text: "Cowork and Chat are simply two names for the same product", correct: false, why: "Microsoft documentation explicitly separates the two — Cowork is described as an agentic system, distinct from an agent and from Chat." }
-    ]
-  },
-  // L1 — GA, licensing, Copilot Credits
-  {
-    q: "What two things does using Copilot Cowork require, per Microsoft's licensing model?",
-    options: [
-      { text: "A free trial only, with no ongoing cost", correct: false, why: "Cowork has an ongoing two-part cost, not a one-time free trial." },
-      { text: "A Microsoft 365 Copilot license ($30/user/month) plus usage-based Copilot Credits", correct: true, why: "The Microsoft 365 Blog GA post confirms both are required — the license, plus separately billed, usage-based Copilot Credits." },
-      { text: "A one-time perpetual purchase", correct: false, why: "Cowork is licensed as a subscription plus consumption-based credits, not a one-time purchase." },
-      { text: "Only admin approval, with no separate billing", correct: false, why: "Admin approval turns on billing — it doesn't replace it. Usage-based billing is a real, separate cost." }
-    ]
-  },
-  // L2 — Work IQ
-  {
-    q: "What are the three layers that make up Work IQ?",
-    options: [
-      { text: "Data, context, and skills/tools", correct: true, why: "Microsoft Learn describes Work IQ as combining these three layers, built atop foundation models from providers like OpenAI and Anthropic." },
-      { text: "Chat, Cowork, and Agents", correct: false, why: "Those are three different Copilot products, not the internal layers of Work IQ." },
-      { text: "OneDrive, SharePoint, and Teams", correct: false, why: "Those are content sources Work IQ can draw from, not the three architectural layers Microsoft documents." },
-      { text: "Auto, Opus, and Sonnet", correct: false, why: "Those are model options in Cowork's model picker, not Work IQ's layers." }
-    ]
-  },
-  // L3 — Where Cowork runs
-  {
-    q: "How do you start using Cowork within the Microsoft 365 Copilot app?",
-    options: [
-      { text: "Through a separate subscription portal outside the Copilot app", correct: false, why: "No separate portal is documented — Cowork lives inside the Microsoft 365 Copilot app itself." },
-      { text: "Via the Cowork toggle next to Chat", correct: true, why: "Microsoft Learn describes a Cowork toggle next to Chat in the Microsoft 365 Copilot app, which rolled out in June 2026." },
-      { text: "Only from inside Excel", correct: false, why: "Cowork is documented across browser, desktop app, mobile, Outlook, and Teams — not limited to Excel." },
-      { text: "Only on mobile devices", correct: false, why: "Mobile is one of several surfaces (added May 2026) — Cowork isn't mobile-only." }
-    ]
-  },
-  // L4 — Approval model
-  {
-    q: "What happens during a soft pause of a running Cowork task?",
-    options: [
-      { text: "It stops immediately, mid-step", correct: false, why: "That describes a hard pause, not a soft pause." },
-      { text: "It finishes the current step, then stops", correct: true, why: "Microsoft documents soft pause as completing the in-progress step before halting, versus hard pause stopping immediately." },
-      { text: "It cancels the task and discards all progress", correct: false, why: "Pausing is documented separately from cancelling — pause preserves the task so it can be resumed." },
-      { text: "It automatically skips all future approval prompts", correct: false, why: "Skipping future prompts is a separate, explicit dropdown option a user chooses — not a side effect of pausing." }
-    ]
-  },
-  // L5 — Model selection
-  {
-    q: "What is Microsoft's guidance on model selection in Cowork?",
-    options: [
-      { text: "Always manually select Claude Opus 4.8 for every task", correct: false, why: "Opus 4.8 is offered for complex or high-stakes work, but it isn't the recommended default for everything." },
-      { text: "Leave the picker on Auto so Cowork chooses the model for the task", correct: true, why: "The Learn 'Choose a model for Copilot Cowork' page states the default is Auto and recommends leaving it there most of the time." },
-      { text: "Admins must manually assign a model to every individual user", correct: false, why: "Admins can restrict model families (e.g., disable Anthropic models), but per-task model choice defaults to Auto, not manual admin assignment." },
-      { text: "Only GPT 5.5 is available in Cowork", correct: false, why: "GPT 5.5 is one option among several — Sonnet 5, Opus 4.8, Fable 5 (Preview), and Sonnet + Opus Advisor are also documented." }
-    ]
-  },
-  // L6 — Limitations
-  {
-    q: "Which of these is a documented limitation of Copilot Cowork?",
-    options: [
-      { text: "It can delete files anywhere in OneDrive or SharePoint", correct: false, why: "The opposite is documented: Cowork cannot delete files or folders in OneDrive or SharePoint." },
-      { text: "It can read encrypted or rights-protected files if the user has access", correct: false, why: "Microsoft documents the opposite: Cowork can't read encrypted or rights-protected files even when the user has access." },
-      { text: "It cannot access or edit files stored only on the local device", correct: true, why: "Cowork works with OneDrive/SharePoint and connected cloud services — it doesn't reach local-only files." },
-      { text: "It has no file upload size limit", correct: false, why: "File uploads are capped at 200 MB per file." }
-    ]
-  },
-  // L7 — Built-in skills
-  {
-    q: "How many built-in skills does Copilot Cowork ship with?",
-    options: [
-      { text: "8", correct: false, why: "Microsoft documents 13, not 8." },
-      { text: "13", correct: true, why: "Word, Excel, PowerPoint, PDF, Email, Scheduling, Calendar Management, Meetings, Daily Briefing, Enterprise Search, Communications, Deep Research, and Adaptive Cards — 13 in total." },
-      { text: "50", correct: false, why: "50 is the cap on custom skills a user can create, not the built-in count." },
-      { text: "20", correct: false, why: "20 is the companion-file limit per custom skill, not the built-in skill count." }
-    ]
-  },
-  // L8 — Custom skills
-  {
-    q: "Where can a manually created custom skill file be placed so Cowork discovers it automatically?",
-    options: [
-      { text: "Documents/Cowork/skills/<skill-name>/ in OneDrive, as a SKILL.md file", correct: true, why: "Microsoft documents this exact path; Cowork discovers SKILL.md files there automatically at the start of each session." },
-      { text: "Anywhere on the local hard drive", correct: false, why: "Cowork can't access local-only files, so a locally-stored skill file wouldn't be discoverable." },
-      { text: "A Teams channel's Files tab", correct: false, why: "The documented location is a specific OneDrive folder path, not a Teams channel." },
-      { text: "Only through the Microsoft 365 admin center", correct: false, why: "The admin center is used for governance, not as the discovery location for a manually authored SKILL.md file." }
-    ]
-  },
-  // L9 — Sharing skills
-  {
-    q: "How does a user share a custom skill with specific colleagues?",
-    options: [
-      { text: "Email the SKILL.md file as a plain attachment", correct: false, why: "Sharing is done through the Customize page's Share option, not by emailing a file." },
-      { text: "From the skill's detail page on the Customize page, select Share, then Only you or Specific users in your organization", correct: true, why: "This is the documented sharing flow, and re-sharing keeps recipients up to date when the skill changes." },
-      { text: "Skills cannot be shared with anyone", correct: false, why: "Sharing is an explicit, documented feature — skills can be shared with specific users." },
-      { text: "Only an admin can share a skill, never its creator", correct: false, why: "The creator shares the skill directly from its detail page; this isn't restricted to admins." }
-    ]
-  },
-  // L10 — Plugins and App Store
-  {
-    q: "Which of the following is one of Microsoft's own plugins available for Cowork?",
-    options: [
-      { text: "Dynamics 365 Customer Service", correct: true, why: "Dynamics 365 Customer Service, Sales, ERP, and Fabric IQ are listed as Microsoft's own plugins in the Microsoft 365 App Store." },
-      { text: "Salesforce", correct: false, why: "Salesforce is a partner connector, not a Microsoft-built plugin." },
-      { text: "Zendesk", correct: false, why: "Zendesk is a partner connector, not a Microsoft-built plugin." },
-      { text: "Adobe", correct: false, why: "Adobe is listed as a partner integration coming soon, not a Microsoft-built plugin available at launch." }
-    ]
-  },
-  // L11 — Partner plugins at GA + MCP apps
-  {
-    q: "Which partner plugin was available for Cowork at general availability?",
-    options: [
-      { text: "Adobe", correct: false, why: "Adobe is listed as coming soon, not available at GA." },
-      { text: "Miro", correct: true, why: "Miro is named among the partner plugins available at Cowork's GA, alongside Enosix, Harvey, LSEG, monday.com, Moodys, Morningstar, S&P Global Energy, and TeamsMaestro." },
-      { text: "Canva", correct: false, why: "Canva is listed as coming soon, not available at GA." },
-      { text: "Box", correct: false, why: "Box is listed as coming soon, not available at GA." }
-    ]
-  },
-  // L12 — Admin governance and Cost Management Dashboard
-  {
-    q: "What does the Cost Management Dashboard let admins do?",
-    options: [
-      { text: "Only view usage reports, with no way to set controls", correct: false, why: "The dashboard supports active controls, not just passive viewing." },
-      { text: "Allocate Copilot Credits, set spending policies/limits by group, and configure alerts or hard caps", correct: true, why: "This is the documented feature set for the Cost Management Dashboard in the M365 admin center." },
-      { text: "Approve each individual Cowork task one at a time", correct: false, why: "Per-task approval is the end user's job inside the approval model, not an admin dashboard function." },
-      { text: "Assign a specific AI model to each Teams channel", correct: false, why: "Model family restrictions are set tenant-wide in Copilot admin settings, not per Teams channel via this dashboard." }
-    ]
-  },
-  // L13 — Practitioner guidance on getting value
-  {
-    q: "How should the 'start with a few high-value repeatable workflows' guidance in this lesson be treated?",
-    options: [
-      { text: "As an official Microsoft licensing requirement", correct: false, why: "It's not a licensing or feature-availability claim at all — it's practical advice on adoption." },
-      { text: "As practitioner and community guidance, not an official Microsoft document", correct: true, why: "This lesson draws on community/practitioner sources for practical color, and is explicitly labeled as such rather than as official Microsoft documentation." },
-      { text: "As a mandatory admin configuration step", correct: false, why: "Nothing here configures the tenant — it's guidance on which workflows to try first." },
-      { text: "As part of Cowork's documented list of limitations", correct: false, why: "This is adoption advice, unrelated to the documented technical limitations covered in an earlier lesson." }
-    ]
-  }
+  { q: "You need research, a presentation, and a draft email produced as one coordinated assignment. Which experience is the best fit?", options: [
+    { text: "Copilot Cowork", correct: true, why: "Cowork is designed to plan and carry out multi-step work across supported tools." },
+    { text: "A single search query", correct: false, why: "A search query does not coordinate and execute a multi-step assignment." },
+    { text: "A formatting macro", correct: false, why: "A macro is too narrow for research, content creation, and communication." }
+  ] },
+  { q: "A licensed learner cannot see Cowork. What should they check first?", options: [
+    { text: "Whether organizational policy, permissions, region, configuration, or rollout affects access", correct: true, why: "A license is necessary but does not guarantee that every capability is enabled or available." },
+    { text: "Whether their document uses the right font", correct: false, why: "Document formatting does not control product access." },
+    { text: "Whether they selected a named model", correct: false, why: "Model selection occurs after access is available." }
+  ] },
+  { q: "Cowork proposes using work files to prepare a briefing. What should you verify?", options: [
+    { text: "That the cited sources are relevant and that you have permission to use them", correct: true, why: "Work IQ respects existing access, and the user remains responsible for source selection and review." },
+    { text: "That Cowork can bypass missing permissions", correct: false, why: "Cowork does not grant access the user does not already have." },
+    { text: "That every available file is included", correct: false, why: "Use only relevant, authorized sources." }
+  ] },
+  { q: "You want Cowork to create a weekly status package every Friday. What should you configure?", options: [
+    { text: "A scheduled recurring task with the scope, timing, and outputs defined", correct: true, why: "Scheduled work is appropriate for a predictable recurring assignment." },
+    { text: "A new one-time chat every Friday", correct: false, why: "That works manually but does not use Cowork's recurring-task capability." },
+    { text: "An event trigger based on any incoming message", correct: false, why: "A fixed weekly cadence calls for a schedule, not a broad event trigger." }
+  ] },
+  { q: "Cowork is about to send an external message. What is the safest action?", options: [
+    { text: "Review the recipients and content at the approval point before allowing the action", correct: true, why: "Approval gates give you a chance to inspect consequential actions before execution." },
+    { text: "Approve automatically because Cowork drafted it", correct: false, why: "The user remains accountable for consequential communications." },
+    { text: "Disable all progress updates", correct: false, why: "Progress visibility supports oversight." }
+  ] },
+  { q: "You are unsure which model is appropriate for a routine task. What is the best starting point?", options: [
+    { text: "Use Auto, then choose a specialized option only when the task warrants it", correct: true, why: "Behavior-based selection is more durable than memorizing a changing model roster." },
+    { text: "Always choose the model with the longest name", correct: false, why: "Names do not determine fit." },
+    { text: "Delay the task until the model list stops changing", correct: false, why: "Availability changes; use the options currently enabled in your tenant." }
+  ] },
+  { q: "A needed file exists only on your laptop. What should you do before delegating the task?", options: [
+    { text: "Move it to an approved supported cloud location and confirm access", correct: true, why: "Cowork cannot work with a file that remains local-only." },
+    { text: "Assume Cowork can browse the local drive", correct: false, why: "Local-only files are outside Cowork's supported access boundary." },
+    { text: "Remove its permissions", correct: false, why: "Removing access would prevent Cowork from using it." }
+  ] },
+  { q: "Your team repeats the same briefing workflow. What can improve consistency?", options: [
+    { text: "Use a reusable skill that captures the process and expected output", correct: true, why: "Skills package repeatable instructions and supporting resources." },
+    { text: "Rewrite the instructions from memory every time", correct: false, why: "That increases variation and omissions." },
+    { text: "Use a different format for every run", correct: false, why: "Unnecessary variation works against consistency." }
+  ] },
+  { q: "You are creating a custom skill. What should its instructions include?", options: [
+    { text: "A clear purpose, steps, boundaries, and expected output", correct: true, why: "Specific instructions help Cowork apply the skill consistently." },
+    { text: "Only the skill name", correct: false, why: "A name alone does not define the workflow." },
+    { text: "Unrelated files in case they become useful", correct: false, why: "Supporting material should be relevant and intentionally scoped." }
+  ] },
+  { q: "You updated a skill already shared with colleagues. What should you do?", options: [
+    { text: "Use the current sharing controls to distribute the updated version and ask recipients to verify it", correct: true, why: "Sharing controls and labels can change, but recipients should receive and validate the current version." },
+    { text: "Assume every copy updates without checking", correct: false, why: "Verify that the current version is available to recipients." },
+    { text: "Post the raw file publicly", correct: false, why: "Use approved organizational sharing." }
+  ] },
+  { q: "You need Cowork to retrieve information from an external service. Which concept describes that connection?", options: [
+    { text: "A connector; it may be delivered inside a plugin package", correct: true, why: "A connector links to a service or data source, while a plugin can package skills, connectors, or both." },
+    { text: "A model name", correct: false, why: "Models generate and reason; they are not service integrations." },
+    { text: "A local-only file", correct: false, why: "A local file is not an external-service connection." }
+  ] },
+  { q: "A plugin is available in the catalog but not in your Cowork experience. What is the likely explanation?", options: [
+    { text: "Catalog availability, admin approval, policy, region, or rollout may differ for your tenant", correct: true, why: "Catalog listings are not a guarantee of user access." },
+    { text: "Every catalog item is automatically enabled", correct: false, why: "Organizations control deployment and access." },
+    { text: "The plugin must be a built-in model", correct: false, why: "Plugins and models are different extensibility concepts." }
+  ] },
+  { q: "An incoming customer escalation should start a prepared response workflow. What should you create?", options: [
+    { text: "A narrowly scoped event-driven task with review before consequential actions", correct: true, why: "Event-driven work can respond to qualifying messages, while approvals preserve oversight." },
+    { text: "A trigger for every message with automatic external sending", correct: false, why: "That scope is too broad and removes necessary review." },
+    { text: "A fixed monthly schedule", correct: false, why: "The workflow should begin when the qualifying event occurs." }
+  ] },
+  { q: "What is the best first Cowork workflow for a team?", options: [
+    { text: "A repeatable, valuable task with clear inputs, outputs, and a review point", correct: true, why: "A bounded workflow is easier to test, improve, and govern." },
+    { text: "Every process the team performs at once", correct: false, why: "Starting too broadly makes validation and adoption harder." },
+    { text: "A task with no success criteria", correct: false, why: "Clear expectations are essential for evaluating results." }
+  ] }
 ];
 
 const SECTIONS = [
@@ -1146,13 +1076,18 @@ const LESSONS = [
         </ul>
       </div>
 
+      <div class="callout note">
+        <div class="callout-label">Course assumptions · Last reviewed July 30, 2026</div>
+        This course assumes an eligible enterprise Microsoft 365 subscription, a Microsoft 365 Copilot license, and organizational access to Cowork. Licensing does not guarantee availability: tenant policy, permissions, geography, preview enrollment, administrator configuration, and phased rollout can affect what you see. Public Preview capabilities are clearly labeled. Recheck volatile features against current Microsoft documentation and your tenant.
+      </div>
+
       <h2>Chat answers. Cowork does the work.</h2>
       <p>Copilot Chat is built to respond — you ask, it answers, drafts, or summarizes. Copilot Cowork is built to act. It plans a sequence of steps, executes them using the tools and skills it has access to, and returns a completed piece of work rather than a suggestion for you to execute yourself.</p>
       <p>Microsoft's Cowork admin documentation is explicit that Cowork "is now an agentic system (different from an agent)." That distinction matters for how you introduce Cowork to a team: it isn't a scoped Q&A assistant like a declarative agent, and it isn't a chat window. It's a system that runs a task end-to-end, in a secure cloud-hosted environment, so a task keeps running even after you close your laptop.</p>
 
       <div class="prompt-card">
         <div class="prompt-label">Chat vs. Cowork, side by side</div>
-        Chat: "Summarize this document." Cowork: "Research our top three competitors' pricing, build a one-page comparison, and <span class="annot" title="Cowork plans the research, drafting, and posting steps, then executes them — pausing for your approval before the post goes out.">post it to the team channel</span>."
+        Chat: "Summarize this document." Cowork: "Research our top three competitors' offerings, build a one-page comparison, and <span class="annot" title="Cowork plans the research, drafting, and posting steps, then executes them — pausing for your approval before the post goes out.">post it to the team channel</span>."
         <div class="legend">The Cowork prompt describes an outcome across several steps and tools — not a single answer.</div>
       </div>
 
@@ -1179,41 +1114,33 @@ const LESSONS = [
     `
   },
 
-  // ── L1 — GA, licensing, and Copilot Credits ──
+  // ── L1 — Access and consumption ──
   {
-    title: "GA, Licensing, and Copilot Credits",
+    title: "Enterprise Access and Copilot Credits",
     time: "8 minutes",
     objectives: [
-      "State the correct general-availability date for Copilot Cowork worldwide",
-      "Explain the two-part cost structure — license plus Copilot Credits",
-      "Identify the four factors that drive a task's Copilot Credit cost"
+      "Explain the enterprise access assumptions used in this course",
+      "Recognize why licensing does not guarantee feature availability",
+      "Identify the factors that influence Copilot Credit consumption"
     ],
     body: `
       <div class="takeaways">
         <h4>Key takeaways</h4>
         <ul>
-          <li><strong>Copilot Cowork reached general availability worldwide on June 16, 2026.</strong> Billing for Cowork began the same day.</li>
-          <li><strong>Using Cowork costs two things:</strong> a Microsoft 365 Copilot license ($30/user/month) and separately billed, usage-based Copilot Credits — off by default until an admin turns on usage-based billing.</li>
-          <li><strong>Each task's credit cost comes from four factors:</strong> the model used, the context retrieved, the tool calls made, and the runtime.</li>
+          <li><strong>This course assumes enterprise licensing</strong> and that your organization has enabled Cowork and its required consumption capacity.</li>
+          <li><strong>A license does not guarantee access.</strong> Policy, permissions, geography, preview enrollment, administrator configuration, and phased rollout can all affect availability.</li>
+          <li><strong>Task consumption varies</strong> with the model, retrieved context, tool use, and runtime.</li>
         </ul>
       </div>
 
-      <h2>When Cowork actually went GA</h2>
-      <p>Copilot Cowork is generally available worldwide as of June 16, 2026. That date comes directly from the Microsoft 365 Blog's general-availability announcement, and it's confirmed independently by the Microsoft Learn "What's new in Copilot Cowork" page (which headers the June 2026 entry "general availability") and by the Learn Cowork admin-governance page.</p>
-
-      <div class="callout warn">
-        <div class="callout-label">Watch out</div>
-        Earlier material described Cowork as "in preview, GA expected September 2026." That estimate has been superseded. Three official Microsoft sources — the Microsoft 365 Blog GA post, the Learn "What's new in Copilot Cowork" page, and the Learn Cowork admin-governance page — all confirm Cowork reached general availability worldwide on June 16, 2026. The September figure appears to have been a different feature's "GA expected" estimate, picked up and misapplied to Cowork itself. When a release-timing claim matters, check Microsoft's own GA announcements and release notes directly, rather than relying on an earlier roadmap estimate or third-party recap.
-      </div>
-
-      <h3>What Cowork costs</h3>
-      <p>Cowork requires a Microsoft 365 Copilot user subscription license at $30 per user per month, plus usage-based billing through Copilot Credits, billed separately. Copilot Credits are priced at $0.01 per credit on a pay-as-you-go basis, or through a prepaid commitment plan for a discount. An admin has to enable usage-based billing before Cowork can be used — it's off by default.</p>
+      <h2>Access depends on more than licensing</h2>
+      <p>Your organization must provide the required enterprise license, enable Cowork, and configure any required consumption capacity. Even then, the experience can differ by tenant, region, policy, permission, client, and rollout stage.</p>
 
       <div class="steps">
         <ol>
-          <li>Each task's Copilot Credit cost is calculated from the model used, the context retrieved, the tool calls made, and the task's runtime.</li>
-          <li>Cowork's Frontier preview program ran March 30 to June 16, 2026.</li>
-          <li>Tenants with at least one Frontier user during that window get a grace period — they aren't billed until July 1, 2026.</li>
+          <li>Confirm Cowork appears in a supported Microsoft 365 Copilot experience.</li>
+          <li>If it does not appear, check organizational policy, permissions, geography, configuration, and rollout status.</li>
+          <li>When planning work, remember that model use, context retrieval, tool calls, and runtime influence Copilot Credit consumption.</li>
         </ol>
       </div>
 
@@ -1267,13 +1194,13 @@ const LESSONS = [
         <h4>Key takeaways</h4>
         <ul>
           <li><strong>Cowork works across five surfaces:</strong> the browser, the Microsoft 365 Copilot desktop app, mobile, Outlook, and Teams.</li>
-          <li><strong>You open Cowork with the Cowork toggle</strong> next to Chat in the Microsoft 365 Copilot app — it rolled out in June 2026.</li>
+          <li><strong>You open Cowork from the available Cowork entry point</strong> in your Microsoft 365 Copilot experience.</li>
           <li><strong>Feature availability can vary by platform</strong>, and voice input depends on your browser or device.</li>
         </ul>
       </div>
 
       <h2>Cowork's surfaces</h2>
-      <p>Cowork is available in the browser at m365.cloud.microsoft, in the Microsoft 365 Copilot desktop app for Windows and Mac, in the mobile app for iOS and Android (added May 2026), and inside Outlook and Teams.</p>
+      <p>Cowork can be available in the browser, Microsoft 365 Copilot desktop and mobile experiences, Outlook, and Teams. The exact surfaces enabled for you can vary.</p>
 
       <span class="chip-row">
         <span class="chip">Browser (m365.cloud.microsoft)</span>
@@ -1285,7 +1212,7 @@ const LESSONS = [
 
       <div class="callout note">
         <div class="callout-label">Note</div>
-        Open Cowork with the Cowork toggle next to Chat in the Microsoft 365 Copilot app. The toggle rolled out in June 2026. Feature availability may vary by platform, and voice input depends on your browser or device.
+        Use the Cowork entry point available in your Microsoft 365 Copilot experience. Labels and placement may change; availability can vary by client, tenant, policy, region, and rollout.
       </div>
 
       <div class="quiz" data-quiz-idx="3"></div>
@@ -1344,8 +1271,8 @@ const LESSONS = [
     time: "8 minutes",
     objectives: [
       "Explain why Auto is the recommended default model setting",
-      "List the current model lineup and what each model is suited for",
-      "Note where admins can restrict model families"
+      "Choose a model by task behavior rather than memorizing names",
+      "Recognize that model availability varies by tenant"
     ],
     video: {
       id: "4vkPv9lX64k",
@@ -1359,42 +1286,36 @@ const LESSONS = [
         <h4>Key takeaways</h4>
         <ul>
           <li><strong>Auto is the default</strong>, and Microsoft's own guidance is to leave the picker on Auto most of the time so Cowork can choose the right model for the task.</li>
-          <li><strong>The current lineup (as of July 2026)</strong> includes Claude Sonnet 5, Claude Opus 4.8, GPT 5.5 (Frontier), Claude Fable 5 (Preview), and a Sonnet + Opus Advisor combination.</li>
-          <li><strong>Admins can turn off the entire Anthropic model family</strong> tenant-wide, and the model list itself changes frequently.</li>
+          <li><strong>Choose by behavior, not by model name:</strong> consider speed, reasoning depth, task complexity, and organizational requirements.</li>
+          <li><strong>The model picker in your tenant is the source of truth.</strong> Available choices can vary by policy, geography, product surface, and rollout.</li>
         </ul>
       </div>
 
       <h2>Auto is the recommended default</h2>
       <p>Microsoft Learn's "Choose a model for Copilot Cowork" page is direct about this: most of the time, leave the picker on Auto so Cowork can choose the model for your task. Manual model selection is available, but it's the exception, not the recommended workflow.</p>
 
-      <h3>The current lineup</h3>
+      <h3>Choose by task behavior</h3>
       <div class="compare-grid">
         <div class="compare-card featured">
-          <h4>Claude Sonnet 5</h4>
-          <p>The efficient, everyday model. Replaced Sonnet 4.6 in the current documentation.</p>
-          <div class="best-for">Best for: routine, everyday tasks</div>
+          <h4>Auto</h4>
+          <p>Lets Cowork route the assignment to an appropriate available model.</p>
+          <div class="best-for">Best for: the default starting point</div>
         </div>
         <div class="compare-card">
-          <h4>Claude Opus 4.8</h4>
-          <p>Positioned for complex or high-stakes work.</p>
-          <div class="best-for">Best for: complex, high-stakes tasks</div>
+          <h4>Fast response</h4>
+          <p>Favor speed for routine drafting, rewriting, or straightforward work.</p>
+          <div class="best-for">Best for: simple, time-sensitive tasks</div>
         </div>
         <div class="compare-card">
-          <h4>GPT 5.5 (Frontier)</h4>
-          <p>Hosted in Azure AI Foundry.</p>
-          <div class="best-for">Best for: org-approved Frontier scenarios</div>
+          <h4>Deeper reasoning</h4>
+          <p>Favor more extensive analysis when the task is complex or ambiguous.</p>
+          <div class="best-for">Best for: complex analysis and planning</div>
         </div>
-      </div>
-      <p>Two additional options round out the lineup: <strong>Claude Fable 5 (Preview)</strong>, which is off by default and must be admin-enabled, and a <strong>Sonnet + Opus Advisor</strong> combination, where Sonnet handles the main turn and Opus reviews it.</p>
-
-      <div class="callout warn">
-        <div class="callout-label">Watch out</div>
-        Claude Fable 5 (Preview) requires data retention — prompts and responses are retained by the model provider, flagged with an in-product banner. It's disabled by default and must be turned on by an admin.
       </div>
 
       <div class="callout note">
         <div class="callout-label">Note</div>
-        Anthropic's Claude models are used in Cowork as a subprocessor. Admins can turn off the entire Anthropic model family tenant-wide in the M365 admin center. No data leaves Microsoft for Microsoft-hosted models. Model names here are current as of July 2026 — this list changes frequently, so check the Learn "Choose a model for Copilot Cowork" page for the latest lineup.
+        Named models change frequently and may be restricted by your organization. Use the options currently shown in your tenant, and follow any in-product data-handling notice before selecting a provider-specific model.
       </div>
 
       <div class="quiz" data-quiz-idx="5"></div>
@@ -1407,7 +1328,7 @@ const LESSONS = [
     time: "6 minutes",
     objectives: [
       "List Cowork's documented limitations",
-      "Explain why Cowork's outputs should be treated as drafts",
+      "Distinguish technical limitations from human-review guidance",
       "Identify what Cowork cannot do with encrypted or local files"
     ],
     body: `
@@ -1415,8 +1336,8 @@ const LESSONS = [
         <h4>Key takeaways</h4>
         <ul>
           <li><strong>Cowork can't touch local-only files</strong>, and it can't delete files or folders in OneDrive or SharePoint.</li>
-          <li><strong>It can't read encrypted or rights-protected files</strong>, even if you have access, and uploads are capped at 200 MB per file.</li>
-          <li><strong>Custom skills and plugins aren't validated by Microsoft</strong> — review their outputs carefully, and treat every Cowork-generated document or email as a draft.</li>
+          <li><strong>It can't read encrypted files</strong>, and upload restrictions can apply.</li>
+          <li><strong>Human review is a governance practice, not a technical limitation.</strong> Review consequential output before distribution or execution.</li>
         </ul>
       </div>
 
@@ -1425,29 +1346,29 @@ const LESSONS = [
 
       <div class="callout danger">
         <div class="callout-label">Cannot do</div>
-        Cowork can't delete files or folders in OneDrive or SharePoint. It also can't read encrypted or rights-protected files, even when the signed-in user has access to them.
+        Cowork can't delete files or folders in OneDrive or SharePoint. It also can't read encrypted files.
       </div>
 
       <div class="callout warn">
         <div class="callout-label">Watch out</div>
-        Cowork can't access or edit files stored only on the local device — it works with OneDrive, SharePoint, and other connected cloud services. File uploads are limited to 200 MB per file. Cowork is bounded by whatever permissions the user already has; it doesn't grant new access.
+        Cowork can't access or edit files stored only on the local device — it works with supported cloud services. Upload restrictions can change. Cowork is bounded by the user's existing permissions; it doesn't grant new access.
       </div>
 
       <div class="callout tip">
-        <div class="callout-label">Tip</div>
-        Treat AI-generated documents and emails as drafts, not finished output. Custom skills and plugins aren't validated by Microsoft, so review their outputs carefully before you rely on them. Cowork may also misinterpret ambiguous instructions — the more specific the task, the more reliable the result.
+        <div class="callout-label">Recommended human-review practice</div>
+        Review consequential documents, messages, decisions, and actions before distribution or execution—especially when work involves external communication, regulated information, legal or financial interpretation, or user-created skills and plugins. This is governance guidance, not a statement that Cowork can only produce drafts.
       </div>
 
       <div class="quiz" data-quiz-idx="6"></div>
     `
   },
 
-  // ── L7 — The 13 built-in skills ──
+  // ── L7 — Built-in skills ──
   {
-    title: "The 13 Built-in Skills",
+    title: "Built-in Skills",
     time: "6 minutes",
     objectives: [
-      "List the 13 skills Cowork ships with by default",
+      "Recognize the kinds of built-in skills Cowork can use",
       "Explain what a skill teaches Cowork to do"
     ],
     body: `
@@ -1455,12 +1376,12 @@ const LESSONS = [
         <h4>Key takeaways</h4>
         <ul>
           <li><strong>Skills are reusable instructions</strong> that teach Cowork how to complete a task or workflow consistently, using your structure, tone, and process.</li>
-          <li><strong>Cowork ships with 13 built-in skills</strong> covering the core Microsoft 365 apps and common work patterns.</li>
+          <li><strong>Cowork includes a growing set of built-in skills</strong> covering Microsoft 365 content and common work patterns.</li>
         </ul>
       </div>
 
       <h2>What's built in</h2>
-      <p>Cowork's 13 built-in skills give it a working knowledge of the core Microsoft 365 apps and several everyday work patterns, without any setup on your part:</p>
+      <p>Cowork's built-in skills support core Microsoft 365 apps and everyday work patterns. The exact catalog can change, so treat these as illustrative categories rather than a fixed count:</p>
 
       <span class="chip-row">
         <span class="chip">Word</span>
@@ -1489,13 +1410,13 @@ const LESSONS = [
     objectives: [
       "List the three paths for creating a custom skill",
       "Describe the SKILL.md structure and where it lives",
-      "State the size and count limits for a custom skill"
+      "Write clear, bounded instructions for a custom skill"
     ],
     body: `
       <div class="takeaways">
         <h4>Key takeaways</h4>
         <ul>
-          <li><strong>Users can create up to 50 custom skills</strong>, through three different paths.</li>
+          <li><strong>Users can create custom skills through several supported paths.</strong></li>
           <li><strong>A manually authored skill is a SKILL.md file</strong> — YAML frontmatter plus Markdown instructions — placed in a specific OneDrive folder.</li>
           <li><strong>Custom skills aren't validated by Microsoft</strong>, so review their outputs carefully.</li>
         </ul>
@@ -1529,7 +1450,7 @@ const LESSONS = [
 
       <div class="callout note">
         <div class="callout-label">Note</div>
-        Limits per custom skill: each SKILL.md file can be up to 1 MB, a skill can include up to 20 companion files, and the total size of a skill is capped at 10 MB. Up to 50 custom skills are allowed per user.
+        Limits for skill files and companion resources can change. Check the current in-product guidance before packaging a large skill, and include only the files needed for the workflow.
       </div>
 
       <div class="callout warn">
@@ -1587,25 +1508,25 @@ const LESSONS = [
     time: "7 minutes",
     objectives: [
       "Explain what a plugin adds to Cowork",
-      "List Microsoft's own plugins available at launch",
-      "Describe how admins control plugin deployment"
+      "Distinguish a plugin from a connector",
+      "Recognize how organizational controls affect availability"
     ],
     body: `
       <div class="takeaways">
         <h4>Key takeaways</h4>
         <ul>
-          <li><strong>The Microsoft 365 App Store lists both Microsoft and partner plugins</strong> for Cowork at launch.</li>
-          <li><strong>Microsoft's own plugins include</strong> Dynamics 365 Customer Service, Dynamics 365 Sales, Dynamics 365 ERP, and Fabric IQ.</li>
-          <li><strong>Admins deploy and restrict plugins</strong> in the Microsoft 365 admin center; admin-deployed plugins can't be removed by users.</li>
+          <li><strong>A plugin is an installable package</strong> that may add skills, connectors, or both.</li>
+          <li><strong>A connector links Cowork to an external service or data source.</strong> The terms are related but not interchangeable.</li>
+          <li><strong>Availability is tenant-dependent.</strong> Catalog listings, deployment, permissions, policy, geography, and rollout affect what users can access.</li>
         </ul>
       </div>
 
       <h2>Extending Cowork with plugins</h2>
-      <p>Plugins connect Cowork to systems beyond core Microsoft 365 — line-of-business apps, CRM systems, and partner tools. The Microsoft 365 App Store lists Microsoft and partner plugins for Cowork at launch, including Microsoft's own plugins (Dynamics 365 Customer Service, Dynamics 365 Sales, Dynamics 365 ERP, and Fabric IQ) and partner connectors such as Jira, Salesforce, ServiceNow, SAP ERP, Workday HCM, and Zendesk.</p>
+      <p>Plugins extend Cowork with packaged business functionality. A plugin may contain reusable skills, connectors, or both. Connectors provide the integration used to retrieve information from or act on an external service. Because the catalog changes frequently, use your organization's live Microsoft 365 Copilot App Store as the source of truth.</p>
 
       <div class="callout note">
         <div class="callout-label">Note</div>
-        Admins deploy and restrict plugins from the Microsoft 365 admin center. Plugins that an admin deploys can't be removed by individual users.
+        Your organization controls which plugins and connectors are available. Before using one, confirm its permissions, data access, intended actions, and any approval requirements.
       </div>
 
       <div class="quiz" data-quiz-idx="10"></div>
@@ -1614,36 +1535,31 @@ const LESSONS = [
 
   // ── L11 — Partner plugins at GA + MCP apps ──
   {
-    title: "Partner Plugins at GA and MCP Apps",
+    title: "Choosing Extensions and MCP Apps",
     time: "6 minutes",
     objectives: [
-      "List partner plugins available at Cowork's general availability",
+      "Evaluate whether an extension fits a task",
       "Explain what an MCP app adds to Cowork",
-      "Identify partners whose integrations are coming soon"
+      "Verify extension availability and permissions in your tenant"
     ],
     body: `
       <div class="takeaways">
         <h4>Key takeaways</h4>
         <ul>
-          <li><strong>Partner plugins available at GA</strong> include Enosix, Harvey, LSEG, Miro, monday.com, Moodys, Morningstar, S&P Global Energy, and TeamsMaestro.</li>
-          <li><strong>Databricks is available via sideloading</strong>; Adobe, Atlassian, Box, and Canva are coming soon.</li>
+          <li><strong>The plugin catalog is dynamic.</strong> Do not rely on a static partner roster.</li>
+          <li><strong>Evaluate permissions and data handling</strong> before using an extension for organizational work.</li>
           <li><strong>Cowork also supports MCP apps</strong> — interactive UI widgets served from an MCP server.</li>
         </ul>
       </div>
 
-      <h2>The partner plugin roster at launch</h2>
+      <h2>Choose extensions by capability</h2>
       <span class="chip-row">
-        <span class="chip">Enosix</span>
-        <span class="chip">Harvey</span>
-        <span class="chip">LSEG</span>
-        <span class="chip">Miro</span>
-        <span class="chip">monday.com</span>
-        <span class="chip">Moodys</span>
-        <span class="chip">Morningstar</span>
-        <span class="chip">S&P Global Energy</span>
-        <span class="chip">TeamsMaestro</span>
+        <span class="chip">Knowledge retrieval</span>
+        <span class="chip">Business actions</span>
+        <span class="chip">Reusable workflows</span>
+        <span class="chip">Interactive output</span>
       </span>
-      <p>Databricks is available through sideloading rather than the standard App Store listing. Adobe, Atlassian, Box, and Canva are listed as coming soon.</p>
+      <p>Start with the business outcome, then look for an approved extension that provides the needed skill or connector. Confirm that the extension is enabled for your tenant and that its requested access is appropriate.</p>
 
       <div class="callout note">
         <div class="callout-label">Note</div>
@@ -1654,32 +1570,53 @@ const LESSONS = [
     `
   },
 
-  // ── L12 — Admin governance and the Cost Management Dashboard ──
+  // ── L12 — Scheduled and event-driven work ──
   {
-    title: "Admin Governance and the Cost Management Dashboard",
+    title: "Scheduled and Event-Driven Work",
     time: "7 minutes",
     objectives: [
-      "Explain what changed in how Cowork is managed after GA",
-      "List what the Cost Management Dashboard lets admins control",
-      "Describe the grace-period billing timeline for Frontier tenants"
+      "Distinguish one-time, scheduled, and event-driven tasks",
+      "Scope a trigger so it starts only the intended workflow",
+      "Apply review and approval controls to automated work"
     ],
     body: `
       <div class="takeaways">
         <h4>Key takeaways</h4>
         <ul>
-          <li><strong>Post-GA, Cowork is no longer managed</strong> in the Microsoft 365 admin center by selecting All Agents &gt; Cowork — governance now runs through Cowork's own admin pages.</li>
-          <li><strong>The Cost Management Dashboard</strong> lets admins allocate Copilot Credits, set spending policies and limits by group, choose prepaid versus pay-as-you-go, and set alerts or hard caps.</li>
-          <li><strong>Frontier tenants got a grace period</strong> — billing didn't start until July 1, 2026 for tenants with at least one Frontier user during the March 30–June 16, 2026 preview.</li>
+          <li><strong>Use a one-time task</strong> for work that should run once.</li>
+          <li><strong>Use a scheduled task</strong> for a predictable recurring assignment, such as a weekly status package.</li>
+          <li><strong>Use an event-driven task</strong> when a qualifying email or Teams message should start the workflow.</li>
         </ul>
       </div>
 
-      <h2>Governing Cowork at the tenant level</h2>
-      <p>With GA, Cowork's admin management moved: it's "no longer managed in the Microsoft 365 admin center by selecting All Agents &gt; Cowork," reflecting its status as an agentic system distinct from a single agent.</p>
-      <p>A Cost Management Dashboard in the M365 admin center gives admins direct control over Cowork spending: allocating Copilot Credits, setting spending policies and limits by group, choosing between prepaid and pay-as-you-go billing, and setting alerts or hard caps.</p>
+      <h2>Choose the right way to start the work</h2>
+      <div class="compare-grid">
+        <div class="compare-card">
+          <h4>One-time</h4>
+          <p>Run a defined assignment once, now or when you start it.</p>
+          <div class="best-for">Best for: a specific deliverable</div>
+        </div>
+        <div class="compare-card featured">
+          <h4>Scheduled</h4>
+          <p>Run a recurring assignment on a predictable cadence.</p>
+          <div class="best-for">Best for: weekly or periodic work</div>
+        </div>
+        <div class="compare-card">
+          <h4>Event-driven</h4>
+          <p>Start when a matching email or Teams message arrives.</p>
+          <div class="best-for">Best for: qualifying business events</div>
+        </div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-label">Event-driven example</div>
+        "When an email from the support queue is marked high priority and mentions a service outage, summarize the issue, identify the affected customer, draft an internal escalation, and <span class="annot" title="Keep consequential communication behind an explicit review point.">pause for my review before posting</span>."
+        <div class="legend">Use a narrow trigger, clear outputs, and an approval point.</div>
+      </div>
 
       <div class="callout tip">
-        <div class="callout-label">Tip</div>
-        Frontier program tenants — those with at least one user in the Frontier preview between March 30 and June 16, 2026 — get a grace period and aren't billed until July 1, 2026.
+        <div class="callout-label">Governance</div>
+        Review the proposed schedule or trigger before activation. Keep triggers narrow, define what happens when information is missing, and require approval before consequential external actions.
       </div>
 
       <div class="quiz" data-quiz-idx="12"></div>
@@ -1734,106 +1671,12 @@ const LESSONS = [
   }
 ];
 
-const FINAL_QUIZ = [
-  // L0
-  { q: "What is Copilot Cowork, in Microsoft's own framing?", options: [
-    { text: "A chatbot that only answers questions", correct: false },
-    { text: "An agentic system that plans, executes, and delivers completed work on your behalf", correct: true },
-    { text: "A replacement for Microsoft Teams", correct: false },
-    { text: "A spreadsheet automation macro", correct: false }
-  ] },
-  // L1 — dedicated GA-date question
-  { q: "When did Copilot Cowork become generally available worldwide?", options: [
-    { text: "September 2026", correct: false },
-    { text: "June 16, 2026", correct: true },
-    { text: "March 30, 2026", correct: false },
-    { text: "It has not yet reached general availability", correct: false }
-  ] },
-  // L2
-  { q: "Work IQ's foundation models come from which providers, per Microsoft documentation?", options: [
-    { text: "OpenAI and Anthropic", correct: true },
-    { text: "Google and Meta", correct: false },
-    { text: "Only Microsoft's own models", correct: false },
-    { text: "Amazon and IBM", correct: false }
-  ] },
-  // L3
-  { q: "Which of these is NOT a documented surface where Cowork runs?", options: [
-    { text: "Browser (m365.cloud.microsoft)", correct: false },
-    { text: "Outlook and Teams", correct: false },
-    { text: "The Microsoft 365 Copilot desktop app", correct: false },
-    { text: "A local file explorer app on the device", correct: true }
-  ] },
-  // L4
-  { q: "In Cowork's approval model, what does a hard pause do?", options: [
-    { text: "Finishes the current step, then stops", correct: false },
-    { text: "Stops the task immediately, mid-step", correct: true },
-    { text: "Automatically approves all future prompts", correct: false },
-    { text: "Restarts the task from the beginning", correct: false }
-  ] },
-  // L5
-  { q: "What is the recommended default model setting in Copilot Cowork?", options: [
-    { text: "GPT 5.5", correct: false },
-    { text: "Claude Opus 4.8", correct: false },
-    { text: "Auto", correct: true },
-    { text: "Claude Fable 5", correct: false }
-  ] },
-  // L6
-  { q: "Which statement about Cowork's limitations is accurate?", options: [
-    { text: "Cowork can delete files in SharePoint if instructed to", correct: false },
-    { text: "Cowork can read rights-protected files if the signed-in user has access", correct: false },
-    { text: "Cowork cannot access files stored only on the local device", correct: true },
-    { text: "There is no file upload size limit", correct: false }
-  ] },
-  // L7
-  { q: "How many built-in skills ship with Copilot Cowork?", options: [
-    { text: "5", correct: false },
-    { text: "13", correct: true },
-    { text: "25", correct: false },
-    { text: "50", correct: false }
-  ] },
-  // L8
-  { q: "What is the maximum number of custom skills a user can create in Cowork?", options: [
-    { text: "10", correct: false },
-    { text: "25", correct: false },
-    { text: "50", correct: true },
-    { text: "Unlimited", correct: false }
-  ] },
-  // L9
-  { q: "Which file formats can be used to upload a custom skill?", options: [
-    { text: ".md, .zip, or .skill", correct: true },
-    { text: ".exe only", correct: false },
-    { text: ".pdf only", correct: false },
-    { text: ".docx only", correct: false }
-  ] },
-  // L10
-  { q: "Which of the following is one of Microsoft's own plugins available for Cowork?", options: [
-    { text: "Fabric IQ", correct: true },
-    { text: "Jira", correct: false },
-    { text: "Workday HCM", correct: false },
-    { text: "ServiceNow", correct: false }
-  ] },
-  // L11
-  { q: "What capability lets Cowork show interactive UI widgets served from an external server?", options: [
-    { text: "Sensitivity labels", correct: false },
-    { text: "MCP apps", correct: true },
-    { text: "The Adaptive Cards built-in skill", correct: false },
-    { text: "Work IQ", correct: false }
-  ] },
-  // L12
-  { q: "What can admins configure in the Cost Management Dashboard?", options: [
-    { text: "Individual employee performance reviews", correct: false },
-    { text: "Spending policies and limits by group, plus alerts or hard caps on Copilot Credits", correct: true },
-    { text: "Which fonts appear in Word documents", correct: false },
-    { text: "Teams meeting recording settings", correct: false }
-  ] },
-  // L13
-  { q: "How should the practitioner guidance on starting Cowork workflows be treated?", options: [
-    { text: "As an official Microsoft support document", correct: false },
-    { text: "As community/practitioner guidance offered for practical color, not an official availability or licensing claim", correct: true },
-    { text: "As a required admin configuration step", correct: false },
-    { text: "As part of the Cowork Responsible AI FAQ", correct: false }
-  ] }
-];
+// The final assessment reuses the scenario-based lesson checks so answers
+// always remain consistent with the content learners just completed.
+const FINAL_QUIZ = INLINE_QUIZZES.map(({ q, options }) => ({
+  q,
+  options: options.map(({ text, correct }) => ({ text, correct }))
+}));
 
 // ============================================================
 // RENDERING + STATE

@@ -893,39 +893,39 @@ const COURSE_TITLE = "Introduction to M365 Copilot Chat";
 
 const INLINE_QUIZZES = [
   {
-    q: "Which statement correctly describes what's included with every eligible Microsoft 365 license, with no add-on required?",
+    q: "You need a quick draft based on public information and a file you can attach. What should you use?",
     options: [
-      { text: "AI chat grounded on the web, with standard file upload, image generation, and access to the latest models", correct: true, why: "This is exactly what Copilot Chat includes at no extra cost — web grounding plus standard file upload and image generation." },
-      { text: "AI chat grounded on your work data — files, emails, and chats", correct: false, why: "Work-data grounding is part of the paid Microsoft 365 Copilot add-on, not the included tier." },
-      { text: "Reasoning agents like Researcher and Analyst", correct: false, why: "Reasoning agents come with the $30/user/month add-on." },
-      { text: "Priority access to file upload and image generation", correct: false, why: "Priority access is an add-on benefit — the base capability is included, but the priority lane isn't." }
+      { text: "Copilot Chat with web grounding and the file attached", correct: true, why: "Copilot Chat can combine web information with content you deliberately attach." },
+      { text: "A Notebook with no references", correct: false, why: "A Notebook is most useful when you are curating a reusable collection of references." },
+      { text: "A Page with no source content", correct: false, why: "A Page is an editable canvas, not the best starting point for this request." },
+      { text: "A Teams chat summary", correct: false, why: "A Teams summary is for conversation content, not a general drafting task." }
     ]
   },
   {
-    q: "A colleague's account shows the in-product label \"M365 Copilot (Basic)\". What does that tell you?",
+    q: "A licensed colleague cannot see a feature shown in this course. What should they check first?",
     options: [
-      { text: "They have the $30/month add-on with priority access", correct: false, why: "That description matches M365 Copilot (Premium), not Basic." },
-      { text: "They don't have the paid add-on, but they do have standard in-app Copilot access in apps like Word, Excel, and PowerPoint", correct: true, why: "M365 Copilot (Basic) means no add-on, but standard in-app Copilot access is included." },
-      { text: "They have no in-app Copilot access at all", correct: false, why: "That describes Copilot Chat (Basic), which lacks in-app access entirely." },
-      { text: "They can't use Copilot Chat", correct: false, why: "All three labels include Copilot Chat — the difference is in-app access and grounding, not chat access itself." }
+      { text: "Tenant policy, permissions, region, preview enrollment, admin settings, and rollout status", correct: true, why: "Licensing is necessary for some features, but it does not guarantee that every capability is enabled or available." },
+      { text: "Whether their browser zoom is 100%", correct: false, why: "Display settings do not determine feature entitlement or rollout." },
+      { text: "Whether a coworker can see it", correct: false, why: "Availability can differ by user, policy, client, and rollout." },
+      { text: "Whether they have created a Copilot Page", correct: false, why: "Page creation does not unlock unrelated features." }
     ]
   },
   {
-    q: "Which best matches the progression Microsoft describes, from a simple conversation to fully delegated execution?",
+    q: "You repeatedly need answers that follow the same instructions and use an approved knowledge scope. Which experience is the best fit?",
     options: [
-      { text: "Cowork → Agents → Chat", correct: false, why: "This reverses the order — Cowork is the most autonomous, not the starting point." },
-      { text: "Chat → Agents → Cowork", correct: true, why: "Chat answers and drafts; agents are scoped specialists; Cowork carries out multi-step work end to end." },
-      { text: "Agents → Chat → Cowork", correct: false, why: "Chat is the starting point in Microsoft's framing, not the middle step." },
-      { text: "Chat → Cowork → Agents", correct: false, why: "Agents sit between Chat and Cowork in Microsoft's own framing, not after Cowork." }
+      { text: "A one-time Copilot Chat prompt", correct: false, why: "A one-time prompt does not package reusable instructions and knowledge for colleagues." },
+      { text: "A custom agent", correct: true, why: "An agent packages reusable instructions and a defined knowledge scope for repeated use." },
+      { text: "A blank Page", correct: false, why: "A Page is an editable canvas, not a reusable specialist." },
+      { text: "A Teams recap", correct: false, why: "A recap summarizes a conversation rather than applying reusable agent instructions." }
     ]
   },
   {
-    q: "According to Microsoft's official prompting guidance, what does a prompt actually require at minimum?",
+    q: "Which prompt is most likely to produce a useful first draft?",
     options: [
-      { text: "All four parts — goal, context, expectations, and source — every time", correct: false, why: "The guidance treats context, expectations, and source as optional refinements, not requirements." },
-      { text: "A clear goal", correct: true, why: "Microsoft's guidance states plainly that all that's required is a clear goal — everything else sharpens the response." },
-      { text: "A source file attached", correct: false, why: "A source is optional and, when used, should come last in the prompt — it isn't a minimum requirement." },
-      { text: "A persona instruction, like 'act as a project manager'", correct: false, why: "Persona framing isn't part of Microsoft's documented minimum requirement." }
+      { text: "\"Write something about the project.\"", correct: false, why: "The goal, audience, and expected content are too vague." },
+      { text: "\"Draft a concise project update for executives using the attached notes; include decisions, risks, and next steps.\"", correct: true, why: "It gives Copilot a clear goal, audience, expectations, and source." },
+      { text: "\"Use this.\"", correct: false, why: "It does not explain the goal or expected output." },
+      { text: "\"Project update.\"", correct: false, why: "A label alone does not clearly describe the desired output." }
     ]
   },
   {
@@ -938,21 +938,21 @@ const INLINE_QUIZZES = [
     ]
   },
   {
-    q: "What's the real difference in file upload and image generation between an included Copilot Chat license and the paid add-on?",
+    q: "You want Copilot to work from a document that is not otherwise in the current context. What should you do?",
     options: [
-      { text: "Only add-on users can upload files or generate images at all", correct: false, why: "Standard file upload and image generation are included for every Copilot Chat user, not gated behind the add-on." },
-      { text: "Both get the same standard capability, but add-on-licensed users get priority access", correct: true, why: "The add-on doesn't unlock the capability — it gives licensed users priority access when demand is high." },
-      { text: "Only Copilot Chat (Basic) users can generate images", correct: false, why: "Image generation is available across the tiers, not restricted to Basic." },
-      { text: "File upload only works on mobile devices", correct: false, why: "File upload and image generation both work across the surfaces where Copilot Chat appears, not just mobile." }
+      { text: "Assume Copilot can find it without identifying the document", correct: false, why: "Copilot needs the intended source to be available in its current context." },
+      { text: "Attach or explicitly reference the document and confirm it appears as a source", correct: true, why: "Explicitly adding the source gives Copilot the intended context and lets you verify what it is using." },
+      { text: "Paste only the document title", correct: false, why: "A title does not ensure that Copilot can access the document content." },
+      { text: "Turn off grounding and retry", correct: false, why: "Turning off grounding removes organizational context rather than adding the document." }
     ]
   },
   {
-    q: "When did Claude become selectable as a model option in Copilot Chat, according to official release notes cited in this course?",
+    q: "You are doing a straightforward rewrite and want a fast response. What is the best model-selection approach?",
     options: [
-      { text: "May 2026, at the same time as Copilot Cowork", correct: false, why: "May 2026 is when an Anthropic model appeared on adjacent surfaces like Cowork — Copilot Chat itself got Claude in the June window." },
-      { text: "June 2026", correct: true, why: "Official release notes place Claude's availability in Copilot Chat in the June 2–16, 2026 window." },
-      { text: "September 2026", correct: false, why: "September 2026 doesn't appear in the release notes as Claude's Copilot Chat availability date." },
-      { text: "It has never been available in Copilot Chat", correct: false, why: "Claude is documented as selectable in Copilot Chat as of June 2026." }
+      { text: "Use Auto or the available quick-response option", correct: true, why: "For straightforward work, Auto or a speed-oriented option is a sensible choice." },
+      { text: "Memorize and select a specific model version from this course", correct: false, why: "Model names and availability change; use the choices currently shown in your tenant." },
+      { text: "Always choose the deepest reasoning option", correct: false, why: "Deeper reasoning can be useful for complex work but is unnecessary for every rewrite." },
+      { text: "Avoid the model selector entirely", correct: false, why: "Auto is a valid default, but the selector can help when you have a clear speed-versus-depth preference." }
     ]
   },
   {
@@ -965,21 +965,21 @@ const INLINE_QUIZZES = [
     ]
   },
   {
-    q: "How many sources can a single Copilot Notebook bring together, according to Microsoft's documentation?",
+    q: "You need repeated answers grounded in a curated set of project files, pages, and meeting notes. What should you create?",
     options: [
-      { text: "20", correct: false, why: "20 is the source limit for Agent Builder knowledge, a different feature entirely." },
-      { text: "300", correct: true, why: "Notebooks can aggregate up to 300 sources and reason across them." },
-      { text: "50", correct: false, why: "50 is not the documented Notebooks source limit." },
-      { text: "Unlimited", correct: false, why: "Notebooks have a documented cap of 300 sources, not an unlimited number." }
+      { text: "A Copilot Notebook", correct: true, why: "A Notebook is designed to collect project references and ground ongoing work in that curated context." },
+      { text: "A blank Copilot Page", correct: false, why: "A Page is an editable canvas rather than a multi-reference project workspace." },
+      { text: "A Teams group chat", correct: false, why: "A group chat is a conversation surface, not a curated reference workspace." },
+      { text: "A model preset", correct: false, why: "Model selection does not create a persistent source collection." }
     ]
   },
   {
-    q: "On which platform was Copilot Notebooks-to-OneNote sync available first?",
+    q: "A Notebook feature shown in the course is missing from your version of OneNote. What is the best next step?",
     options: [
-      { text: "Windows, since September 2025", correct: true, why: "OneNote for Windows got Copilot Notebooks sync starting September 2025, ahead of other platforms." },
-      { text: "iPhone/iPad, since September 2025", correct: false, why: "iPhone/iPad got this capability July 1, 2026, not September 2025." },
-      { text: "OneNote on the Web, since September 2025", correct: false, why: "OneNote on the Web got this capability July 1, 2026, not September 2025." },
-      { text: "All platforms simultaneously, in July 2026", correct: false, why: "The rollout was staged — Windows came first, nearly a year before Web and iPhone/iPad." }
+      { text: "Check the current platform, release channel, tenant policy, and rollout status", correct: true, why: "OneNote availability can vary by platform and phased rollout even when licensing is in place." },
+      { text: "Assume the license has been revoked", correct: false, why: "A missing feature can have several causes beyond licensing." },
+      { text: "Rebuild the Notebook from scratch", correct: false, why: "Rebuilding will not resolve a platform or rollout limitation." },
+      { text: "Move every source into a Teams chat", correct: false, why: "That changes the workflow and does not address feature availability." }
     ]
   },
   {
@@ -1027,21 +1027,25 @@ const LESSONS = [
     objectives: [
       "Describe what Copilot Chat is and who already has access to it",
       "Explain the difference between web grounding and work grounding at a high level",
-      "Identify what's included at no extra cost versus what requires the paid add-on"
+      "Recognize that licensing and feature availability are separate considerations"
     ],
     body: `
       <div class="takeaways">
         <h4>Key takeaways</h4>
         <ul>
-          <li><strong>Copilot Chat comes with your Microsoft 365 license.</strong> Every eligible Microsoft 365 business subscription includes Copilot Chat at no extra cost.</li>
-          <li><strong>It's grounded on the web by default.</strong> Copilot Chat answers using the latest models and public web data — not your organization's files, unless you add the paid add-on.</li>
+          <li><strong>This course assumes enterprise licensing.</strong> Learners have the eligible Microsoft 365 and Microsoft 365 Copilot licenses required for the capabilities discussed.</li>
+          <li><strong>Licensing does not guarantee availability.</strong> Tenant policy, permissions, geography, preview enrollment, administrator configuration, and phased rollout can affect what you see.</li>
           <li><strong>Standard capabilities are included.</strong> File upload, image generation, and access to large language models come with every Copilot Chat license.</li>
         </ul>
       </div>
 
       <h2>What Copilot Chat actually is</h2>
       <p>Copilot Chat is Microsoft's AI chat experience for Microsoft 365 — a conversational assistant you can ask questions, draft text, brainstorm, or summarize with. Microsoft's support documentation describes it plainly: Copilot Chat is automatically included and available to organizations with an eligible Microsoft 365 license. That means most people taking this course already have it, whether or not their organization has purchased anything extra.</p>
-      <p>By default, Copilot Chat is <strong>grounded on the web</strong> — it answers using public information and the latest underlying models, similar to a general-purpose AI assistant. What it does <em>not</em> do out of the box is read your organization's emails, files, or Teams messages. That capability — called work grounding — requires a separate paid add-on, which the next lesson covers in detail.</p>
+      <p>Copilot Chat can use public web information and content you deliberately attach. With the enterprise licensing assumed in this course, Work IQ can also ground responses in organizational content the signed-in user is permitted to access.</p>
+      <div class="callout note">
+        <div class="callout-label">Course scope · Last reviewed July 30, 2026</div>
+        This course covers enterprise end-user capabilities. Feature availability may still vary by tenant policy, permissions, geography, preview enrollment, administrator configuration, client, and phased rollout. Public Preview features are clearly labeled. Verify volatile capabilities in your tenant.
+      </div>
 
       <div class="prompt-card">
         <div class="prompt-label">Example prompt</div>
@@ -1067,7 +1071,7 @@ const LESSONS = [
           <div class="best-for">Best for: quick drafting, brainstorming, and general questions</div>
         </div>
         <div class="compare-card">
-          <div class="tag">Paid add-on</div>
+          <div class="tag">Enterprise licensed</div>
           <h4>Microsoft 365 Copilot</h4>
           <p>Adds chat grounded on your work data, in-app Copilot inside Word/Excel/PowerPoint, reasoning agents, and priority access.</p>
           <div class="best-for">Best for: work that depends on your own files, emails, and meetings</div>
@@ -1080,47 +1084,28 @@ const LESSONS = [
 
   // ── L1 — How it's licensed and where it shows up ──
   {
-    title: "How it's licensed and where it shows up",
+    title: "Enterprise access and where it shows up",
     time: "7 minutes",
     objectives: [
-      "Identify the three in-product license labels and what each unlocks",
-      "State the cost of the Microsoft 365 Copilot add-on",
+      "Explain the enterprise licensing assumption used in this course",
+      "Recognize why a licensed feature may still be unavailable",
       "List the surfaces where Copilot Chat appears"
     ],
     body: `
       <div class="takeaways">
         <h4>Key takeaways</h4>
         <ul>
-          <li><strong>Three in-product labels tell you what you have.</strong> Copilot Chat (Basic), M365 Copilot (Basic), and M365 Copilot (Premium) each unlock different capability.</li>
-          <li><strong>The add-on is $30 per user per month.</strong> It adds work grounding, in-app Copilot, reasoning agents, and priority access.</li>
+          <li><strong>This course assumes eligible enterprise licensing.</strong> It focuses on using Copilot, not comparing commercial plans.</li>
+          <li><strong>Licensed does not always mean visible.</strong> Organizational policy, permissions, geography, preview enrollment, administrator configuration, client, and rollout can affect access.</li>
           <li><strong>Copilot Chat follows you across surfaces.</strong> The Microsoft 365 Copilot app, Teams, Outlook, the Edge sidebar, and mobile all carry the same chat experience.</li>
         </ul>
       </div>
 
-      <h2>Reading your own license label</h2>
-      <p>Microsoft documents three in-product labels, worth knowing by name since they show up under your name in microsoft365.com:</p>
-
-      <div class="compare-grid">
-        <div class="compare-card">
-          <div class="tag">No add-on</div>
-          <h4>Copilot Chat (Basic)</h4>
-          <p>Web-grounded chat only. No in-app Copilot inside Word, Excel, PowerPoint, or OneNote.</p>
-        </div>
-        <div class="compare-card">
-          <div class="tag">No add-on</div>
-          <h4>M365 Copilot (Basic)</h4>
-          <p>Web-grounded chat, but with standard in-app Copilot access inside the Office apps.</p>
-        </div>
-        <div class="compare-card featured">
-          <div class="tag">$30/user/month add-on</div>
-          <h4>M365 Copilot (Premium)</h4>
-          <p>Full add-on: work-data grounding, in-app Copilot, reasoning agents like Researcher and Analyst, and priority access.</p>
-        </div>
-      </div>
-
-      <div class="callout note">
-        <div class="callout-label">Note</div>
-        A Microsoft pricing and packaging update took effect July 1, 2026. If a number in this course looks off by the time you're reading it, check the current Microsoft pricing page — pricing and model details move fast.
+      <h2>Separate entitlement from availability</h2>
+      <p>The lessons assume you have the enterprise entitlements required for work grounding and the Microsoft 365 Copilot experiences described. Even so, a feature may be hidden, disabled, unavailable in a particular region or client, limited to preview participants, or still rolling out.</p>
+      <div class="callout warn">
+        <div class="callout-label">Availability check</div>
+        If your screen differs from the course, confirm your permissions and current tenant configuration before assuming the feature is missing from the product.
       </div>
 
       <h3>Where you'll find it</h3>
@@ -1312,7 +1297,7 @@ const LESSONS = [
       </div>
 
       <h2>Bringing your own files and images into the conversation</h2>
-      <p>Copilot Chat includes standard access to file upload, image generation, and the underlying models for everyone with an eligible license — this isn't gated behind the paid add-on. What the add-on changes is queue position: licensed users get <strong>priority access</strong> to these same capabilities when systems are busy.</p>
+      <p>Copilot Chat can provide file upload, image generation, and model access according to the user's enterprise entitlement and tenant configuration. Availability and service priority can vary, so use the controls visible in your current experience.</p>
 
       <div class="steps">
         <ol>
@@ -1338,8 +1323,8 @@ const LESSONS = [
     time: "8 minutes",
     objectives: [
       "Use Regenerate's Try Again and Switch Model options",
-      "Identify when Claude became selectable as a model in Copilot Chat",
-      "Explain why model names in this course carry a 'current as of' caveat"
+      "Choose between speed-oriented, automatic, and deeper-reasoning options",
+      "Explain why the model picker in your tenant is the current source of truth"
     ],
     video: {
       id: "4vkPv9lX64k",
@@ -1352,27 +1337,25 @@ const LESSONS = [
       <div class="takeaways">
         <h4>Key takeaways</h4>
         <ul>
-          <li><strong>Regenerate gives you a second attempt.</strong> Try Again re-runs the same model; Switch Model tries a different one — this rolled out in June 2026.</li>
-          <li><strong>Claude is now a selectable model family</strong> in Copilot Chat, alongside GPT, as of the June 2026 release window.</li>
+          <li><strong>Regenerate gives you another attempt.</strong> Depending on the current interface, you can retry or choose another available response mode.</li>
+          <li><strong>Choose by behavior, not a memorized model roster.</strong> Favor speed for straightforward work and deeper reasoning for more complex analysis.</li>
           <li><strong>Model names change often.</strong> Treat any specific model name as "current as of July 2026," not permanent.</li>
         </ul>
       </div>
 
       <h2>Not happy with a response? Regenerate it</h2>
-      <p>The Regenerate action lets you use simple options — <strong>Try Again</strong> or <strong>Switch Model</strong> — to quickly get an alternative response, instead of rewriting your whole prompt. This feature rolled out in June 2026.</p>
-      <p>Around the same time, Anthropic's Claude became available as a model option in Copilot Chat, useful for complex analysis, document understanding, and structured content generation. In the model switcher next to the Work IQ toggle (labeled "Auto" by default), you can choose response styles like Quick Response or Think Deeper, and pick between model families — currently <strong>Opus</strong> (Anthropic's Claude) and <strong>GPT</strong> (OpenAI).</p>
+      <p>The Regenerate action provides a quick way to request an alternative response. When a model or response-mode selector is available, choose based on the work: use <strong>Auto</strong> as a practical default, a speed-oriented option for straightforward tasks, and a deeper-reasoning option for complex analysis.</p>
+      <p>Named models and labels change frequently and may vary by tenant, administrator policy, geography, product surface, and rollout. The selector visible in your tenant is the current source of truth.</p>
 
       <span class="chip-row">
         <span class="chip">Auto (default)</span>
         <span class="chip">Quick Response</span>
         <span class="chip">Think Deeper</span>
-        <span class="chip">Opus (Claude)</span>
-        <span class="chip">GPT</span>
       </span>
 
       <div class="callout warn">
         <div class="callout-label">Watch out</div>
-        Model names and lineups change on close to a monthly cadence. An earlier Anthropic model was available on adjacent surfaces like Cowork before Copilot Chat itself got Claude in June 2026 — if you encounter a model name that isn't listed here, that's expected drift, not an error in this course.
+        Model choices are illustrative and non-exhaustive. Availability changes frequently, so do not rely on a course screenshot or model name as a guarantee of access.
       </div>
 
       <div class="quiz" data-quiz-idx="6"></div>
@@ -1394,7 +1377,7 @@ const LESSONS = [
         <ul>
           <li><strong>A Page turns a Copilot response into an editable canvas.</strong> It's interactive, shareable, and separate from the chat thread it came from.</li>
           <li><strong>You don't need a Copilot license to use Pages</strong> — just SharePoint or OneDrive storage on a work or school account.</li>
-          <li><strong>Two formats exist:</strong> the current <code>.page</code> format and the legacy <code>.loop</code> format, and both can convert to Word or PowerPoint.</li>
+          <li><strong>Current Pages use the <code>.page</code> format;</strong> earlier Pages may appear as <code>.loop</code> files. Conversion to Word is supported; PowerPoint conversion is currently unavailable.</li>
         </ul>
       </div>
 
@@ -1414,6 +1397,10 @@ const LESSONS = [
         <div class="callout-label">Note</div>
         Pages is available to anyone with a work or school (Entra ID) account who has SharePoint or OneDrive storage — including people without a Microsoft 365 Copilot license.
       </div>
+      <div class="callout warn">
+        <div class="callout-label">Export availability</div>
+        A Page can currently be converted to Word. Do not rely on a PowerPoint conversion option; it is currently unavailable and export choices can change.
+      </div>
 
       <div class="quiz" data-quiz-idx="7"></div>
     `
@@ -1426,14 +1413,14 @@ const LESSONS = [
     objectives: [
       "Explain what a Copilot Notebook is and how it differs from a Page",
       "Create a Notebook and add references to it",
-      "State the source limit and license requirement for Notebooks"
+      "Recognize that reference limits depend on licensing and can change"
     ],
     body: `
       <div class="takeaways">
         <h4>Key takeaways</h4>
         <ul>
           <li><strong>A Notebook is a persistent workspace,</strong> not a single response — it aggregates files, pages, meeting notes, links, and chats in one place.</li>
-          <li><strong>It can hold up to 300 sources</strong> and reason across all of them at once.</li>
+          <li><strong>Reference limits depend on licensing.</strong> Under the enterprise licensing assumed here, more than 300 references may be added, but only the first 300 are used for grounding.</li>
           <li><strong>Notebooks generate more than text:</strong> Word documents, PowerPoint decks, mind maps, and Study Guides, all built from its curated context.</li>
         </ul>
       </div>
@@ -1449,7 +1436,7 @@ const LESSONS = [
         </div>
         <div class="compare-card featured">
           <h4>Copilot Notebooks</h4>
-          <p>A persistent workspace that aggregates up to 300 sources and reasons across them.</p>
+          <p>A persistent workspace that aggregates a curated reference collection and reasons across the references used for grounding.</p>
           <div class="best-for">Best for: a whole project's worth of material in one place</div>
         </div>
       </div>
@@ -1465,7 +1452,7 @@ const LESSONS = [
 
       <div class="callout note">
         <div class="callout-label">Note</div>
-        Notebooks require a SharePoint or OneDrive service plan and are available to both Microsoft 365 Copilot and Copilot Chat licensed users — Notebooks opened up to Chat users in the June/July 2026 window.
+        Under the enterprise licensing assumed in this course, a Notebook can contain more than 300 references, but only the first 300 are used for grounding. Copilot Chat users without the Microsoft 365 Copilot entitlement may be limited to 50 references. Limits and feature availability can change, so verify the current experience in your tenant.
       </div>
 
       <div class="quiz" data-quiz-idx="8"></div>
@@ -1477,32 +1464,25 @@ const LESSONS = [
     title: "Keeping Notebooks and OneNote in sync",
     time: "5 minutes",
     objectives: [
-      "State which OneNote platforms support Copilot Notebooks sync, and since when",
-      "Recognize a platform gap as a rollout timing issue rather than a licensing problem"
+      "Recognize that OneNote integration availability varies by platform and rollout",
+      "Troubleshoot a platform gap without assuming it is only a licensing problem"
     ],
     body: `
       <div class="takeaways">
         <h4>Key takeaways</h4>
         <ul>
           <li><strong>OneNote and Notebooks can sync,</strong> so pages you keep in OneNote can feed into Copilot's reasoning.</li>
-          <li><strong>Windows got it first</strong> — Copilot Notebooks in OneNote has been available there since September 2025.</li>
-          <li><strong>Web and mobile caught up July 1, 2026</strong> — OneNote on the Web and the iPhone/iPad apps added the same capability.</li>
+          <li><strong>Availability can vary by platform,</strong> release channel, tenant, and deployment stage.</li>
+          <li><strong>Check the current experience</strong> rather than relying on an historical rollout date.</li>
         </ul>
       </div>
 
-      <h2>Rolling out platform by platform</h2>
-      <p>Copilot Notebooks integration with OneNote didn't arrive everywhere at once. Microsoft's feature — creating and using Copilot Notebooks in OneNote — has rolled out in stages:</p>
-
-      <table>
-        <tr><th>Platform</th><th>Available since</th></tr>
-        <tr><td>OneNote for Windows</td><td>September 2025</td></tr>
-        <tr><td>OneNote on the Web</td><td>July 1, 2026</td></tr>
-        <tr><td>OneNote for iPhone/iPad</td><td>July 1, 2026</td></tr>
-      </table>
+      <h2>Availability varies by platform</h2>
+      <p>Copilot Notebooks integration with OneNote is introduced progressively. The capability you see can differ across Windows, web, and mobile clients and may also depend on release channel, tenant configuration, and phased rollout.</p>
 
       <div class="callout tip">
         <div class="callout-label">Tip</div>
-        If a colleague on Windows can add a OneNote page to a Notebook but you can't on your iPad, check the date before assuming it's a licensing gap — it may simply be a platform rollout timing difference.
+        If a colleague can add a OneNote page to a Notebook but you cannot, compare the app, version, release channel, tenant policy, and rollout status before assuming it is a licensing problem.
       </div>
 
       <div class="quiz" data-quiz-idx="9"></div>
@@ -1516,7 +1496,7 @@ const LESSONS = [
     objectives: [
       "Explain how implicit grounding works when Copilot Chat is open alongside an email",
       "Use highlighted text to narrow the grounding source",
-      "Identify what changed for Outlook grounding as of July 1, 2026"
+      "Recognize that Outlook grounding depends on permissions, tenant configuration, and rollout"
     ],
     body: `
       <div class="takeaways">
@@ -1524,12 +1504,12 @@ const LESSONS = [
         <ul>
           <li><strong>Implicit grounding means you don't have to attach the email yourself.</strong> Open Copilot Chat next to an email and it's automatically added as a grounding source.</li>
           <li><strong>Highlighting text narrows the grounding.</strong> Select part of the email and Copilot updates to reason over just that selection.</li>
-          <li><strong>Outlook keeps expanding what Copilot Chat can reason over</strong> — inbox, calendar, and enterprise data as of July 1, 2026.</li>
+          <li><strong>Outlook context can include mail, calendar, and meetings,</strong> subject to the user's permissions and the capabilities enabled in the tenant.</li>
         </ul>
       </div>
 
       <h2>Copilot Chat that already knows what you're looking at</h2>
-      <p>Implicit grounding rolled out to Copilot Chat in Outlook in December 2025. When you open Copilot Chat alongside an email, that email is automatically added as a grounding source in the prompt box — no copy-paste, no manual upload. Highlight part of the email, and the grounding source updates automatically to use only the highlighted text.</p>
+      <p>When implicit grounding is available, opening Copilot Chat alongside an email adds that message as context without requiring copy-and-paste or a manual upload. Highlight part of the email to narrow the source to the selected text.</p>
 
       <div class="prompt-card">
         <div class="prompt-label">Example prompt</div>
@@ -1539,7 +1519,7 @@ const LESSONS = [
 
       <div class="callout note">
         <div class="callout-label">Note</div>
-        Copilot Chat in Outlook can also take triage actions through natural language — mark read/unread, pin, flag, or archive — and as of July 1, 2026, expanded to reason over inbox, calendar, and enterprise data together.
+        Outlook capabilities can include contextual reasoning and supported triage actions. Exact grounding and actions depend on permissions, tenant configuration, client, and rollout.
       </div>
 
       <div class="quiz" data-quiz-idx="10"></div>
@@ -1561,7 +1541,7 @@ const LESSONS = [
         <ul>
           <li><strong>Summarizing a chat defaults to a 30-day history.</strong> That's the built-in time frame unless you ask otherwise.</li>
           <li><strong>Summarize thread needs at least 1,000 characters</strong> of content to work with.</li>
-          <li><strong>Copilot can join a group chat directly,</strong> added via "Add agents and bots" or an @mention, and it grounds its answer in the asker's own data.</li>
+          <li><strong>Adding Copilot to a group chat is Public Preview.</strong> Availability and behavior may vary by tenant, client, policy, and preview participation.</li>
         </ul>
       </div>
 
@@ -1578,8 +1558,8 @@ const LESSONS = [
       </div>
 
       <div class="callout warn">
-        <div class="callout-label">Watch out</div>
-        Copilot can be added as a member of a group chat and grounds its response in the asker's own data. If sources aren't shared with every member of the chat, the person who asked sees a preview flagging that — worth knowing before you rely on it in a mixed-permissions group.
+        <div class="callout-label">Public Preview · Last reviewed July 30, 2026</div>
+        Adding Copilot as a member of a Teams group chat is a Public Preview capability. It grounds a response according to the permissions of the person asking. Availability and behavior may change, and a source that is not shared with every participant should not be assumed visible to the group.
       </div>
 
       <div class="quiz" data-quiz-idx="11"></div>
@@ -1646,83 +1626,41 @@ const LESSONS = [
 ];
 
 const FINAL_QUIZ = [
-  { q: "Which of these is included with every eligible Microsoft 365 license, no add-on required?", options: [
-      { text: "Web-grounded AI chat with standard file upload and image generation", correct: true },
-      { text: "Reasoning agents such as Researcher and Analyst", correct: false },
-      { text: "AI chat grounded on your work data — files, emails, chats", correct: false },
-      { text: "Priority access during peak usage", correct: false }
+  { q: "You need a concise draft based on an attached document and public information. Where should you begin?", options: [
+      { text: "Copilot Chat with the document attached", correct: true }, { text: "A blank Page", correct: false }, { text: "A Teams summary", correct: false }, { text: "A model catalog", correct: false }
   ]},
-  { q: "What does the Microsoft 365 Copilot add-on cost, per the pricing cited in this course?", options: [
-      { text: "$10/user/month", correct: false },
-      { text: "$20/user/month", correct: false },
-      { text: "$30/user/month", correct: true },
-      { text: "$50/user/month", correct: false }
+  { q: "A feature is missing even though your enterprise license is assigned. What should you check?", options: [
+      { text: "Tenant policy, permissions, region, preview enrollment, admin settings, client, and rollout", correct: true }, { text: "Only the prompt wording", correct: false }, { text: "Only the browser theme", correct: false }, { text: "Only the time of day", correct: false }
   ]},
-  { q: "Which of these is designed to carry out multi-step delegated work on your behalf, rather than just answering in a chat window?", options: [
-      { text: "Copilot Chat", correct: false },
-      { text: "A custom, scoped agent", correct: false },
-      { text: "Copilot Cowork", correct: true },
-      { text: "Copilot Pages", correct: false }
+  { q: "You need consistent answers from reusable instructions and approved knowledge. Which experience fits best?", options: [
+      { text: "A custom agent", correct: true }, { text: "A one-time Chat prompt", correct: false }, { text: "A blank Page", correct: false }, { text: "A Teams recap", correct: false }
   ]},
-  { q: "Per Microsoft's prompting guidance, where should source or file information go if you want Copilot to use it?", options: [
-      { text: "At the very beginning of the prompt", correct: false },
-      { text: "Last, after the goal and expectations", correct: true },
-      { text: "It doesn't matter where it goes", correct: false },
-      { text: "In a completely separate message only", correct: false }
+  { q: "Which prompt gives Copilot the clearest direction?", options: [
+      { text: "\"Draft a two-paragraph executive update from the attached notes; include decisions, risks, and next steps.\"", correct: true }, { text: "\"Help.\"", correct: false }, { text: "\"Use this.\"", correct: false }, { text: "\"Make it good.\"", correct: false }
   ]},
-  { q: "Turning the Work IQ button ON makes Copilot Chat a chat experience grounded in what?", options: [
-      { text: "Public web results only", correct: false },
-      { text: "Microsoft Graph — your work data", correct: true },
-      { text: "A locally stored file cache on your device", correct: false },
-      { text: "Third-party plugins only", correct: false }
+  { q: "You want Copilot to use organizational content you are permitted to access. What should you confirm?", options: [
+      { text: "Work IQ is enabled and the intended sources are available in context", correct: true }, { text: "Work IQ is off", correct: false }, { text: "The files are stored only on a local device", correct: false }, { text: "Everyone in the tenant has identical permissions", correct: false }
   ]},
-  { q: "How does file upload and image generation access differ between an included Copilot Chat license and the paid add-on?", options: [
-      { text: "Only add-on users can use these features at all", correct: false },
-      { text: "Standard access is included for all eligible users; add-on users get priority access on top", correct: true },
-      { text: "Neither included nor add-on users can generate images", correct: false },
-      { text: "File upload is add-on only, but image generation is free for everyone", correct: false }
+  { q: "A straightforward rewrite needs a quick result. How should you choose a model?", options: [
+      { text: "Use Auto or the available speed-oriented option", correct: true }, { text: "Choose a memorized model version from the course", correct: false }, { text: "Always use deepest reasoning", correct: false }, { text: "Wait for a particular model name to appear", correct: false }
   ]},
-  { q: "What does the Regenerate action let a Copilot Chat user do?", options: [
-      { text: "Delete their chat history", correct: false },
-      { text: "Use 'Try Again' or 'Switch Model' to get an alternative response", correct: true },
-      { text: "Switch from Chat into Cowork", correct: false },
-      { text: "Turn Work IQ on automatically", correct: false }
+  { q: "You want an editable, shareable canvas for refining one draft. What should you create?", options: [
+      { text: "A Copilot Page", correct: true }, { text: "A Notebook solely to export PowerPoint", correct: false }, { text: "A group-chat bot", correct: false }, { text: "A model preset", correct: false }
   ]},
-  { q: "How does a user typically turn a Copilot response into a Copilot Page?", options: [
-      { text: "Select the pencil button below Copilot's response", correct: true },
-      { text: "Right-click the response and choose Export", correct: false },
-      { text: "It happens automatically for every response", correct: false },
-      { text: "Only an admin can do this, from the M365 admin center", correct: false }
+  { q: "You need ongoing work grounded in a curated set of project references. What should you create?", options: [
+      { text: "A Copilot Notebook", correct: true }, { text: "A blank Page only", correct: false }, { text: "A chat with no sources", correct: false }, { text: "A screenshot", correct: false }
   ]},
-  { q: "What best distinguishes a Copilot Notebook from a Copilot Page?", options: [
-      { text: "A Page is a persistent multi-source workspace; a Notebook is a single canvas", correct: false },
-      { text: "A Notebook aggregates many references and reasons across them; a Page is a single collaborative canvas built from one response", correct: true },
-      { text: "They are the same feature under two different names", correct: false },
-      { text: "Notebooks are mobile-only; Pages are desktop-only", correct: false }
+  { q: "A Notebook feature differs between OneNote clients. What is the best response?", options: [
+      { text: "Check platform, version, release channel, tenant settings, and rollout status", correct: true }, { text: "Assume the Notebook is corrupted", correct: false }, { text: "Delete every reference", correct: false }, { text: "Assume licensing is the only cause", correct: false }
   ]},
-  { q: "When did OneNote on the Web and iPhone/iPad gain Copilot Notebooks sync, per the release notes cited in this course?", options: [
-      { text: "September 2025, same as Windows", correct: false },
-      { text: "July 1, 2026", correct: true },
-      { text: "January 2026", correct: false },
-      { text: "It still isn't available on those platforms", correct: false }
+  { q: "While Copilot Chat is open beside an Outlook email, how can you focus it on one passage?", options: [
+      { text: "Highlight the relevant text and confirm the source context updates", correct: true }, { text: "Archive the email", correct: false }, { text: "Turn off all grounding", correct: false }, { text: "Move the email to a local-only file", correct: false }
   ]},
-  { q: "When did implicit grounding on emails in Copilot Chat in Outlook roll out?", options: [
-      { text: "December 2025", correct: true },
-      { text: "June 2026", correct: false },
-      { text: "March 2026", correct: false },
-      { text: "It rolled out with Copilot Chat's original launch", correct: false }
+  { q: "What should you remember before adding Copilot to a Teams group chat?", options: [
+      { text: "It is Public Preview and responses follow the asker's permissions", correct: true }, { text: "It is guaranteed in every tenant", correct: false }, { text: "It makes every source visible to everyone", correct: false }, { text: "It bypasses administrator policy", correct: false }
   ]},
-  { q: "What is the default time frame Copilot uses when summarizing a Teams chat?", options: [
-      { text: "7 days", correct: false },
-      { text: "30 days", correct: true },
-      { text: "90 days", correct: false },
-      { text: "All history, unlimited", correct: false }
-  ]},
-  { q: "Enterprise 'Vision in Microsoft 365 Copilot' works only during what?", options: [
-      { text: "A scheduled Teams meeting", correct: false },
-      { text: "An active voice conversation", correct: true },
-      { text: "A shared SharePoint session", correct: false },
-      { text: "Offline mode", correct: false }
+  { q: "Before sharing consequential Copilot output, what should you do?", options: [
+      { text: "Review the content, sources, permissions, and intended audience", correct: true }, { text: "Assume grounding guarantees accuracy", correct: false }, { text: "Remove all citations", correct: false }, { text: "Treat preview behavior as permanent", correct: false }
   ]}
 ];
 
